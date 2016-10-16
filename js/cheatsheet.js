@@ -1,3 +1,18 @@
+// mark a requirement as not done/done
+$('#COEN11').prop('checked', false);
+$('#COEN11').prop('checked', true);
+refreshPage(); // make sure to refresh afterwards
+
+// set a requirement completion date
+$('#COEN11dropdown').val('F1');
+refreshPage(); // make sure to refresh afterwards
+
+// retrieve requirement completion status
+$('#COEN11').is(':checked');
+
+// retrieve completion date
+$('#COEN11dropdown').val();
+
 // to get an array of unchecked requirements
 $('.requirementMarker:not(:checked)').map(function() {
     return this.id;
