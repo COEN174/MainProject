@@ -1,0 +1,10 @@
+{
+  "requirementgroup1": {
+      "COEN11": ["COEN11"],
+      "COEN124": ["COEN124", "COEN666"]
+  },
+  "requirementgroup2": {
+      "ELEN51": ["ELEN51", "ELEN666"],
+      "ENGR1": ["ENGR1"]
+  }
+}
