@@ -65,6 +65,9 @@ function loadRequirements() {
             buildList();
 
             drawCompletionList();
+            if (localStorage.getItem("requirements") !== null) {
+              restoreStatus();
+            }
             restoreStatus();
             colorCode();
             updateCompletionPercentage();
