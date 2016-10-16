@@ -1,10 +1,20 @@
 {
-  "requirementgroup1": {
-      "COEN11": ["COEN11"],
-      "COEN124": ["COEN124", "COEN666"]
-  },
-  "requirementgroup2": {
-      "ELEN51": ["ELEN51", "ELEN666"],
-      "ENGR1": ["ENGR1"]
-  }
+    "col1": {
+        "COEN Requirements": {
+            "COEN11": ["COEN11"],
+            "COEN124": ["COEN124", "COEN666"]
+        },
+        "Other Requirements": {
+            "POOP9": ["ELEN51", "ELEN666"],
+            "HRNG77": ["ENGR1"]
+        }
+    },
+    "col2": {
+        "General Requirements": {
+            "ELEN51": ["ELEN51", "ELEN666"],
+            "ENGR1": ["ENGR1"]
+        }
+    },
+    "col3": {
+    }
 }

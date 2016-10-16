@@ -6,3 +6,19 @@ body {
 .navbar {
   margin-bottom: 20px;
 }
+
+.space-right {
+  margin-right: 10px;
+}
+
+.list-group-item[status="notscheduled"] {
+    background-color: red;
+}
+
+.list-group-item[status="scheduled"] {
+    background-color: yellow;
+}
+
+.list-group-item[status="done"] {
+    background-color: green;
+}
