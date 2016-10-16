@@ -75,3 +75,63 @@ function colorCode() {
         }
     });
 }
+
+function clearForm(){
+  $('.requirementMarker').removeAttr('checked');
+  $('.quarterDropdown').val('notselected');
+  drawCompletionList();
+  colorCode();
+  saveStatus();
+  updateCompletionPercentage();
+}
+
+function refreshPage(){
+  drawCompletionList();
+  colorCode();
+  saveStatus();
+  updateCompletionPercentage();
+}
+
+function saveStatus(){
+  var data = {};
+
+  var ids = $('.requirementMarker').map(function() {
+      return this.id;
+  }).get();
+
+  ids.forEach(function(id) {
+    data[id] = {completed: $('#' + id).is(':checked'), date: $('#' + id + 'dropdown').val()};
+  });
+
+  localStorage.setItem('requirements', JSON.stringify(data));
+}
+
+function restoreStatus(){
+  var restored = JSON.parse(localStorage.requirements);
+  $.each(restored, function(className, classData){
+    if(classData.completed){
+      $('#' + className).prop('checked', true);
+    } else {
+      $('#' + className).prop('checked', false);
+    }
+
+    $('#' + className + 'dropdown').val(classData.date);
+  });
+}
+
+function updateCompletionPercentage(){
+  var completed = $('.requirementMarker:checked').map(function() {
+      return this.id;
+  }).get().length;
+
+  var uncompleted = $('.requirementMarker:not(:checked)').map(function() {
+      return this.id;
+  }).get().length;
+
+  $('#completionDone').text(completed);
+  $('#completionTotal').text(completed + uncompleted);
+
+  var completionPercentage = Math.round((completed / (completed + uncompleted)) * 100) + '%';
+  $('#completionPercentage').text(completionPercentage);
+  $('#completionProgress').css('width', completionPercentage);
+}

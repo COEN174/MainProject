@@ -65,16 +65,12 @@ function loadRequirements() {
             buildList();
 
             drawCompletionList();
+            restoreStatus();
             colorCode();
+            updateCompletionPercentage();
 
-            $(".requirementMarker").change(function() {
-                drawCompletionList();
-                colorCode();
-            });
-
-            $(".quarterDropdown").change(function() {
-                colorCode();
-            });
+            $(".requirementMarker").change(refreshPage);
+            $(".quarterDropdown").change(refreshPage);
         }
     });
 }

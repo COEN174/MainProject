@@ -35,13 +35,15 @@
 
     <div class="container">
         <div class="page-header">
+            Total degree progress: <strong><span id="completionPercentage"></span></strong> (<span id="completionDone"></span> out of <span id="completionTotal"></span> requirements completed)
             <div class="progress active">
-                <div id="progress" class="progress-bar progress-bar-custom" style="width: 15%;">
+                <div id="completionProgress" class="progress-bar progress-bar-custom" style="width: 0%;">
                 </div>
             </div>
         </div>
         <div class="text-center">
-            Check off the classes you have taken OR select the quarter and year that you intend to take the courses you have left!
+            Check off the classes you have taken OR select the quarter and year that you intend to take the courses you have left!<br>
+            <a href="#" onclick="clearForm();">Clear stored data</a>
             <br>
             <br>
         </div>
