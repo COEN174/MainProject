@@ -64,10 +64,10 @@ function loadRequirements() {
             requirements = requirementsData;
             buildList();
 
-            drawCompletionList();
             if (localStorage.getItem("requirements") !== null) {
               restoreStatus();
             }
+            drawCompletionList();
             colorCode();
             updateCompletionPercentage();
 
