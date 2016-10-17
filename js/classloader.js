@@ -33,6 +33,11 @@ function fillColumn(colNumber) {
             var requirementEntry = document.createElement('li');
             requirementEntry.className = 'list-group-item';
             requirementEntry.id = requirementName + 'listEntry';
+            requirementEntry.onclick = function(e) {
+                if (e.path[0].nodeName === 'LI') {
+                    this.getElementsByTagName("input")[0].click();
+                }
+            };
 
             var requirementLabel = document.createTextNode(requirementName);
 
@@ -65,7 +70,7 @@ function loadRequirements() {
             buildList();
 
             if (localStorage.getItem("requirements") !== null) {
-              restoreStatus();
+                restoreStatus();
             }
             drawCompletionList();
             colorCode();
