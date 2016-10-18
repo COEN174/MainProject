@@ -13,7 +13,7 @@ function fillColumn(colNumber) {
         // assemble general group div
         var groupDiv = document.createElement('div');
         var header = document.createElement('h4');
-        header.innerHTML = requirementgroupName + ' Requirements';
+        header.innerHTML = requirementgroupName;
         groupDiv.appendChild(header);
 
         // list group to hold individual requirements
