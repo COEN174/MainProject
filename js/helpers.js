@@ -49,8 +49,6 @@ function drawCompletionList() {
     if (completed.length > 0) {
         // update #completed with all the classes whos checkbox is checked
         completed.forEach(function(requirement) {
-            var entry = document.createElement('li'); // WARNING: entry unused/not needed?
-            entry.innerHTML = requirement;
             $('#completed').append('<li>' + requirement + '</ul>');
         });
     }
