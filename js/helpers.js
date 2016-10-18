@@ -1,3 +1,5 @@
+// returns the appropriate ending (Ordinal) of number
+// this function is called from generateQuarterDropdown()
 function genOrdinal(number) {
     switch (number) {
         case 1:
@@ -11,6 +13,7 @@ function genOrdinal(number) {
     }
 }
 
+// creates a drop down menu of when a class was completed
 function generateQuarterDropdown() {
     years = 4;
     quarters = ['Fall', 'Winter', 'Spring', 'Summer'];
@@ -34,6 +37,7 @@ function generateQuarterDropdown() {
     return quarterDropdown;
 }
 
+// called from loadRequirements()
 function drawCompletionList() {
     var completed = $('.requirementMarker:checked').map(function() {
         return this.id;
@@ -58,6 +62,8 @@ function drawCompletionList() {
     }
 }
 
+// updates the colors of row that a class is stored in
+// called from loadRequirements()
 function colorCode() {
     var ids = $('.requirementMarker').map(function() {
         return this.id;
@@ -92,20 +98,25 @@ function refreshPage(){
   updateCompletionPercentage();
 }
 
+// stores the user's data to local storage
 function saveStatus(){
   var data = {};
 
+  // get all of the classes that are displayed on the webpage
   var ids = $('.requirementMarker').map(function() {
       return this.id;
   }).get();
 
+  // for every class, save its information to data[id] to be eventually written to local storage
   ids.forEach(function(id) {
     data[id] = {completed: $('#' + id).is(':checked'), date: $('#' + id + 'dropdown').val()};
   });
 
+  // save the users data to local storage
   localStorage.setItem('requirements', JSON.stringify(data));
 }
 
+// load the user's data from a prior session
 function restoreStatus(){
   var restored = JSON.parse(localStorage.requirements);
   $.each(restored, function(className, classData){
@@ -119,6 +130,7 @@ function restoreStatus(){
   });
 }
 
+// updates the progress bar and associated numbers
 function updateCompletionPercentage(){
   var completed = $('.requirementMarker:checked').map(function() {
       return this.id;
