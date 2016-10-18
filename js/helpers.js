@@ -13,7 +13,8 @@ function genOrdinal(number) {
     }
 }
 
-// creates a drop down menu of when a class was completed
+// returns a drop down menu that allows the user to specify when a class was completed
+// called from fillColumn() in classloader.js
 function generateQuarterDropdown() {
     years = 4;
     quarters = ['Fall', 'Winter', 'Spring', 'Summer'];
@@ -25,6 +26,7 @@ function generateQuarterDropdown() {
     var quarterOption = new Option('', 'notselected');
     quarterDropdown.add(quarterOption);
 
+    // adds assorted date options to quarterDropdown
     for (var year = 1; year <= 4; year++) {
         quarters.forEach(function(quarter) {
             var label = quarter + ' ' + year + genOrdinal(year) + ' Year';
@@ -37,25 +39,28 @@ function generateQuarterDropdown() {
     return quarterDropdown;
 }
 
-// called from loadRequirements()
+// called from loadRequirements() in classloader.js
 function drawCompletionList() {
+    // fill completed with the ids of all the classes whos checkbox is checked
     var completed = $('.requirementMarker:checked').map(function() {
         return this.id;
     }).get();
     $('#completed').empty();
     if (completed.length > 0) {
+        // update #completed with all the classes whos checkbox is checked
         completed.forEach(function(requirement) {
-            var entry = document.createElement('li');
+            var entry = document.createElement('li'); // WARNING: entry unused/not needed?
             entry.innerHTML = requirement;
             $('#completed').append('<li>' + requirement + '</ul>');
         });
     }
-
+    // fill uncompleted with the ids of all the classes whos checkbox is uncheck
     var uncompleted = $('.requirementMarker:not(:checked)').map(function() {
         return this.id;
     }).get();
     $('#notcompleted').empty();
     if (uncompleted.length > 0) {
+        // update #notcompleted with all the classes whos checkbox is not check
         uncompleted.forEach(function(requirement) {
             $('#notcompleted').append('<li>' + requirement + '</ul>');
         });
@@ -63,7 +68,7 @@ function drawCompletionList() {
 }
 
 // updates the colors of row that a class is stored in
-// called from loadRequirements()
+// called from loadRequirements() in classloader.js
 function colorCode() {
     var ids = $('.requirementMarker').map(function() {
         return this.id;
@@ -131,6 +136,7 @@ function restoreStatus(){
 }
 
 // updates the progress bar and associated numbers
+// called by loadRequirements() in classloader.js
 function updateCompletionPercentage(){
   var completed = $('.requirementMarker:checked').map(function() {
       return this.id;
