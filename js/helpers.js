@@ -132,7 +132,9 @@ function updateCompletionPercentage(){
   $('#completionTotal').text(completed + uncompleted);
 
   var completionPercentage = Math.round((completed / (completed + uncompleted)) * 100) + '%';
+  var intendedPercentage = (uncompleted * 100) + '%';
   $('#completionPercentage').text(completionPercentage);
   $('#completionProgress').css('width', completionPercentage);
   $('#completionProgress').css('background-color','lightgreen');
+  $('#intendedProgress').css('width',intendedPercentage);
 }
