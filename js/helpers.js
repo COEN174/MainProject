@@ -1,3 +1,5 @@
+var intended = 0;
+
 function genOrdinal(number) {
     switch (number) {
         case 1:
@@ -59,7 +61,6 @@ function drawCompletionList() {
 }
 
 function colorCode() {
-    var intended = 0;
     var ids = $('.requirementMarker').map(function() {
         return this.id;
     }).get();
@@ -139,5 +140,5 @@ function updateCompletionPercentage(){
   $('#completionProgress').css('width', completionPercentage);
   $('#completionProgress').css('background-color','lightgreen');
   $('#intendedProgress').css('width',intendedPercentage);
-  $('intendedProgress').css('background-color','#FF9');
+  $('#intendedProgress').css('background-color','#FF9');
 }
