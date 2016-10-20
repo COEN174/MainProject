@@ -13,7 +13,7 @@ function fillColumn(colNumber) {
         // assemble general group div
         var groupDiv = document.createElement('div');
         var header = document.createElement('h4');
-        header.innerHTML = requirementgroupName + ' Requirements';
+        header.innerHTML = requirementgroupName;
         groupDiv.appendChild(header);
 
         // list group to hold individual requirements
@@ -33,6 +33,11 @@ function fillColumn(colNumber) {
             var requirementEntry = document.createElement('li');
             requirementEntry.className = 'list-group-item';
             requirementEntry.id = requirementName + 'listEntry';
+            requirementEntry.onclick = function(e) {
+                if (e.path[0].nodeName === 'LI') {
+                    this.getElementsByTagName("input")[0].click();
+                }
+            };
 
             var requirementLabel = document.createTextNode(requirementName);
 
@@ -64,10 +69,10 @@ function loadRequirements() {
             requirements = requirementsData;
             buildList();
 
-            drawCompletionList();
             if (localStorage.getItem("requirements") !== null) {
-              restoreStatus();
+                restoreStatus();
             }
+            drawCompletionList();
             colorCode();
             updateCompletionPercentage();
 
