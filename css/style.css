@@ -1,22 +1,22 @@
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .navbar {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .space-right {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .list-group-item[status="notscheduled"] {
-    background-color:none;
+    background-color: none;
 }
 
 .list-group-item[status="scheduled"] {
-    background-color:#FF6;
+    background-color: #FF6;
 }
 
 .list-group-item[status="done"] {
