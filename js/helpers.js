@@ -151,3 +151,38 @@ function updateCompletionPercentage(){
   $('#completionPercentage').text(completionPercentage);
   $('#completionProgress').css('width', completionPercentage);
 }
+
+// regex out the classes from the inputString and return an array with the properly formatted classes
+function getClasses(inputString) {
+  var regex = /([a-z][a-z][a-z][a-z])\s*(\d{2,3})/gi;
+  var classes = [];
+      match = regex.exec(inputString);
+      while (match != null) {
+    // matched text: match[0]
+    // match start: match.index
+        // capturing group n: match[n]
+          var temp = "";
+    for(i = 0; i < 3-match[2].length; i++) {
+      temp += "0";
+    }
+    temp += match[2]; 
+    classes.push(match[1].toUpperCase()+temp)
+    match = regex.exec(inputString);
+  }
+  return classes;
+}
+
+// updates the webpage based on the input pulled from the textbox
+function checkReqsFromClasses(classes) {
+  for(i = 0; i < classes.length; i++) {
+    $('.satisfiedBy' + classes[i]).prop("checked", true);
+  }
+  refreshPage();
+}
+
+// function that is called when update button is clicked
+function updateClasses() {
+  var rawClasses = $('#classInput').val();
+  var classes = getClasses(rawClasses);
+  checkReqsFromClasses(classes);
+}
