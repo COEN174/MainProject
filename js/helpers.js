@@ -92,31 +92,39 @@ function refreshPage() {
     updateCompletionPercentage();
 }
 
-function saveStatus(){
-  var data = {};
+// stores the user's data to local storage
+function saveStatus() {
+    var data = {};
 
-  var ids = $('.requirementMarker').map(function() {
-      return this.id;
-  }).get();
+    // get all of the classes that are displayed on the webpage
+    var ids = $('.requirementMarker').map(function() {
+        return this.id;
+    }).get();
 
-  ids.forEach(function(id) {
-    data[id] = {completed: $('#' + id).is(':checked'), date: $('#' + id + 'dropdown').val()};
-  });
+    // for every class, save its information to data[id] to be eventually written to local storage
+    ids.forEach(function(id) {
+        data[id] = {
+            completed: $('#' + id).is(':checked'),
+            date: $('#' + id + 'dropdown').val()
+        };
+    });
 
-  localStorage.setItem('requirements', JSON.stringify(data));
+    // save the users data to local storage
+    localStorage.setItem('requirements', JSON.stringify(data));
 }
 
-function restoreStatus(){
-  var restored = JSON.parse(localStorage.requirements);
-  $.each(restored, function(className, classData){
-    if(classData.completed){
-      $('#' + className).prop('checked', true);
-    } else {
-      $('#' + className).prop('checked', false);
-    }
+// load the user's data from a prior session
+function restoreStatus() {
+    var restored = JSON.parse(localStorage.requirements);
+    $.each(restored, function(className, classData) {
+        if (classData.completed) {
+            $('#' + className).prop('checked', true);
+        } else {
+            $('#' + className).prop('checked', false);
+        }
 
-    $('#' + className + 'dropdown').val(classData.date);
-  });
+        $('#' + className + 'dropdown').val(classData.date);
+    });
 }
 
 // updates the progress bar and associated numbers
