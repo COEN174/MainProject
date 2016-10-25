@@ -1,5 +1,3 @@
-var intended = 0;
-
 function genOrdinal(number) {
     switch (number) {
         case 1:
@@ -73,7 +71,6 @@ function colorCode() {
                 $('#' + id + 'listEntry').attr('status', 'scheduled');
             } else {
                 $('#' + id + 'listEntry').attr('status', 'notscheduled');
-                intended += 1;
             }
         }
     });
@@ -131,11 +128,21 @@ function updateCompletionPercentage(){
       return this.id;
   }).get().length;
 
+  var intended = $('.list-group-item[status="scheduled"]').map(function(){
+      return this.id;
+  }).get().length;
+
+  var total = $('.list-group-item').map(function(){
+      return this.id;
+  }).get().length;
+
   $('#completionDone').text(completed);
   $('#completionTotal').text(completed + uncompleted);
 
-  var completionPercentage = Math.round((completed / (completed + uncompleted)) * 100) + '%';
+  var intendedPercentage = Math.round((intended/total) * 100) + '%';
+  var completionPercentage = Math.round((completed / total) * 100) + '%';
+
   $('#completionPercentage').text(completionPercentage);
   $('#completionProgress').css('width', completionPercentage);
-  $('#completionProgress').css('background-color','lightgreen');
+  $('#intendedProgress').css('width', intendedPercentage);
 }
