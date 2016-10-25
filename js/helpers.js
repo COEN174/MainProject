@@ -1,5 +1,3 @@
-var intended = 0;
-
 // returns the appropriate ending (Ordinal) of number
 // this function is called from generateQuarterDropdown()
 function genOrdinal(number) {
