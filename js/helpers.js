@@ -25,7 +25,7 @@ function generateQuarterDropdown() {
     for (var year = 1; year <= 4; year++) {
         quarters.forEach(function(quarter) {
             var label = quarter + ' ' + year + genOrdinal(year) + ' Year';
-            var value = quarter.slice(0, 1) + year;
+            var value = quarter.slice(0, 2) + year;
             var quarterOption = new Option(label, value);
             quarterDropdown.add(quarterOption);
         });
@@ -34,28 +34,88 @@ function generateQuarterDropdown() {
     return quarterDropdown;
 }
 
-function drawCompletionList() {
+// simple little helper function to get the intersection of two arrays
+function intersect(a, b) {
+    return a.filter(function(e) {
+        return b.indexOf(e) !== -1;
+    });
+}
+
+// draw side list of unscheduled requirements
+function drawUnscheduledList() {
+    // gather data
     var completed = $('.requirementMarker:checked').map(function() {
         return this.id;
     }).get();
-    $('#completed').empty();
-    if (completed.length > 0) {
-        completed.forEach(function(requirement) {
-            var entry = document.createElement('li');
-            entry.innerHTML = requirement;
-            $('#completed').append('<li>' + requirement + '</ul>');
-        });
-    }
 
     var uncompleted = $('.requirementMarker:not(:checked)').map(function() {
         return this.id;
     }).get();
-    $('#notcompleted').empty();
-    if (uncompleted.length > 0) {
-        uncompleted.forEach(function(requirement) {
-            $('#notcompleted').append('<li>' + requirement + '</ul>');
+
+    var unscheduled = $('.quarterDropdown option[value="notselected"]:selected').map(function() {
+        return $(this).parent().get(0).id.replace('dropdown', '');
+    }).get();
+
+    // intersect to form lists of complete and incompleted unscheduled
+    var completedUnscheduled = intersect(completed, unscheduled);
+    var uncompletedUnscheduled = intersect(uncompleted, unscheduled);
+
+    // populate un[complete|scheduled]
+    $('#uncompletedUnscheduledList').empty();
+    if (uncompletedUnscheduled.length > 0) {
+        uncompletedUnscheduled.forEach(function(requirement) {
+            var entry = document.createElement('li');
+            entry.innerHTML = requirement;
+            $('#uncompletedUnscheduledList').append('<li>' + requirement + '</ul>');
         });
     }
+
+    // populate complete unscheduled
+    $('#completedUnscheduledList').empty();
+    if (completedUnscheduled.length > 0) {
+        completedUnscheduled.forEach(function(requirement) {
+            var entry = document.createElement('li');
+            entry.innerHTML = requirement;
+            $('#completedUnscheduledList').append('<li>' + requirement + '</ul>');
+        });
+    }
+}
+
+// erase all entries from calendar. yeah, I know...
+function emptyCalendar() {
+    $('#Fa1, #Wi1, #Sp1, #Su1, #Fa2, #Wi2, #Sp2, #Su2, #Fa3, #Wi3, #Sp3, #Su3, #Fa4, #Wi4, #Sp4, #Su4').empty();
+}
+
+function drawCalendar() {
+    emptyCalendar();
+    drawUnscheduledList();
+
+    // list of all scheduled class
+    var scheduled = $('.quarterDropdown option[value!="notselected"]:selected').map(function() {
+        return $(this).parent().get(0).id.replace('dropdown', '');
+    }).get();
+
+    scheduled.forEach(function(requirement) {
+        // build an li entry as a container for the span
+        var container = document.createElement('li');
+        var entry = document.createElement('span');
+
+        // repopulate spaces
+        entry.innerHTML = requirement.replace(/_/g, ' ');
+        entry.className = 'class-entry';
+
+        // handle background coloring
+        if ($('#' + requirement).is(':checked')) {
+            entry.className += ' bg-success';
+        } else {
+            entry.className += ' bg-warning';
+        }
+
+        // get the quarter of completion and load the entry into the calendar
+        var quarter = $('#' + requirement + 'dropdown').val();
+        container.appendChild(entry);
+        $('#' + quarter).append(container);
+    });
 }
 
 function colorCode() {
@@ -79,14 +139,14 @@ function colorCode() {
 function clearForm() {
     $('.requirementMarker').removeAttr('checked');
     $('.quarterDropdown').val('notselected');
-    drawCompletionList();
+    drawCalendar();
     colorCode();
     saveStatus();
     updateCompletionPercentage();
 }
 
 function refreshPage() {
-    drawCompletionList();
+    drawCalendar();
     colorCode();
     saveStatus();
     updateCompletionPercentage();
