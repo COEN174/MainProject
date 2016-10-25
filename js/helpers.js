@@ -41,7 +41,9 @@ function intersect(a, b) {
     });
 }
 
+// draw side list of unscheduled requirements
 function drawUnscheduledList() {
+    // gather data
     var completed = $('.requirementMarker:checked').map(function() {
         return this.id;
     }).get();
@@ -54,9 +56,11 @@ function drawUnscheduledList() {
         return $(this).parent().get(0).id.replace('dropdown', '');
     }).get();
 
+    // intersect to form lists of complete and incompleted unscheduled
     var completedUnscheduled = intersect(completed, unscheduled);
     var uncompletedUnscheduled = intersect(uncompleted, unscheduled);
 
+    // populate un[complete|scheduled]
     $('#uncompletedUnscheduledList').empty();
     if (uncompletedUnscheduled.length > 0) {
         uncompletedUnscheduled.forEach(function(requirement) {
@@ -66,6 +70,7 @@ function drawUnscheduledList() {
         });
     }
 
+    // populate complete unscheduled
     $('#completedUnscheduledList').empty();
     if (completedUnscheduled.length > 0) {
         completedUnscheduled.forEach(function(requirement) {
@@ -76,31 +81,40 @@ function drawUnscheduledList() {
     }
 }
 
+// erase all entries from calendar. yeah, I know...
 function emptyCalendar() {
-  $('#Fa1, #Wi1, #Sp1, #Su1, #Fa2, #Wi2, #Sp2, #Su2, #Fa3, #Wi3, #Sp3, #Su3, #Fa4, #Wi4, #Sp4, #Su4').empty();
+    $('#Fa1, #Wi1, #Sp1, #Su1, #Fa2, #Wi2, #Sp2, #Su2, #Fa3, #Wi3, #Sp3, #Su3, #Fa4, #Wi4, #Sp4, #Su4').empty();
 }
+
 function drawCalendar() {
     emptyCalendar();
     drawUnscheduledList();
 
+    // list of all scheduled class
     var scheduled = $('.quarterDropdown option[value!="notselected"]:selected').map(function() {
         return $(this).parent().get(0).id.replace('dropdown', '');
     }).get();
 
-    scheduled.forEach(function(requirement){
-      var container = document.createElement('li');
-      var entry = document.createElement('span');
-      entry.innerHTML = requirement.replace(/_/g, ' ');
-      entry.className = 'class-entry';
-      if($('#' + requirement).is(':checked')){
-        entry.className += ' bg-success';
-      } else {
-        entry.className += ' bg-warning';
-      }
+    scheduled.forEach(function(requirement) {
+        // build an li entry as a container for the span
+        var container = document.createElement('li');
+        var entry = document.createElement('span');
 
-      var quarter = $('#' + requirement + 'dropdown').val();
-      container.appendChild(entry);
-      $('#' + quarter).append(container);
+        // repopulate spaces
+        entry.innerHTML = requirement.replace(/_/g, ' ');
+        entry.className = 'class-entry';
+
+        // handle background coloring
+        if ($('#' + requirement).is(':checked')) {
+            entry.className += ' bg-success';
+        } else {
+            entry.className += ' bg-warning';
+        }
+
+        // get the quarter of completion and load the entry into the calendar
+        var quarter = $('#' + requirement + 'dropdown').val();
+        container.appendChild(entry);
+        $('#' + quarter).append(container);
     });
 }
 
