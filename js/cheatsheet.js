@@ -33,7 +33,7 @@ $('.quarterDropdown option[value="notselected"]:selected').map(function() {
 }).get();
 
 // to get an array of requirements scheduled for a quarter
-$('.quarterDropdown option[value="F1"]:selected').map(function() {
+$('.quarterDropdown option[value="Fa1"]:selected').map(function() {
     return $(this).parent().get(0).id.replace('dropdown', '');
 }).get();
 
