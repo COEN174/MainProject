@@ -64,9 +64,7 @@ function drawUnscheduledList() {
     $('#uncompletedUnscheduledList').empty();
     if (uncompletedUnscheduled.length > 0) {
         uncompletedUnscheduled.forEach(function(requirement) {
-            var entry = document.createElement('li');
-            entry.innerHTML = requirement;
-            $('#uncompletedUnscheduledList').append('<li>' + requirement + '</ul>');
+            $('#uncompletedUnscheduledList').append('<li>' + requirement.replace(/_/g, ' ') + '</ul>');
         });
     }
 
@@ -74,9 +72,7 @@ function drawUnscheduledList() {
     $('#completedUnscheduledList').empty();
     if (completedUnscheduled.length > 0) {
         completedUnscheduled.forEach(function(requirement) {
-            var entry = document.createElement('li');
-            entry.innerHTML = requirement;
-            $('#completedUnscheduledList').append('<li>' + requirement + '</ul>');
+            $('#completedUnscheduledList').append('<li>' + requirement.replace(/_/g, ' ') + '</ul>');
         });
     }
 }
