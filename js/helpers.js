@@ -25,7 +25,7 @@ function generateQuarterDropdown() {
     for (var year = 1; year <= 4; year++) {
         quarters.forEach(function(quarter) {
             var label = quarter + ' ' + year + genOrdinal(year) + ' Year';
-            var value = quarter.slice(0, 1) + year;
+            var value = quarter.slice(0, 2) + year;
             var quarterOption = new Option(label, value);
             quarterDropdown.add(quarterOption);
         });
@@ -34,28 +34,79 @@ function generateQuarterDropdown() {
     return quarterDropdown;
 }
 
-function drawCompletionList() {
+function intersect(a, b) {
+    var t;
+    if (b.length > a.length) {
+        t = b;
+        b = a;
+        a = t; // indexOf to loop over shorter
+    }
+    return a.filter(function(e) {
+        if (b.indexOf(e) !== -1) return true;
+    });
+}
+
+function drawUnscheduledList() {
     var completed = $('.requirementMarker:checked').map(function() {
         return this.id;
     }).get();
-    $('#completed').empty();
-    if (completed.length > 0) {
-        completed.forEach(function(requirement) {
-            var entry = document.createElement('li');
-            entry.innerHTML = requirement;
-            $('#completed').append('<li>' + requirement + '</ul>');
-        });
-    }
 
     var uncompleted = $('.requirementMarker:not(:checked)').map(function() {
         return this.id;
     }).get();
-    $('#notcompleted').empty();
-    if (uncompleted.length > 0) {
-        uncompleted.forEach(function(requirement) {
-            $('#notcompleted').append('<li>' + requirement + '</ul>');
+
+    var unscheduled = $('.quarterDropdown option[value="notselected"]:selected').map(function() {
+        return $(this).parent().get(0).id.replace('dropdown', '');
+    }).get();
+
+    var completedUnscheduled = intersect(completed, unscheduled);
+    var uncompletedUnscheduled = intersect(uncompleted, unscheduled);
+
+    $('#uncompletedUnscheduledList').empty();
+    if (uncompletedUnscheduled.length > 0) {
+        uncompletedUnscheduled.forEach(function(requirement) {
+            var entry = document.createElement('li');
+            entry.innerHTML = requirement;
+            $('#uncompletedUnscheduledList').append('<li>' + requirement + '</ul>');
         });
     }
+
+    $('#completedUnscheduledList').empty();
+    if (completedUnscheduled.length > 0) {
+        completedUnscheduled.forEach(function(requirement) {
+            var entry = document.createElement('li');
+            entry.innerHTML = requirement;
+            $('#completedUnscheduledList').append('<li>' + requirement + '</ul>');
+        });
+    }
+}
+
+function emptyCalendar() {
+  $('#Fa1, #Wi1, #Sp1, #Su1, #Fa2, #Wi2, #Sp2, #Su2, #Fa3, #Wi3, #Sp3, #Su3, #Fa4, #Wi4, #Sp4, #Su4').empty();
+}
+function drawCalendar() {
+    emptyCalendar();
+    drawUnscheduledList();
+
+    var scheduled = $('.quarterDropdown option[value!="notselected"]:selected').map(function() {
+        return $(this).parent().get(0).id.replace('dropdown', '');
+    }).get();
+
+    scheduled.forEach(function(requirement){
+      var container = document.createElement('li');
+      var entry = document.createElement('span');
+      entry.innerHTML = requirement;
+      entry.className = 'class-entry';
+      if($('#' + requirement).is(':checked')){
+        entry.className += ' bg-success';
+      } else {
+        entry.className += ' bg-warning';
+      }
+
+      var quarter = $('#' + requirement + 'dropdown').val();
+      container.appendChild(entry);
+      $('#' + quarter).append(container);
+    });
 }
 
 function colorCode() {
@@ -79,14 +130,14 @@ function colorCode() {
 function clearForm() {
     $('.requirementMarker').removeAttr('checked');
     $('.quarterDropdown').val('notselected');
-    drawCompletionList();
+    drawCalendar();
     colorCode();
     saveStatus();
     updateCompletionPercentage();
 }
 
 function refreshPage() {
-    drawCompletionList();
+    drawCalendar();
     colorCode();
     saveStatus();
     updateCompletionPercentage();
