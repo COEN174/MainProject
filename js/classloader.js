@@ -72,7 +72,7 @@ function loadRequirements() {
             if (localStorage.getItem("requirements") !== null) {
                 restoreStatus();
             }
-            drawCompletionList();
+            drawCalendar();
             colorCode();
             updateCompletionPercentage();
 
