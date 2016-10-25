@@ -1,5 +1,3 @@
-// returns the appropriate ending (Ordinal) of number
-// this function is called from generateQuarterDropdown()
 function genOrdinal(number) {
     switch (number) {
         case 1:
@@ -13,8 +11,6 @@ function genOrdinal(number) {
     }
 }
 
-// returns a drop down menu that allows the user to specify when a class was completed
-// called from fillColumn() in classloader.js
 function generateQuarterDropdown() {
     years = 4;
     quarters = ['Fall', 'Winter', 'Spring', 'Summer'];
@@ -26,7 +22,6 @@ function generateQuarterDropdown() {
     var quarterOption = new Option('', 'notselected');
     quarterDropdown.add(quarterOption);
 
-    // adds assorted date options to quarterDropdown
     for (var year = 1; year <= 4; year++) {
         quarters.forEach(function(quarter) {
             var label = quarter + ' ' + year + genOrdinal(year) + ' Year';
@@ -39,34 +34,30 @@ function generateQuarterDropdown() {
     return quarterDropdown;
 }
 
-// called from loadRequirements() in classloader.js
 function drawCompletionList() {
-    // fill completed with the ids of all the classes whos checkbox is checked
     var completed = $('.requirementMarker:checked').map(function() {
         return this.id;
     }).get();
     $('#completed').empty();
     if (completed.length > 0) {
-        // update #completed with all the classes whos checkbox is checked
         completed.forEach(function(requirement) {
+            var entry = document.createElement('li');
+            entry.innerHTML = requirement;
             $('#completed').append('<li>' + requirement + '</ul>');
         });
     }
-    // fill uncompleted with the ids of all the classes whos checkbox is uncheck
+
     var uncompleted = $('.requirementMarker:not(:checked)').map(function() {
         return this.id;
     }).get();
     $('#notcompleted').empty();
     if (uncompleted.length > 0) {
-        // update #notcompleted with all the classes whos checkbox is not check
         uncompleted.forEach(function(requirement) {
             $('#notcompleted').append('<li>' + requirement + '</ul>');
         });
     }
 }
 
-// updates the colors of row that a class is stored in
-// called from loadRequirements() in classloader.js
 function colorCode() {
     var ids = $('.requirementMarker').map(function() {
         return this.id;
@@ -101,25 +92,20 @@ function refreshPage(){
   updateCompletionPercentage();
 }
 
-// stores the user's data to local storage
 function saveStatus(){
   var data = {};
 
-  // get all of the classes that are displayed on the webpage
   var ids = $('.requirementMarker').map(function() {
       return this.id;
   }).get();
 
-  // for every class, save its information to data[id] to be eventually written to local storage
   ids.forEach(function(id) {
     data[id] = {completed: $('#' + id).is(':checked'), date: $('#' + id + 'dropdown').val()};
   });
 
-  // save the users data to local storage
   localStorage.setItem('requirements', JSON.stringify(data));
 }
 
-// load the user's data from a prior session
 function restoreStatus(){
   var restored = JSON.parse(localStorage.requirements);
   $.each(restored, function(className, classData){
@@ -133,8 +119,6 @@ function restoreStatus(){
   });
 }
 
-// updates the progress bar and associated numbers
-// called by loadRequirements() in classloader.js
 function updateCompletionPercentage(){
   var completed = $('.requirementMarker:checked').map(function() {
       return this.id;
