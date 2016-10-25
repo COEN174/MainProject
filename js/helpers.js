@@ -158,33 +158,33 @@ function updateCompletionPercentage() {
 // regex out the classes from the inputString and return an array with the properly formatted classes
 function getClasses(inputString) {
     // scrub whitespace and split on comma
-    var brokenInput = inputString.replace(/ /g,'').split(',');
+    var brokenInput = inputString.replace(/ /g, '').split(',');
 
-    var classes = brokenInput.map(function(classEntry){
-      // regex to break out the classes
-      var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
-      var classes = [];
-      var match = regex.exec(classEntry);
+    var classes = brokenInput.map(function(classEntry) {
+        // regex to break out the classes
+        var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
+        var classes = [];
+        var match = regex.exec(classEntry);
 
-      // extract and upper department identifier
-      var department = match[1].toUpperCase();
-      // extract and pad class number
-      var classNumber = ('00' + match[2]).substr(-3);
+        // extract and upper department identifier
+        var department = match[1].toUpperCase();
+        // extract and pad class number
+        var classNumber = ('00' + match[2]).substr(-3);
 
-      return department + classNumber;
+        return department + classNumber;
     });
 
     return classes;
 }
 
 // function that is called when update button is clicked
-$("#classInputForm").submit(function(e){
+$("#classInputForm").submit(function(e) {
     e.preventDefault();
 
     var rawClass = $('#classInput').val();
     var classes = getClasses(rawClass);
-    classes.forEach(function(className){
-      $('.satisfiedBy' + className).prop("checked", true);
+    classes.forEach(function(className) {
+        $('.satisfiedBy' + className).prop("checked", true);
     });
     refreshPage();
 
