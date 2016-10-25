@@ -1,9 +1,13 @@
+// updates the ui based on user changes
+// called by loadRequirements()
 function buildList() {
     for (var i = 1; i <= 3; i++) {
         fillColumn(i);
     }
 }
 
+// updates the classes in the column specified by colNumber
+// called by buildList()
 function fillColumn(colNumber) {
     // get the data for the colum we're working on
     colRequirements = requirements['col' + colNumber];
@@ -61,6 +65,8 @@ function fillColumn(colNumber) {
     });
 }
 
+// requirements are pulled from requirements.json
+// also updates/builds ui
 function loadRequirements() {
     $.ajax({
         dataType: 'json',
@@ -68,7 +74,7 @@ function loadRequirements() {
         success: function(requirementsData) {
             requirements = requirementsData;
             buildList();
-
+            // reload data from local storage if the user had used the webpage before
             if (localStorage.getItem("requirements") !== null) {
                 restoreStatus();
             }
