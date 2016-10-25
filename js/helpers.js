@@ -95,7 +95,7 @@ function drawCalendar() {
     scheduled.forEach(function(requirement){
       var container = document.createElement('li');
       var entry = document.createElement('span');
-      entry.innerHTML = requirement;
+      entry.innerHTML = requirement.replace(/_/g, ' ');
       entry.className = 'class-entry';
       if($('#' + requirement).is(':checked')){
         entry.className += ' bg-success';
