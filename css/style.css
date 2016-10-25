@@ -12,13 +12,13 @@ body {
 }
 
 .list-group-item[status="notscheduled"] {
-    background-color: red;
+    background-color:none;
 }
 
 .list-group-item[status="scheduled"] {
-    background-color: yellow;
+    background-color:#FF6;
 }
 
 .list-group-item[status="done"] {
-    background-color: green;
+    background-color: lightgreen;
 }
