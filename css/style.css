@@ -23,6 +23,6 @@ body {
     background-color: lightgreen;
 }
 
-button[disabled]{
+button[disabled] {
     color: rgb(211, 211, 211);
 }
