@@ -25,6 +25,7 @@ body {
 
 button[disabled] {
     color: rgb(211, 211, 211);
+}
 
 h4 {
     padding: 10px;
