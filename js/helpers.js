@@ -34,15 +34,10 @@ function generateQuarterDropdown() {
     return quarterDropdown;
 }
 
+// simple little helper function to get the intersection of two arrays
 function intersect(a, b) {
-    var t;
-    if (b.length > a.length) {
-        t = b;
-        b = a;
-        a = t; // indexOf to loop over shorter
-    }
     return a.filter(function(e) {
-        if (b.indexOf(e) !== -1) return true;
+        return b.indexOf(e) !== -1;
     });
 }
 
