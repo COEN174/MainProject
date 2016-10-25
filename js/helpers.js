@@ -187,3 +187,18 @@ $("#classInputForm").submit(function(e) {
     $('#classInput').val('');
     $('#classInput').focus();
 });
+
+$('#classInput').keydown(function(e) {
+    if ($('#classInput').val().length === 0) {
+        $('#addClassButton').prop("disabled", true);
+    }
+
+    try {
+        getClasses($('#classInput').val());
+    } catch (e) {
+        $('#addClassButton').prop("disabled", true);
+        return;
+    }
+
+    $('#addClassButton').prop("disabled", false);
+});
