@@ -76,20 +76,20 @@ function colorCode() {
     });
 }
 
-function clearForm(){
-  $('.requirementMarker').removeAttr('checked');
-  $('.quarterDropdown').val('notselected');
-  drawCompletionList();
-  colorCode();
-  saveStatus();
-  updateCompletionPercentage();
+function clearForm() {
+    $('.requirementMarker').removeAttr('checked');
+    $('.quarterDropdown').val('notselected');
+    drawCompletionList();
+    colorCode();
+    saveStatus();
+    updateCompletionPercentage();
 }
 
-function refreshPage(){
-  drawCompletionList();
-  colorCode();
-  saveStatus();
-  updateCompletionPercentage();
+function refreshPage() {
+    drawCompletionList();
+    colorCode();
+    saveStatus();
+    updateCompletionPercentage();
 }
 
 function saveStatus(){
@@ -119,6 +119,8 @@ function restoreStatus(){
   });
 }
 
+// updates the progress bar and associated numbers
+// called by loadRequirements() in classloader.js
 function updateCompletionPercentage(){
   var completed = $('.requirementMarker:checked').map(function() {
       return this.id;
@@ -149,35 +151,38 @@ function updateCompletionPercentage(){
 
 // regex out the classes from the inputString and return an array with the properly formatted classes
 function getClasses(inputString) {
-  var regex = /([a-z][a-z][a-z][a-z])\s*(\d{2,3})/gi;
-  var classes = [];
-      match = regex.exec(inputString);
-      while (match != null) {
-    // matched text: match[0]
-    // match start: match.index
-        // capturing group n: match[n]
-          var temp = "";
-    for(i = 0; i < 3-match[2].length; i++) {
-      temp += "0";
-    }
-    temp += match[2]; 
-    classes.push(match[1].toUpperCase()+temp)
-    match = regex.exec(inputString);
-  }
-  return classes;
-}
+    // scrub whitespace and split on comma
+    var brokenInput = inputString.replace(/ /g,'').split(',');
 
-// updates the webpage based on the input pulled from the textbox
-function checkReqsFromClasses(classes) {
-  for(i = 0; i < classes.length; i++) {
-    $('.satisfiedBy' + classes[i]).prop("checked", true);
-  }
-  refreshPage();
+    var classes = brokenInput.map(function(classEntry){
+      // regex to break out the classes
+      var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
+      var classes = [];
+      var match = regex.exec(classEntry);
+
+      // extract and upper department identifier
+      var department = match[1].toUpperCase();
+      // extract and pad class number
+      var classNumber = ('00' + match[2]).substr(-3);
+
+      return department + classNumber;
+    });
+
+    return classes;
 }
 
 // function that is called when update button is clicked
-function updateClasses() {
-  var rawClasses = $('#classInput').val();
-  var classes = getClasses(rawClasses);
-  checkReqsFromClasses(classes);
-}
+$("#classInputForm").submit(function(e){
+    e.preventDefault();
+
+    var rawClass = $('#classInput').val();
+    var classes = getClasses(rawClass);
+    classes.forEach(function(className){
+      $('.satisfiedBy' + className).prop("checked", true);
+    });
+    refreshPage();
+
+    // clear textbox and refocus
+    $('#classInput').val('');
+    $('#classInput').focus();
+});
