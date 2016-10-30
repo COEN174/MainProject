@@ -22,8 +22,20 @@ function fillColumn(colNumber) {
 
         $.each(requirementGroup, function(requirementName, satisfiedBy) {
             var classRequirementName = requirementName + 'marker';
-            var classSatisfierNames = satisfiedBy.map(function(satisfier) {
-                return 'satisfiedBy' + satisfier;
+            var classSatisfierNames = [];
+            satisfiedBy.forEach(function(satisfier) {
+                // check if this is a range of classe
+                if (satisfier.indexOf('-') > -1) {
+                    var startRange = satisfier.substr(4, 3);
+                    var endRange = satisfier.substr(8, 3);
+                    for (var i = startRange; i <= endRange; i++) {
+                        var paddedNumber = ('00' + i).substr(-3);
+                        classSatisfierNames.push('satisfiedBy' + satisfier.substr(0, 4) + paddedNumber);
+                    }
+                } else {
+                    // it's a singular class
+                    classSatisfierNames.push('satisfiedBy' + satisfier);
+                }
             });
 
             classSatisfierNames.push(classRequirementName);
