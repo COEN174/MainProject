@@ -212,6 +212,11 @@ function getClasses(inputString) {
     var brokenInput = inputString.replace(/ /g, '').split(',');
 
     var classes = brokenInput.map(function(classEntry) {
+        // remove honors identifier
+        if(classEntry.toUpperCase().substr(-1) === 'H'){
+          classEntry = classEntry.substr(0, classEntry.length - 1);
+        }
+
         // regex to break out the classes
         var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
         var classes = [];
