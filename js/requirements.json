@@ -15,10 +15,7 @@
             "COEN174": ["COEN174"],
             "COEN175": ["COEN175"],
             "COEN177": ["COEN177"],
-            "COEN179": ["COEN179"],
-            "COEN194": ["COEN194", "ENGR194"],
-            "COEN195": ["COEN195", "ENGR195"],
-            "COEN196": ["COEN196", "ENGR196"]
+            "COEN179": ["COEN179"]
         },
         "COEN Electives": {
             "Elective_1": [],
@@ -62,9 +59,9 @@
             "PHYS033": ["PHYS033"]
         },
         "Senior Design": {
-          "Sr_Design_1":["COEN194"],
-          "Sr_Design_2":["COEN195"],
-          "Sr_Design_3":["COEN196"]
+          "Sr_Design_1":["COEN194", "ENGR194"],
+          "Sr_Design_2":["COEN195", "ENGR195"],
+          "Sr_Design_3":["COEN196", "ENGR196"]
         },
         "Educational Enrichment Electives": {
           "EEE_Pt_1": [],
