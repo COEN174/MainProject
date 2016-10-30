@@ -59,15 +59,15 @@
             "PHYS033": ["PHYS033"]
         },
         "Senior Design": {
-          "Sr_Design_1":["COEN194", "ENGR194"],
-          "Sr_Design_2":["COEN195", "ENGR195"],
-          "Sr_Design_3":["COEN196", "ENGR196"]
+            "Sr_Design_1": ["COEN194", "ENGR194"],
+            "Sr_Design_2": ["COEN195", "ENGR195"],
+            "Sr_Design_3": ["COEN196", "ENGR196"]
         },
         "Educational Enrichment Electives": {
-          "EEE_Pt_1": [],
-          "EEE_Pt_2": [],
-          "EEE_Pt_3": [],
-          "EEE_Pt_4": []
+            "EEE_Pt_1": [],
+            "EEE_Pt_2": [],
+            "EEE_Pt_3": [],
+            "EEE_Pt_4": []
         }
     }
 }
