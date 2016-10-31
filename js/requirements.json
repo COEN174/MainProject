@@ -62,7 +62,7 @@
             "PHYS033": ["PHYS033"]
         },
         "ELEN Electives": {
-            "ELEN50": ["ELEN050"],
+            "ELEN050": ["ELEN050"],
             "ELEN153": ["ELEN153"]
         }
     }
