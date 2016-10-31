@@ -34,9 +34,9 @@
             "United_States": [],
             "World_Culture_Society": [],
             "Ethics": [],
-            "Religious_Studies_1": ["RSOC001-019","TESP001-019","SCTR001-019"],
-            "Religious_Studies_2": ["RSOC020-099","TESP020-099","SCTR020-099"],
-            "Religious_Studies_3": ["RSOC100-199","TESP100-199","SCTR100-199"]
+            "Religious_Studies_1": ["RSOC001-019", "TESP001-019", "SCTR001-019"],
+            "Religious_Studies_2": ["RSOC020-099", "TESP020-099", "SCTR020-099"],
+            "Religious_Studies_3": ["RSOC100-199", "TESP100-199", "SCTR100-199"]
         },
         "Educational Enrichment Electives": {
             "Educational_Enrichment": []
