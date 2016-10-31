@@ -27,7 +27,7 @@
         "CORE Requirements": {
             "English_1": ["ENGL001", "ENGL007"],
             "English_2": ["ENGL002", "ENGL008"],
-            "ENGL182": [],
+            "ENGL182": ["ENGL182"],
             "Western_Culture_1": [],
             "Western_Culture_2": [],
             "Sociology": [],
