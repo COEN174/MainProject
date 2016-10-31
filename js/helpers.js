@@ -230,8 +230,25 @@ function getClasses(inputString) {
 // function that is called when update button is clicked
 $("#classInputForm").submit(function(e) {
     e.preventDefault();
+    updateColumnsWithTextArea(); 
+});
 
-    var rawClass = $('#classInput').val();
+// called from onkeydown of #classInput
+// called from submission of form surrounding #classInput (essentially onClick of button)
+function onTextAreaChange(event) {
+	var key = event.keyCode;
+	// 13 is the keyCode for the enter key
+	if(key == 13) {
+		updateColumnsWithTextArea();
+		// false so that enter is not printed after the textarea is cleared
+		return false;
+	}
+	// allows for other keys to still be printed in the text area
+	return true;
+}
+
+function updateColumnsWithTextArea() {
+	var rawClass = $('#classInput').val();
     var classes = getClasses(rawClass);
     classes.forEach(function(className) {
         $('.satisfiedBy' + className).prop("checked", true);
@@ -241,4 +258,4 @@ $("#classInputForm").submit(function(e) {
     // clear textbox and refocus
     $('#classInput').val('');
     $('#classInput').focus();
-});
+}
