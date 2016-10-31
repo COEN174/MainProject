@@ -20,25 +20,20 @@
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
-            <div class="navbar-header">
-              <!--  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>-</button>-->
-                    <a class="navbar-brand" href="#">Computer Engineering Degree Audit</a>
+            <div class="navbar-header" style="float: left;">
+                <a class="navbar-brand" href="#">Computer Engineering Degree Audit</a>
             </div>
             <a href="#" class="btn btn-info" role="button" onclick="window.print();">Print Audit</a>
-            <a href="#" class="btn btn-danger" role="button" id="clearForm" onclick="clearForm();">Clear Form</a>
+            <a href="#" class="btn btn-danger" id="clearForm" role="button" onclick="clearForm();">Clear Form</a>
             <!--/.navbar-collapse -->
         </div>
     </nav>
 
     <div class="container">
         <div class="page-header">
-          <div class="well well-sm">
-            <h2 id="readOnlyMode" style="text-align: center; color: red; display: none;">You are currently viewing another requirement set; this page is <strong>read only</strong> until you refresh (which will clear the current requirement set and restore your original set).<hr></h2>
-          </div>
+            <div class="well well-sm">
+                <h2 id="readOnlyMode" style="text-align: center; color: red; display: none;">You are currently viewing another requirement set; this page is <strong>read only</strong> until you refresh (which will clear the current requirement set and restore your original set).<hr></h2>
+            </div>
             Total degree progress: <strong><span id="completionPercentage"></span></strong> (<span id="completionDone"></span> out of <span id="completionTotal"></span> requirements completed)
             <div class="progress active">
                 <div id="completionProgress" class="progress-bar progress-bar-custom" style="width: 0%; background-color: lightgreen;">
@@ -46,119 +41,160 @@
                 <div id="intendedProgress" class="progress-bar progress-bar-custom" style="width: 0%; background-color:#FF6; ">
                 </div>
             </div>
-                <span id="shareLink">Share this sheet: <input id="shareLinkInput" readonly="readonly"></span>
-                <br>
+            <span id="shareLink">Share this sheet: <input id="shareLinkInput" readonly="readonly"></span>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4" id="classCol1">
 
-            <div class="row">
-                <div class="col-md-4" id="classCol1">
+                    </div>
+                    <div class="col-md-4" id="classCol2">
 
+                    </div>
+                    <div class="col-md-4" id="classCol3">
+
+                    </div>
+                    <hr>
                 </div>
-                <div class="col-md-4" id="classCol2">
-
-                </div>
-                <div class="col-md-4" id="classCol3">
-
+                <div class="row">
+                    <h4>Or input the classes you have taken below. Seperate classes with a comma, and hit enter or click Update to enter the classes into the system.</h4>
+                    <form id="classInputForm">
+                        <input type="text" id="classInput" placeholder="e.g. coen11, COEN124">
+                        <button type="submit" id="addClassButton">Update</button>
+                    </form>
                 </div>
                 <hr>
-            </div>
-            <div class="row">
-                <h4>Or input the classes you have taken below. Seperate classes with a comma, and hit enter or click Update to enter the classes into the system.</h4>
-                <form id="classInputForm">
-                    <input type="text" id="classInput" placeholder="e.g. coen11, COEN124">
-                    <button type="submit" id="addClassButton">Update</button>
-                </form>
-            </div>
-            <hr>
-            <div class="row">
-                <h3>Completion Calendar</h3>
-                <div class="col-md-9">
-                    <div class="row">
-                        <div class="col-md-3 cal-box">
-                            <h4>Fall 1</h4>
-                            <ul id="Fa1">
-                        </div>
-                        <div class="col-md-3 cal-box">
-                            <h4>Winter 1</h4>
-                            <ul id="Wi1">
-                        </div>
-                        <div class="col-md-3 cal-box">
-                            <h4>Spring 1</h4>
-                            <ul id="Sp1">
-                        </div>
-                        <div class="col-md-3 cal-box">
-                            <h4>Summer 1</h4>
-                            <ul id="Su1">
-                        </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3>Completion Calendar</h3>
+
+                        <h3 class="text-center"> First Year</h3>
+                        <table class="table">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Fall</th>
+                                    <th>Winter</th>
+                                    <th>Spring</th>
+                                    <th>Summer</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <ul id="Fa1"></ul>
+                                    </td>
+                                    <td>
+                                        <ul id="Wi1"></ul>
+                                    </td>
+                                    <td>
+                                        <ul id="Sp1"></ul>
+                                    </td>
+                                    <td>
+                                        <ul id="Su1"></ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="text-center"> Second Year</h3>
+                        <table class="table">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Fall</th>
+                                    <th>Winter</th>
+                                    <th>Spring</th>
+                                    <th>Summer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <ul id="Fa2"></ul>
+                                    </td>
+                                    <td>
+                                        <ul id="Wi2"></ul>
+                                    </td>
+                                    <td>
+                                        <ul id="Sp2"></ul>
+                                    </td>
+                                    <td>
+                                        <ul id="Su2"></ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="text-center"> Third Year</h3>
+                        <table class="table">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Fall</th>
+                                    <th>Winter</th>
+                                    <th>Spring</th>
+                                    <th>Summer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <ul id="Fa3"></ul>
+                                    </td>
+                                    <td>
+                                        <ul id="Wi3"></ul>
+                                    </td>
+                                    <td>
+                                        <ul id="Sp3"></ul>
+                                    </td>
+                                    <td>
+                                        <ul id="Su3"></ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="text-center"> Forth Year</h3>
+                        <table class="table">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Fall</th>
+                                    <th>Winter</th>
+                                    <th>Spring</th>
+                                    <th>Summer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <ul id="Fa4"></ul>
+                                    </td>
+                                    <td>
+                                        <ul id="Wi4"></ul>
+                                    </td>
+                                    <td>
+                                        <ul id="Sp4"></ul>
+                                    </td>
+                                    <td>
+                                        <ul id="Su4"></ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3 cal-box">
-                            <h4>Fall 2</h4>
-                            <ul id="Fa2">
-                        </div>
-                        <div class="col-md-3 cal-box">
-                            <h4>Winter 2</h4>
-                            <ul id="Wi2">
-                        </div>
-                        <div class="col-md-3 cal-box">
-                            <h4>Spring 2</h4>
-                            <ul id="Sp2">
-                        </div>
-                        <div class="col-md-3 cal-box">
-                            <h4>Summer 2</h4>
-                            <ul id="Su2">
-                        </div>
+
+                    <div class="col-md-3">
+                        <h4 class="bg-danger">Uncompleted &amp; Unscheduled!</h4>
+                        <ul id="uncompletedUnscheduledList"></ul>
+                        <h4 class="bg-success">Completed (Unscheduled)</h4>
+                        <ul id="completedUnscheduledList"></ul>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3 cal-box">
-                            <h4>Fall 3</h4>
-                            <ul id="Fa3">
-                        </div>
-                        <div class="col-md-3 cal-box">
-                            <h4>Winter 3</h4>
-                            <ul id="Wi3">
-                        </div>
-                        <div class="col-md-3 cal-box">
-                            <h4>Spring 3</h4>
-                            <ul id="Sp3">
-                        </div>
-                        <div class="col-md-3 cal-box">
-                            <h4>Summer 3</h4>
-                            <ul id="Su3">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 cal-box">
-                            <h4>Fall 4</h4>
-                            <ul id="Fa4">
-                        </div>
-                        <div class="col-md-3 cal-box">
-                            <h4>Winter 4</h4>
-                            <ul id="Wi4">
-                        </div>
-                        <div class="col-md-3 cal-box">
-                            <h4>Spring 4</h4>
-                            <ul id="Sp4">
-                        </div>
-                        <div class="col-md-3 cal-box">
-                            <h4>Summer 4</h4>
-                            <ul id="Su4">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <h4 class="bg-danger">Uncompleted &amp; Unscheduled!</h4>
-                    <ul id="uncompletedUnscheduledList"></ul>
-                    <h4 class="bg-success">Completed (Unscheduled)</h4>
-                    <ul id="completedUnscheduledList"></ul>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="js/constants.js"></script>
-    <script src="js/helpers.js"></script>
-    <script src="js/classloader.js"></script>
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="js/constants.js"></script>
+        <script src="js/helpers.js"></script>
+        <script src="js/classloader.js"></script>
 </body>
 
 </html>

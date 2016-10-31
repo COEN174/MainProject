@@ -6,9 +6,10 @@ body {
 .navbar {
     margin-bottom: 20px;
 }
-.btn-info, .btn-danger{
-    float:right;
-    margin:10px;
+
+.btn-info, .btn-danger {
+    float: right;
+    margin: 10px;
 }
 
 .space-right {
@@ -26,7 +27,7 @@ body {
 .list-group-item[status="done"] {
     background-color: lightgreen;
 }
-chec
+
 h4 {
     padding: 10px;
 }
@@ -48,4 +49,9 @@ h4 {
 
 .class-entry.bg-warning {
     background-color: rgb(222, 201, 91);
+}
+
+#classInput {
+    width: 100%;
+    margin-bottom: 10px;
 }

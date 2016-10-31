@@ -230,13 +230,12 @@ function updateCompletionPercentage() {
 
 // regex out the classes from the inputString and return an array with the properly formatted classes
 function getClasses(inputString) {
-    // scrub whitespace and split on comma
-    var brokenInput = inputString.replace(/ /g, '').split(',');
+    var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
+    var matches = inputString.match(regex);
 
-    var classes = brokenInput.map(function(classEntry) {
+    var classes = matches.map(function(classEntry) {
         // regex to break out the classes
         var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
-        var classes = [];
         var match = regex.exec(classEntry);
 
         // extract and upper department identifier
