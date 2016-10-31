@@ -33,6 +33,7 @@
             <!--/.navbar-collapse -->
         </div>
     </nav>
+    <hr>
 
     <div class="container">
         <div class="page-header">
@@ -43,12 +44,21 @@
                 <div id="intendedProgress" class="progress-bar progress-bar-custom" style="width: 0%; background-color:#FF6; ">
                 </div>
             </div>
+
             <!--<div class="text-center">
                 Check off the classes you have taken OR select the quarter and year that you intend to take the courses you have left!<br>
                 <a href="#" onclick="clearForm();">Clear stored data</a>
                 <br>
                 <br>
             </div>-->
+            <hr>
+            <div class="row">
+                <p>Input the classes you have taken below seperated with commas, and hit enter or click Update to see your progress automatically updated. Or, continue below and check off the boxes and select what quarter you have taken or plan to take a course.</p>
+                <form id="classInputForm">
+                    <textarea rows="5" id="classInput" placeholder="e.g. coen11, COEN124"></textarea>
+                    <button class="btn btn-info" type="submit">Update</button>
+                </form>
+            </div>
 
             <div class="row">
                 <div class="col-md-4" id="classCol1">
@@ -62,28 +72,86 @@
                 </div>
                 <hr>
             </div>
-            <div class="row">
-                <h4>Or input the classes you have taken below. Seperate classes with a comma, and hit enter or click Update to enter the classes into the system.</h4>
-                <form id="classInputForm">
-                    <input type="text" id="classInput" placeholder="e.g. coen11, COEN124">
-                    <button type="submit">Update</button>
-                </form>
-            </div>
             <hr>
             <div class="row">
-                <h3>Completion Calendar</h3>
                 <div class="col-md-9">
+                <h3>Completion Calendar</h3>
+
+                <h3 class="text-center"> First Year</h3>
+                <table class="table">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>Fall</th>
+                            <th>Winter</th>
+                            <th>Spring</th>
+                            <th>Summer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <br>
+
+                <h3 class="text-center"> Second Year</h3>
+                <table class="table">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>Fall</th>
+                            <th>Winter</th>
+                            <th>Spring</th>
+                            <th>Summer</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <br>
+
+                <h3 class="text-center"> Third Year</h3>
+                <table class="table">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>Fall</th>
+                            <th>Winter</th>
+                            <th>Spring</th>
+                            <th>Summer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+
+                <h3 class="text-center"> Forth Year</h3>
+                <table class="table">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>Fall</th>
+                            <th>Winter</th>
+                            <th>Spring</th>
+                            <th>Summer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                </div>
+               <!-- <div class="col-md-9">
                     <div class="row">
+                        <h4>First Year - Freshman </h4>
+                        
                         <div class="col-md-3 cal-box">
-                            <h4>Fall 1</h4>
+                            <h4>Fall</h4>
                             <ul id="Fa1">
                         </div>
                         <div class="col-md-3 cal-box">
-                            <h4>Winter 1</h4>
+                            <h4>Winter</h4>
                             <ul id="Wi1">
                         </div>
                         <div class="col-md-3 cal-box">
-                            <h4>Spring 1</h4>
+                            <h4>Spring</h4>
                             <ul id="Sp1">
                         </div>
                         <div class="col-md-3 cal-box">
@@ -144,8 +212,8 @@
                             <h4>Summer 4</h4>
                             <ul id="Su4">
                         </div>
-                    </div>
-                </div>
+                    </div></div>-->
+                
                 <div class="col-md-3">
                     <h4 class="bg-danger">Uncompleted &amp; Unscheduled!</h4>
                     <ul id="uncompletedUnscheduledList"></ul>
