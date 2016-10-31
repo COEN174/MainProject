@@ -265,6 +265,7 @@ $("#classInputForm").submit(function(e) {
     $('#classInput').focus();
 });
 
+// sourced from http://stackoverflow.com/a/901144
 function getParameterByName(name, url) {
     if (!url) {
         url = window.location.href;
