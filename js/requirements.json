@@ -38,10 +38,13 @@
             "Religious_Studies_2": ["RSOC020-099"],
             "Religious_Studies_3": ["RSOC100-200"]
         },
-        "ELEN Electives": {
-            "ELEN50": ["ELEN50"],
-            "ELEN115": ["ELEN115"],
-            "ELEN153": ["ELEN153"]
+        "Educational Enrichment Electives": {
+            "Educational_Enrichment": []
+        },
+        "Senior Design": {
+            "Senior_Design_1": ["COEN194", "ENGR194"],
+            "Senior_Design_2": ["COEN195", "ENGR195"],
+            "Senior_Design_3": ["COEN196", "ENGR196"]
         }
     },
     "col3": {
@@ -58,16 +61,10 @@
             "PHYS032": ["PHYS032"],
             "PHYS033": ["PHYS033"]
         },
-        "Senior Design": {
-            "Sr_Design_1": ["COEN194", "ENGR194"],
-            "Sr_Design_2": ["COEN195", "ENGR195"],
-            "Sr_Design_3": ["COEN196", "ENGR196"]
-        },
-        "Educational Enrichment Electives": {
-            "EEE_Pt_1": [],
-            "EEE_Pt_2": [],
-            "EEE_Pt_3": [],
-            "EEE_Pt_4": []
+        "ELEN Electives": {
+            "ELEN50": ["ELEN50"],
+            "ELEN115": ["ELEN115"],
+            "ELEN153": ["ELEN153"]
         }
     }
 }
