@@ -35,7 +35,7 @@
 
     <div class="container">
         <div class="page-header">
-            Total degree progress: <strong><span id="completionPercentage"></span></strong> (<span id="completionDone"></span> out of <span id="completionTotal"></span> requirements completed)
+            <h2 id="readOnlyMode" style="text-align: center; color: red; display: none;">You are currently viewing another requirement set; this page is <strong>read only</strong> until you refresh (which will clear the current requirement set and restore your original set).<hr></h2> Total degree progress: <strong><span id="completionPercentage"></span></strong> (<span id="completionDone"></span> out of <span id="completionTotal"></span> requirements completed)
             <div class="progress active">
                 <div id="completionProgress" class="progress-bar progress-bar-custom" style="width: 0%; background-color: lightgreen;">
                 </div>
@@ -44,8 +44,10 @@
             </div>
             <div class="text-center">
                 Check off the classes you have taken OR select the quarter and year that you intend to take the courses you have left!<br>
-                <a href="#" onclick="clearForm();">Clear stored data</a>
+                <a id="clearStored" href="#" onclick="clearForm();">Clear stored data</a>
+                <a id="refreshData" href="#" onclick="window.location = document.origin;" style="display: none;">Restore personal data</a>
                 <br>
+                <span id="shareLink">Share this sheet: <input id="shareLinkInput" readonly="readonly"></span>
                 <br>
             </div>
 
@@ -65,7 +67,7 @@
                 <h4>Or input the classes you have taken below. Seperate classes with a comma, and hit enter or click Update to enter the classes into the system.</h4>
                 <form id="classInputForm">
                     <input type="text" id="classInput" placeholder="e.g. coen11, COEN124">
-                    <button type="submit">Update</button>
+                    <button type="submit" id="addClassButton">Update</button>
                 </form>
             </div>
             <hr>

@@ -87,6 +87,7 @@ function loadRequirements() {
             drawCalendar();
             colorCode();
             updateCompletionPercentage();
+            updateShareLink();
 
             $(".requirementMarker").change(refreshPage);
             $(".quarterDropdown").change(refreshPage);
