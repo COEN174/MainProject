@@ -139,6 +139,7 @@ function clearForm() {
     colorCode();
     saveStatus();
     updateCompletionPercentage();
+    updateShareLink();
 }
 
 function refreshPage() {
