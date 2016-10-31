@@ -92,9 +92,9 @@ function drawCalendar() {
     }).get();
 
     scheduled.forEach(function(requirement) {
-        // build an li entry as a container for the span
+        // build an li entry as a container for the div
         var container = document.createElement('li');
-        var entry = document.createElement('span');
+        var entry = document.createElement('div');
 
         // repopulate spaces
         entry.innerHTML = requirement.replace(/_/g, ' ');
@@ -103,7 +103,8 @@ function drawCalendar() {
         // handle background coloring
         if ($('#' + requirement).is(':checked')) {
             entry.className += ' bg-success';
-        } else {
+        } 
+        else {
             entry.className += ' bg-warning';
         }
 

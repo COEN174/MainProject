@@ -16,10 +16,6 @@ body {
     margin-right: 10px;
 }
 
-.list-group-item[status="notscheduled"] {
-    background-color: none;
-}
-
 .list-group-item[status="scheduled"] {
     background-color: #FF6;
 }
@@ -43,16 +39,32 @@ h4 {
     color: rgb(148, 148, 148);
 }
 
-.class-entry.bg-success {
-    background-color: rgb(140, 255, 92);
+.bg-success {
+    background-color: lightgreen;
 }
 
-.class-entry.bg-warning {
-    background-color: rgb(222, 201, 91);
+.bg-warning {
+    background-color: #FF6;
+}
+.bg-danger{
+    background-color:#F66;
 }
 
 .cal-entry {
 	list-style: none;
+    padding:0;
+    margin:0 auto;
+}
+.unscheduledList{
+    background-color:none !important;
+}
+
+td{
+    border:2px solid #ddd;
+}
+
+th{
+    color:#555;
 }
 
 #classInput {
