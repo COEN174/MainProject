@@ -280,9 +280,7 @@ function getParameterByName(name, url) {
 function loadReadOnly(data) {
     $('#addClassButton, .quarterDropdown, .requirementMarker').prop("disabled", true);
     $('#readOnlyMode').css('display', 'block');
-    $('#clearForm').onclick = function() {
-        window.location = document.origin;
-    };
+    $('#clearForm').attr("onclick", "window.location = document.origin;");
     $('#shareLink, #clearStored').css('display', 'none');
     loadStatus(data);
     drawCalendar();
