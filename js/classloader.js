@@ -51,7 +51,7 @@ function fillColumn(colNumber) {
                 }
             };
 
-            var requirementLabel = document.createTextNode(requirementName.replace('_', ' '));
+            var requirementLabel = document.createTextNode(requirementName.replace(/_/g, ' '));
 
             var requirementCheckbox = document.createElement('input');
             requirementCheckbox.setAttribute('type', 'checkbox');
