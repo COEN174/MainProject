@@ -160,8 +160,8 @@ function saveStatus() {
 function restoreStatus() {
     if (getParameterByName('load')) {
         var rawData = getParameterByName('load');
-        if(rawData.substr(-1) === '/'){
-          rawData = rawData.substr(0, rawData.length - 1);
+        if (rawData.substr(-1) === '/') {
+            rawData = rawData.substr(0, rawData.length - 1);
         }
 
         loadReadOnly(JSON.parse(atob(rawData)));
@@ -279,7 +279,10 @@ function getParameterByName(name, url) {
 
 function loadReadOnly(data) {
     $('#addClassButton, .quarterDropdown, .requirementMarker').prop("disabled", true);
-    $('#readOnlyMode, #refreshData').css('display', 'block');
+    $('#readOnlyMode').css('display', 'block');
+    $('#clearForm').onclick = function() {
+        window.location = document.origin;
+    };
     $('#shareLink, #clearStored').css('display', 'none');
     loadStatus(data);
     drawCalendar();
