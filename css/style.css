@@ -6,6 +6,10 @@ body {
 .navbar {
     margin-bottom: 20px;
 }
+.btn-info, .btn-danger{
+    float:right;
+    margin:10px;
+}
 
 .space-right {
     margin-right: 10px;
