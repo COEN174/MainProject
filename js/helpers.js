@@ -139,6 +139,7 @@ function clearForm() {
     colorCode();
     saveStatus();
     updateCompletionPercentage();
+    updateShareLink();
 }
 
 function refreshPage() {
@@ -146,9 +147,31 @@ function refreshPage() {
     colorCode();
     saveStatus();
     updateCompletionPercentage();
+    updateShareLink();
+}
+
+function updateShareLink() {
+    $('#shareLinkInput').val(document.location.origin + '/?load=' + btoa(generateStatus()));
 }
 
 function saveStatus() {
+    localStorage.setItem('requirements', generateStatus());
+}
+
+function restoreStatus() {
+    if (getParameterByName('load')) {
+        var rawData = getParameterByName('load');
+        if (rawData.substr(-1) === '/') {
+            rawData = rawData.substr(0, rawData.length - 1);
+        }
+
+        loadReadOnly(JSON.parse(atob(rawData)));
+    } else {
+        loadStatus(JSON.parse(localStorage.requirements));
+    }
+}
+
+function generateStatus() {
     var data = {};
 
     var ids = $('.requirementMarker').map(function() {
@@ -162,12 +185,11 @@ function saveStatus() {
         };
     });
 
-    localStorage.setItem('requirements', JSON.stringify(data));
+    return JSON.stringify(data);
 }
 
-function restoreStatus() {
-    var restored = JSON.parse(localStorage.requirements);
-    $.each(restored, function(className, classData) {
+function loadStatus(data) {
+    $.each(data, function(className, classData) {
         if (classData.completed) {
             $('#' + className).prop('checked', true);
         } else {
@@ -242,3 +264,27 @@ $("#classInputForm").submit(function(e) {
     $('#classInput').val('');
     $('#classInput').focus();
 });
+
+// sourced from http://stackoverflow.com/a/901144
+function getParameterByName(name, url) {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function loadReadOnly(data) {
+    $('#addClassButton, .quarterDropdown, .requirementMarker').prop("disabled", true);
+    $('#readOnlyMode').css('display', 'block');
+    $('#clearForm').attr("onclick", "window.location = document.origin;");
+    $('#shareLink, #clearStored').css('display', 'none');
+    loadStatus(data);
+    drawCalendar();
+    colorCode();
+    updateCompletionPercentage();
+}

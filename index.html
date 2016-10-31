@@ -24,13 +24,16 @@
                 <a class="navbar-brand" href="#">Computer Engineering Degree Audit</a>
             </div>
             <a href="#" class="btn btn-info" role="button" onclick="window.print();">Print Audit</a>
-            <a href="#" class="btn btn-danger" role="button" onclick="clearForm();">Clear Form</a>
+            <a href="#" class="btn btn-danger" id="clearForm" role="button" onclick="clearForm();">Clear Form</a>
             <!--/.navbar-collapse -->
         </div>
     </nav>
 
     <div class="container">
         <div class="page-header">
+            <div class="well well-sm">
+                <h2 id="readOnlyMode" style="text-align: center; color: red; display: none;">You are currently viewing another requirement set; this page is <strong>read only</strong> until you refresh (which will clear the current requirement set and restore your original set).<hr></h2>
+            </div>
             Total degree progress: <strong><span id="completionPercentage"></span></strong> (<span id="completionDone"></span> out of <span id="completionTotal"></span> requirements completed)
             <div class="progress active">
                 <div id="completionProgress" class="progress-bar progress-bar-custom" style="width: 0%; background-color: lightgreen;">
@@ -38,6 +41,7 @@
                 <div id="intendedProgress" class="progress-bar progress-bar-custom" style="width: 0%; background-color:#FF6; ">
                 </div>
             </div>
+            <span id="shareLink">Share this sheet: <input onClick="this.select();" id="shareLinkInput" readonly="readonly"></span>
             <div class="container">
                 <div class="row">
                     <div class="col-md-4" id="classCol1">
