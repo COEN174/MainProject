@@ -49,3 +49,7 @@ h4 {
 .class-entry.bg-warning {
     background-color: rgb(222, 201, 91);
 }
+#classInput{
+    width:100%;
+    margin-bottom:10px;
+}
