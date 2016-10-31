@@ -52,7 +52,7 @@
             "MATH011": ["MATH011"],
             "MATH012": ["MATH012"],
             "MATH013": ["MATH013"],
-            "MATH021": ["MATH021"],
+            "MATH014": ["MATH014"],
             "AMTH106": ["AMTH106", "MATH022", "CHEM012", "BIOL021", "MATH101-178"],
             "AMTH108": ["AMTH108"],
             "MATH053": ["MATH053", "CSCI166", "AMTH118"],
@@ -62,8 +62,7 @@
             "PHYS033": ["PHYS033"]
         },
         "ELEN Electives": {
-            "ELEN50": ["ELEN50"],
-            "ELEN115": ["ELEN115"],
+            "ELEN50": ["ELEN050"],
             "ELEN153": ["ELEN153"]
         }
     }
