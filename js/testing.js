@@ -106,6 +106,18 @@ var tests = {
 
         return [$('#ENGR001listEntry').css('background-color'), 'rgb(144, 238, 144)'];
     },
+    
+    clicked_class_turns_green: function() {
+        $('#ENGR001').click();
+
+        return [$('#ENGR001listEntry').css('background-color'), 'rgb(144, 238, 144)'];
+    },
+	
+	checked_class_turns_green: function() {
+        $('#ENGR001listEntry').click();
+
+        return [$('#ENGR001listEntry').css('background-color'), 'rgb(144, 238, 144)'];
+    },
 
     completed_class_is_not_in_calendar: function() {
         $('#classInput').val('engr1');
