@@ -46,25 +46,27 @@ h4 {
 .bg-warning {
     background-color: #FF6;
 }
-.bg-danger{
-    background-color:#F66;
+
+.bg-danger {
+    background-color: #F66;
 }
 
 .cal-entry {
-	list-style: none;
-    padding:0;
-    margin:0 auto;
-}
-.unscheduledList{
-    background-color:none !important;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
 }
 
-td{
-    border:2px solid #ddd;
+.unscheduledList {
+    background-color: none !important;
 }
 
-th{
-    color:#555;
+td {
+    border: 2px solid #ddd;
+}
+
+th {
+    color: #555;
 }
 
 #classInput {
