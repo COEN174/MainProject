@@ -43,6 +43,16 @@ var tests = {
 
     },
 
+    make_correct_change_with_invalid: function() {
+        $('#classInput').val('engr1 coen10 poop4 poooop4');
+        $('#classInputForm').submit();
+        saveStatus();
+
+        var expected = '{"ENGR001":{"completed":true,"date":"notselected"},"COEN010":{"completed":true,"date":"notselected"},"COEN011":{"completed":false,"date":"notselected"},"COEN012":{"completed":false,"date":"notselected"},"COEN019":{"completed":false,"date":"notselected"},"COEN020":{"completed":false,"date":"notselected"},"COEN021":{"completed":false,"date":"notselected"},"COEN070":{"completed":false,"date":"notselected"},"COEN122":{"completed":false,"date":"notselected"},"COEN146":{"completed":false,"date":"notselected"},"COEN171":{"completed":false,"date":"notselected"},"COEN174":{"completed":false,"date":"notselected"},"COEN175":{"completed":false,"date":"notselected"},"COEN177":{"completed":false,"date":"notselected"},"COEN179":{"completed":false,"date":"notselected"},"Elective_1":{"completed":false,"date":"notselected"},"Elective_2":{"completed":false,"date":"notselected"},"Elective_3":{"completed":false,"date":"notselected"},"English_1":{"completed":false,"date":"notselected"},"English_2":{"completed":false,"date":"notselected"},"ENGL181":{"completed":false,"date":"notselected"},"Western_Culture_1":{"completed":false,"date":"notselected"},"Western_Culture_2":{"completed":false,"date":"notselected"},"Sociology":{"completed":false,"date":"notselected"},"United_States":{"completed":false,"date":"notselected"},"World_Culture_Society":{"completed":false,"date":"notselected"},"Ethics":{"completed":false,"date":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected"},"Educational_Enrichment":{"completed":false,"date":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected"},"MATH011":{"completed":false,"date":"notselected"},"MATH012":{"completed":false,"date":"notselected"},"MATH013":{"completed":false,"date":"notselected"},"MATH014":{"completed":false,"date":"notselected"},"AMTH106":{"completed":false,"date":"notselected"},"AMTH108":{"completed":false,"date":"notselected"},"MATH053":{"completed":false,"date":"notselected"},"CHEM011":{"completed":false,"date":"notselected"},"PHYS031":{"completed":false,"date":"notselected"},"PHYS032":{"completed":false,"date":"notselected"},"PHYS033":{"completed":false,"date":"notselected"},"ELEN050":{"completed":false,"date":"notselected"},"ELEN153":{"completed":false,"date":"notselected"}}';
+        return [localStorage.requirements, expected];
+
+    },
+
     add_a_single_correct_class: function() {
         $('#classInput').val('ENGR001');
         $('#classInputForm').submit();
@@ -69,6 +79,14 @@ var tests = {
 
     add_multiple_classes: function() {
         $('#classInput').val('engr1 coen10, coen11');
+        $('#classInputForm').submit();
+
+        var expected = '{"ENGR001":{"completed":true,"date":"notselected"},"COEN010":{"completed":true,"date":"notselected"},"COEN011":{"completed":true,"date":"notselected"},"COEN012":{"completed":false,"date":"notselected"},"COEN019":{"completed":false,"date":"notselected"},"COEN020":{"completed":false,"date":"notselected"},"COEN021":{"completed":false,"date":"notselected"},"COEN070":{"completed":false,"date":"notselected"},"COEN122":{"completed":false,"date":"notselected"},"COEN146":{"completed":false,"date":"notselected"},"COEN171":{"completed":false,"date":"notselected"},"COEN174":{"completed":false,"date":"notselected"},"COEN175":{"completed":false,"date":"notselected"},"COEN177":{"completed":false,"date":"notselected"},"COEN179":{"completed":false,"date":"notselected"},"Elective_1":{"completed":false,"date":"notselected"},"Elective_2":{"completed":false,"date":"notselected"},"Elective_3":{"completed":false,"date":"notselected"},"English_1":{"completed":false,"date":"notselected"},"English_2":{"completed":false,"date":"notselected"},"ENGL181":{"completed":false,"date":"notselected"},"Western_Culture_1":{"completed":false,"date":"notselected"},"Western_Culture_2":{"completed":false,"date":"notselected"},"Sociology":{"completed":false,"date":"notselected"},"United_States":{"completed":false,"date":"notselected"},"World_Culture_Society":{"completed":false,"date":"notselected"},"Ethics":{"completed":false,"date":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected"},"Educational_Enrichment":{"completed":false,"date":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected"},"MATH011":{"completed":false,"date":"notselected"},"MATH012":{"completed":false,"date":"notselected"},"MATH013":{"completed":false,"date":"notselected"},"MATH014":{"completed":false,"date":"notselected"},"AMTH106":{"completed":false,"date":"notselected"},"AMTH108":{"completed":false,"date":"notselected"},"MATH053":{"completed":false,"date":"notselected"},"CHEM011":{"completed":false,"date":"notselected"},"PHYS031":{"completed":false,"date":"notselected"},"PHYS032":{"completed":false,"date":"notselected"},"PHYS033":{"completed":false,"date":"notselected"},"ELEN050":{"completed":false,"date":"notselected"},"ELEN153":{"completed":false,"date":"notselected"}}';
+        return [localStorage.requirements, expected];
+    },
+
+    add_multiple_classes_on_multiple_lines: function() {
+        $('#classInput').val('engr1 \ncoen10, coen11');
         $('#classInputForm').submit();
 
         var expected = '{"ENGR001":{"completed":true,"date":"notselected"},"COEN010":{"completed":true,"date":"notselected"},"COEN011":{"completed":true,"date":"notselected"},"COEN012":{"completed":false,"date":"notselected"},"COEN019":{"completed":false,"date":"notselected"},"COEN020":{"completed":false,"date":"notselected"},"COEN021":{"completed":false,"date":"notselected"},"COEN070":{"completed":false,"date":"notselected"},"COEN122":{"completed":false,"date":"notselected"},"COEN146":{"completed":false,"date":"notselected"},"COEN171":{"completed":false,"date":"notselected"},"COEN174":{"completed":false,"date":"notselected"},"COEN175":{"completed":false,"date":"notselected"},"COEN177":{"completed":false,"date":"notselected"},"COEN179":{"completed":false,"date":"notselected"},"Elective_1":{"completed":false,"date":"notselected"},"Elective_2":{"completed":false,"date":"notselected"},"Elective_3":{"completed":false,"date":"notselected"},"English_1":{"completed":false,"date":"notselected"},"English_2":{"completed":false,"date":"notselected"},"ENGL181":{"completed":false,"date":"notselected"},"Western_Culture_1":{"completed":false,"date":"notselected"},"Western_Culture_2":{"completed":false,"date":"notselected"},"Sociology":{"completed":false,"date":"notselected"},"United_States":{"completed":false,"date":"notselected"},"World_Culture_Society":{"completed":false,"date":"notselected"},"Ethics":{"completed":false,"date":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected"},"Educational_Enrichment":{"completed":false,"date":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected"},"MATH011":{"completed":false,"date":"notselected"},"MATH012":{"completed":false,"date":"notselected"},"MATH013":{"completed":false,"date":"notselected"},"MATH014":{"completed":false,"date":"notselected"},"AMTH106":{"completed":false,"date":"notselected"},"AMTH108":{"completed":false,"date":"notselected"},"MATH053":{"completed":false,"date":"notselected"},"CHEM011":{"completed":false,"date":"notselected"},"PHYS031":{"completed":false,"date":"notselected"},"PHYS032":{"completed":false,"date":"notselected"},"PHYS033":{"completed":false,"date":"notselected"},"ELEN050":{"completed":false,"date":"notselected"},"ELEN153":{"completed":false,"date":"notselected"}}';
@@ -103,18 +121,6 @@ var tests = {
     completed_class_turns_green: function() {
         $('#classInput').val('engr1');
         $('#classInputForm').submit();
-
-        return [$('#ENGR001listEntry').css('background-color'), 'rgb(144, 238, 144)'];
-    },
-    
-    clicked_class_turns_green: function() {
-        $('#ENGR001').click();
-
-        return [$('#ENGR001listEntry').css('background-color'), 'rgb(144, 238, 144)'];
-    },
-	
-	checked_class_turns_green: function() {
-        $('#ENGR001listEntry').click();
 
         return [$('#ENGR001listEntry').css('background-color'), 'rgb(144, 238, 144)'];
     },
@@ -162,6 +168,17 @@ var tests = {
         return [inBox, true];
     },
 
+    scheduled_completed_class_is_not_in_unscheduled_list: function() {
+        $('#classInput').val('engr1');
+        $('#classInputForm').submit();
+        $('#ENGR001dropdown').val('Fa1');
+        drawCalendar();
+        colorCode();
+        saveStatus();
+
+        return [$('#completedUnscheduledList').children().length, 0];
+    },
+
     scheduled_uncompleted_class_is_yellow: function() {
         $('#ENGR001dropdown').val('Fa1');
         drawCalendar();
@@ -190,11 +207,11 @@ var tests = {
     },
 
     completed_class_updates_percentage: function() {
-      updateCompletionPercentage();
-      $('#classInput').val('engr1');
-      $('#classInputForm').submit();
+        updateCompletionPercentage();
+        $('#classInput').val('engr1');
+        $('#classInputForm').submit();
 
-      return [$('#completionDone').text(), '1'];
+        return [$('#completionDone').text(), '1'];
     },
 };
 
@@ -241,4 +258,4 @@ function runTests() {
 
 console.log('Test harness loaded...');
 // give the ajax time to load
-// setTimeout(runTests, 1000);
+setTimeout(runTests, 1000);
