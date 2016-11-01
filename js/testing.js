@@ -177,15 +177,6 @@ var tests = {
         return [$('#completionDone').text(), '0'];
     },
 
-    // scheduled_class_updates_percentage_bar: function() {
-    //   $('#ENGR001dropdown').val('Fa1');
-    //   updateCompletionPercentage();
-    //
-    //   var intendedProgressWidth = $('#intendedProgress').css('width');
-    //   console.log(intendedProgressWidth)
-    //   return [intendedProgressWidth > 0, true];
-    // },
-
     completed_class_updates_percentage: function() {
       updateCompletionPercentage();
       $('#classInput').val('engr1');
@@ -193,11 +184,6 @@ var tests = {
 
       return [$('#completionDone').text(), '1'];
     },
-
-    // completed_class_updates_percentage_bar: function() {
-    //     return [true, true];
-    // }
-
 };
 
 
