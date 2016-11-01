@@ -23,6 +23,9 @@ body {
 .list-group-item[status="done"] {
     background-color: lightgreen;
 }
+.list-group-item{
+    overflow:hidden;
+}
 
 h4 {
     padding: 10px;
