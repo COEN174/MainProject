@@ -243,4 +243,4 @@ function runTests() {
 
 console.log('Test harness loaded...');
 // give the ajax time to load
-setTimeout(runTests, 1000);
+// setTimeout(runTests, 1000);
