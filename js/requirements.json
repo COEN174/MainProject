@@ -18,9 +18,9 @@
             "COEN179": ["COEN179"]
         },
         "COEN Electives": {
-            "Elective_1": [],
-            "Elective_2": [],
-            "Elective_3": []
+            "Elective_1": ["COEN100-121", "COEN123-145", "COEN147-170", "COEN172-173", "COEN176", "COEN178", "COEN180", "ELEN115", "ELEN133", "ELEN134"],
+            "Elective_2": ["COEN100-121", "COEN123-145", "COEN147-170", "COEN172-173", "COEN176", "COEN178", "COEN180", "ELEN115", "ELEN133", "ELEN134"],
+            "Elective_3": ["COEN100-121", "COEN123-145", "COEN147-170", "COEN172-173", "COEN176", "COEN178", "COEN180", "ELEN115", "ELEN133", "ELEN134"]
         }
     },
     "col2": {
@@ -28,11 +28,7 @@
             "English_1": ["ENGL001", "ENGL007"],
             "English_2": ["ENGL002", "ENGL008"],
             "ENGL181": ["ENGL181"],
-            "Western_Culture_1": [],
-            "Western_Culture_2": [],
-            "Sociology": [],
-            "United_States": [],
-            "World_Culture_Society": [],
+            "Diversity" : [],
             "Ethics": ["ENGR019", "MGMT006", "PHIL002-010", "PHIL111", "PHIL113", "PHIL115", "PHIL116", "PHIL121", "PHIL122", "PHIL123", "PSYC114", "TESP159", "WGST058", "WGST184"],
             "Religious_Studies_1": ["RSOC001-019", "TESP001-019", "SCTR001-019"],
             "Religious_Studies_2": ["RSOC020-099", "TESP020-099", "SCTR020-099"],
