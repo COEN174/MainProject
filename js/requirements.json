@@ -33,7 +33,7 @@
             "Sociology": [],
             "United_States": [],
             "World_Culture_Society": [],
-            "Ethics": [],
+            "Ethics": ["ENGR019", "MGMT006", "PHIL002-010", "PHIL111", "PHIL113", "PHIL115", "PHIL116", "PHIL121", "PHIL122", "PHIL123", "PSYC114", "TESP159", "WGST058", "WGST184"],
             "Religious_Studies_1": ["RSOC001-019", "TESP001-019", "SCTR001-019"],
             "Religious_Studies_2": ["RSOC020-099", "TESP020-099", "SCTR020-099"],
             "Religious_Studies_3": ["RSOC100-199", "TESP100-199", "SCTR100-199"]
