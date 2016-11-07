@@ -46,13 +46,13 @@ function fillColumn(colNumber) {
             requirementEntry.className = 'list-group-item';
             requirementEntry.id = requirementName + 'listEntry';
             requirementEntry.onclick = function(e) {
-				var nodename;
-				if(e.path){
-					nodename = e.path[0].nodeName;
-				} else {
-					nodename = e.target.nodeName;
-				}
-				
+                var nodename;
+                if (e.path) {
+                    nodename = e.path[0].nodeName;
+                } else {
+                    nodename = e.target.nodeName;
+                }
+
                 if (nodename === 'LI') {
                     this.getElementsByTagName("input")[0].click();
                 }
