@@ -158,7 +158,8 @@ function saveStatus() {
     ids.forEach(function(id) {
         data[id] = {
             completed: $('#' + id).is(':checked'),
-            date: $('#' + id + 'dropdown').val()
+            date: $('#' + id + 'dropdown').val(),
+            satisfaction: $('#' + id + 'satisfaction').val()
         };
     });
 
@@ -175,6 +176,7 @@ function restoreStatus() {
         }
 
         $('#' + className + 'dropdown').val(classData.date);
+        $('#' + className + 'satisfaction').val(classData.satisfaction);
     });
 }
 
