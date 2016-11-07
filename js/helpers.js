@@ -19,7 +19,7 @@ function generateQuarterDropdown() {
     quarterDropdown.className = 'pull-right space-right quarterDropdown';
 
     // create blank entry
-    var quarterOption = new Option('', 'notselected');
+    var quarterOption = new Option('<no date>', 'notselected');
     quarterDropdown.add(quarterOption);
 
     for (var year = 1; year <= 4; year++) {
