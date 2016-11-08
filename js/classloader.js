@@ -94,8 +94,6 @@ function fillColumn(colNumber) {
     });
 }
 
-var requirements = {};
-
 function loadRequirements() {
     $.ajax({
         dataType: 'json',

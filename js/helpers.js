@@ -252,7 +252,7 @@ function updateColumnsWithTextArea() {
     var rawClass = $('#classInput').val();
     var classes = getClasses(rawClass);
     classes.forEach(function(className) {
-        
+        setRequirementFromClass(className);
         //$('.satisfiedBy' + className).prop("checked", true);
     });
     buildList();
@@ -313,23 +313,28 @@ function hasSatisfaction(req) {
     }
 }
 
-function putInEducationEnrichment(c) {
+function putInEducationalEnrichment(c) {
     var eduEnr = JSON.parse(window.localStorage.educational_enrichemnt)
     eduEnr.push(c)
     window.localStorage.setItem("educational_enrichemnt", JSON.stringify(eduEnr));
 }
 
+function satisfyReqInLocalStorage(req, c) {
+    var lsjson = JSON.parse(window.localStorage.requirements);
+    lsjson[req].completed = true;
+    lsjson[req].satisfaction = c;
+    window.localStorage.setItem("requirements", JSON.stringify(lsjson));
+}
+
 // returns the requirement that the class c satisfied
 function setRequirementFromClass(c) {
-    var req = findRecFromJson(c)
+    var req = findReqFromJson(c)
     if(req == "NoReq") {
-        // put in educational enrichment
-        var eduEnr = JSON.parse(window.localStorage.educational_enrichemnt)
-        eduEnr.push(c)
-        window.localStorage.setItem("educational_enrichemnt", JSON.stringify(eduEnr));
+        putInEducationalEnrichment(c);
     }
     if(hasSatisfaction(req)) {
-        return "NoReq"
-    } 
-    return jsonReq
+        putInEducationalEnrichment(c);
+    } else {
+        satisfyReqInLocalStorage(req, c);
+    }
 }
