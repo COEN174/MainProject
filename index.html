@@ -24,7 +24,7 @@
             <div class="navbar-header" style="float: left;">
                 <a class="navbar-brand" href="#">Computer Engineering Degree Audit</a>
             </div>
-            <a href="#" class="btn btn-info" role="button" onclick="window.print();">Print Audit</a>
+            <a href="#" class="btn btn-info" id="print-btn" role="button" onclick="window.print();">Print Audit</a>
             <a href="#" class="btn btn-danger" role="button" onclick="clearForm();">Clear Form</a>
             <!--/.navbar-collapse -->
         </div>
@@ -195,9 +195,14 @@
                         <br>
 
                         <h4 class="bg-danger text-center">Incomplete</h4>
-                        <ul class="cal-entry unscheduledList" id="uncompletedUnscheduledList"></ul>
+                        <div class="indent-div">
+                            <ul class="cal-entry unscheduledList" id="uncompletedUnscheduledList"></ul>
+                        </div>
                         <h4 class="bg-success text-center">Complete</h4>
-                        <ul class="cal-entry unscheduledList" id="completedUnscheduledList"></ul>
+                        <h5>The Classes You Have Completed But Are Not Scheduled...</h5>
+                        <div class="indent-div">
+                            <ul class="cal-entry unscheduledList" id="completedUnscheduledList"></ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -208,6 +213,7 @@
         <script src="js/helpers.js"></script>
         <script src="js/classloader.js"></script>
         <script src="js/testing.js"></script>
+        <script src="js/print.js"></script>
 </body>
 
 </html>

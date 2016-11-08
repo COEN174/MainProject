@@ -1,3 +1,1 @@
-/*window.onafterprint = function(){
-    document.getElementsByClass
-}*/
+$('.print-btn').on('click',$('ul.unscheduledList li').append(', '));

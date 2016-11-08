@@ -1,5 +1,5 @@
 @media print{
-    h2, h4, h3, .list-group-item, p, textarea, hr, .btn-info, br{
+    h2, h4, h3, .list-group-item, p, textarea, hr, .btn-info{
         display:none;
         visibility: hidden;
     }
@@ -20,5 +20,11 @@
 
     #unscheduled-container, #calendar-container{
         width:100%;
+    }
+    ul.unscheduledList li::after{
+        content: ', '
+    }
+    .indent-div{
+        margin-left:20px;
     }
 }
