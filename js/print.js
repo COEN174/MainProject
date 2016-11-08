@@ -1,1 +1,0 @@
-$('.print-btn').on('click',$('ul.unscheduledList li').append(', '));

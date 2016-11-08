@@ -81,7 +81,7 @@ th {
     margin-bottom: 10px;
 }
 
-h5{
+h5.print-titles{
     display:none;
     visibility:hidden;
 }

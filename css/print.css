@@ -8,7 +8,7 @@
         width:25%;
     }
     
-    h5{
+    h5.print-titles{
         display:inline;
         visibility:visible;
     }
