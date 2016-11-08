@@ -6,12 +6,11 @@ function generateQuarterDropdown() {
     quarterDropdown.className = 'pull-right space-right quarterDropdown';
 
     // create blank entry
-    var quarterOption = new Option('', 'notselected');
-    quarterDropdown.add(quarterOption);
+	var quarterOption = new Option('Quarter', 'notselected');    quarterDropdown.add(quarterOption);
 
     for (var year = 1; year <= 4; year++) {
         quarters.forEach(function(quarter) {
-            var label = quarter + ' ' + year + genOrdinal(year) + ' Year';
+            var label = quarter + ' ' + year;
             var value = quarter.slice(0, 2) + year;
             var quarterOption = new Option(label, value);
             quarterDropdown.add(quarterOption);
@@ -31,6 +30,8 @@ function intersect(a, b) {
 // erase all entries from calendar. yeah, I know...
 function emptyCalendar() {
     $('#Fa1, #Wi1, #Sp1, #Su1, #Fa2, #Wi2, #Sp2, #Su2, #Fa3, #Wi3, #Sp3, #Su3, #Fa4, #Wi4, #Sp4, #Su4').empty();
+    $('#uncompletedUnscheduledList').empty(); 
+    $('#completedUnscheduledList').empty(); 
 }
 
 function drawCalendar() {
@@ -115,7 +116,7 @@ function saveStatus() {
     ids.forEach(function(id) {
         data[id] = {
             completed: $('#' + id).is(':checked'),
-            date: $('#' + id + 'dropdown').val()
+            satisfaction: $('#' + id + 'satisfaction').val()
         };
     });
 
@@ -210,7 +211,6 @@ function updateColumnsWithTextArea() {
     var classes = getClasses(rawClass);
     classes.forEach(function(className) {
         setRequirementFromClass(className);
-        //$('.satisfiedBy' + className).prop("checked", true);
     });
     buildList();
     refreshPage(); 

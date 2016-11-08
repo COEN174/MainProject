@@ -29,7 +29,7 @@ function fillColumn(colNumber) {
             var classSatisfactionDropdown = document.createElement('select');
             classSatisfactionDropdown.className = 'satisfiedByDropdown'; // 'pull-right space-right quarterDropdown';
             classSatisfactionDropdown.id = requirementName + 'satisfaction';
-            classSatisfactionDropdown.add(new Option('<no class>', 'notselected'));
+            classSatisfactionDropdown.add(new Option('Class', 'notselected'));
 
             satisfiedBy.forEach(function(satisfier) {
                 // check if this is a range of classe

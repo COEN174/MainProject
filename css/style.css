@@ -27,6 +27,10 @@ body {
     overflow:hidden;
 }
 
+.list-group-item:hover{
+    cursor:pointer;
+}
+
 h4 {
     padding: 10px;
 }
@@ -75,4 +79,12 @@ th {
 #classInput {
     width: 100%;
     margin-bottom: 10px;
+}
+
+h5.print-titles{
+    display:none;
+    visibility:hidden;
+}
+.indent-div{
+    margin:0;
 }
