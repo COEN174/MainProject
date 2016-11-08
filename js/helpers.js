@@ -41,76 +41,52 @@ function intersect(a, b) {
     });
 }
 
-// draw side list of unscheduled requirements
-function drawUnscheduledList() {
-    // gather data
-    var completed = $('.requirementMarker:checked').map(function() {
-        return this.id;
-    }).get();
-
-    var uncompleted = $('.requirementMarker:not(:checked)').map(function() {
-        return this.id;
-    }).get();
-
-    var unscheduled = $('.quarterDropdown option[value="notselected"]:selected').map(function() {
-        return $(this).parent().get(0).id.replace('dropdown', '');
-    }).get();
-
-    // intersect to form lists of complete and incompleted unscheduled
-    var completedUnscheduled = intersect(completed, unscheduled);
-    var uncompletedUnscheduled = intersect(uncompleted, unscheduled);
-
-    // populate un[complete|scheduled]
-    $('#uncompletedUnscheduledList').empty();
-    if (uncompletedUnscheduled.length > 0) {
-        uncompletedUnscheduled.forEach(function(requirement) {
-            $('#uncompletedUnscheduledList').append('<li>' + requirement.replace(/_/g, ' ') + '</ul>');
-        });
-    }
-
-    // populate complete unscheduled
-    $('#completedUnscheduledList').empty();
-    if (completedUnscheduled.length > 0) {
-        completedUnscheduled.forEach(function(requirement) {
-            $('#completedUnscheduledList').append('<li>' + requirement.replace(/_/g, ' ') + '</ul>');
-        });
-    }
-}
-
 // erase all entries from calendar. yeah, I know...
 function emptyCalendar() {
     $('#Fa1, #Wi1, #Sp1, #Su1, #Fa2, #Wi2, #Sp2, #Su2, #Fa3, #Wi3, #Sp3, #Su3, #Fa4, #Wi4, #Sp4, #Su4').empty();
+    $('#uncompletedUnscheduledList').empty();
+    $('#completedUnscheduledList').empty();
 }
 
 function drawCalendar() {
     emptyCalendar();
-    drawUnscheduledList();
 
-    // list of all scheduled class
-    var scheduled = $('.quarterDropdown option[value!="notselected"]:selected').map(function() {
-        return $(this).parent().get(0).id.replace('dropdown', '');
-    }).get();
+    var reqs = JSON.parse(window.localStorage.requirements);
+    $.each(reqs, function(reqName, classData) {
+      // set which class satisfied it
+      var classSatisfier = '';
+      if(classData.satisfaction != 'notselected'){
+        classSatisfier = ' (' + classData.satisfaction + ')';
+      }
 
-    scheduled.forEach(function(requirement) {
-        // build an li entry as a container for the div
+      if(classData.date === 'notselected'){
+        if(classData.completed){
+          // completed; not scheduled
+          $('#completedUnscheduledList').append('<li>' + reqName.replace(/_/g, ' ') + classSatisfier + '</ul>');
+        } else {
+          // uncompleted; not scheduled
+          $('#uncompletedUnscheduledList').append('<li>' + reqName.replace(/_/g, ' ') + classSatisfier + '</ul>');
+        }
+      } else {
+        // put in calendar
         var container = document.createElement('li');
         var entry = document.createElement('div');
 
         // repopulate spaces
-        entry.innerHTML = requirement.replace(/_/g, ' ');
+        entry.innerHTML = reqName.replace(/_/g, ' ') + classSatisfier;
         entry.className = 'class-entry';
 
         // handle background coloring
-        if ($('#' + requirement).is(':checked')) {
+        if (classData.completed) {
             entry.className += ' bg-success';
         } else {
             entry.className += ' bg-warning';
         }
 
         // get the quarter of completion and load the entry into the calendar
-        var quarter = $('#' + requirement + 'dropdown').val();
         container.appendChild(entry);
-        $('#' + quarter).append(container);
+        $('#' + classData.date).append(container);
+      }
     });
 }
 
@@ -142,9 +118,9 @@ function clearForm() {
 }
 
 function refreshPage() {
+    saveStatus();
     drawCalendar();
     colorCode();
-    saveStatus();
     updateCompletionPercentage();
 }
 
