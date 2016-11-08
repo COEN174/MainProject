@@ -7,6 +7,7 @@ function buildList() {
 function fillColumn(colNumber) {
     // get the data for the colum we're working on
     colRequirements = requirements['col' + colNumber];
+    $('#classCol' + colNumber).empty();
 
     // loop through each requirement group and assemble a div with all the boxes and such in it
     $.each(colRequirements, function(requirementgroupName, requirementGroup) {
