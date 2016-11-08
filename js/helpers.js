@@ -262,50 +262,7 @@ function updateColumnsWithTextArea() {
     $('#classInput').focus();
 }
 
-// this function will return the requirement the class c satisifies from the json requirements
-// c should be all capitals. 4 letters and then 3 numbers
-// it will return the requiement, or NoReq 
-function findReqFromJson(c) {
-    for(colNumber = 0; colNumber < 3; colNumber++) {
-
-        // get the data for the colum we're working on
-        var colRequirements = requirements['col' + colNumber];
-
-        // loop through each requirement group and assemble a div with all the boxes and such in it
-        $.each(colRequirements, function(requirementgroupName, requirementGroup) {
-            $.each(requirementGroup, function(requirementName, satisfiedBy) {
-                satisfiedBy.forEach(function(satisfier) {
-                    // check if this is a range of classe
-                    if (satisfier.indexOf('-') > -1) {
-                        var startRange = satisfier.substr(4, 3);
-                        var endRange = satisfier.substr(8, 3);
-                        for (var i = startRange; i <= endRange; i++) {
-                            var paddedNumber = ('00' + i).substr(-3);
-                            if(satisfier.substr(0, 4)+paddedNumber == c) {
-                                return requirementName;   
-                            }
-                        }
-                    } else {
-                        // it's a singular class
-                        if(satisfier == c) {
-                            return requirementName;   
-                        }
-                    }
-                });
-            });
-        });
-    }
-    return "NoReq";
-}
-
-// returns the requirement that the class c satisfied
-function getRequirementFromClass(c) {
-    var jsonReq = findRecFromJson(c)
-    if(jsonReq == "NoReq") {
-        return jsonReq;   
-    }
-    // TODO check against databackend
-}function genOrdinal(number) {
+function genOrdinal(number) {
     switch (number) {
         case 1:
             return 'st';
