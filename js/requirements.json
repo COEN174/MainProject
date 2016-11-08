@@ -42,9 +42,6 @@
             "Religious_Studies_2": ["RSOC020-099", "TESP020-099", "SCTR020-099"],
             "Religious_Studies_3": ["RSOC100-199", "TESP100-199", "SCTR100-199"]
         },
-        "Educational Enrichment Electives": {
-            "Educational_Enrichment": []
-        },
         "Senior Design": {
             "Senior_Design_1": ["COEN194", "ENGR194"],
             "Senior_Design_2": ["COEN195", "ENGR195"],

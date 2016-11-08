@@ -2,6 +2,7 @@ function buildList() {
     for (var i = 1; i <= 3; i++) {
         fillColumn(i);
     }
+    // TODO educational enrichment needs to be taken care of
 }
 
 function fillColumn(colNumber) {

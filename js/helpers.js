@@ -163,6 +163,7 @@ function saveStatus() {
     });
 
     localStorage.setItem('requirements', JSON.stringify(data));
+    localStorage.setItem('educational_enrichemnt', JSON.stringify(['none']));
 }
 
 function restoreStatus() {
@@ -254,7 +255,11 @@ function updateColumnsWithTextArea() {
         
         //$('.satisfiedBy' + className).prop("checked", true);
     });
-    refreshPage();
+    buildList();
+    restoreStatus();
+    drawCalendar();
+    colorCode();
+    updateCompletionPercentage();
 
     // clear textbox and refocus
     $('#classInput').val('');
@@ -308,12 +313,20 @@ function hasSatisfaction(req) {
     }
 }
 
+function putInEducationEnrichment(c) {
+    var eduEnr = JSON.parse(window.localStorage.educational_enrichemnt)
+    eduEnr.push(c)
+    window.localStorage.setItem("educational_enrichemnt", JSON.stringify(eduEnr));
+}
+
 // returns the requirement that the class c satisfied
 function setRequirementFromClass(c) {
     var req = findRecFromJson(c)
     if(req == "NoReq") {
-        // put in the extra class category.
-        return req;   
+        // put in educational enrichment
+        var eduEnr = JSON.parse(window.localStorage.educational_enrichemnt)
+        eduEnr.push(c)
+        window.localStorage.setItem("educational_enrichemnt", JSON.stringify(eduEnr));
     }
     if(hasSatisfaction(req)) {
         return "NoReq"
