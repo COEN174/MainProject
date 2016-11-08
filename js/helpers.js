@@ -109,10 +109,8 @@ function clearForm() {
     $('.requirementMarker').removeAttr('checked');
     $('.quarterDropdown').val('notselected');
     $('.satisfiedByDropdown').val('notselected');
-    drawCalendar();
-    colorCode();
-    saveStatus();
-    updateCompletionPercentage();
+
+    refreshPage();
 }
 
 function refreshPage() {
