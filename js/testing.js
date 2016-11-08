@@ -279,7 +279,7 @@ function runTests() {
 
     // summarize
     if (failcount === 0) {
-        console.log('%c ALL TESTS PASSED!!! :D ', 'background: #222; color: #bada55');
+        console.log('%c' + passcount + ' tests passed (100% success)', 'background: #222; color: #bada55');
     } else {
         console.log('%c' + passcount + ' tests passed', 'background: #222; color: #bada55');
         console.log('%c' + failcount + ' tests failed', 'background: red; color: white');
