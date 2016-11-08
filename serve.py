@@ -9,7 +9,7 @@ import SocketServer
 
 port = 8000
 
-handle = SimpleHTTPServer.SimpleHTTPRequestHandler
+handler = SimpleHTTPServer.SimpleHTTPRequestHandler
 httpd = SocketServer.TCPServer(("", port), handler)
 
 print "Serving at port", port

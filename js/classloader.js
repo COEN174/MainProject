@@ -23,6 +23,12 @@ function fillColumn(colNumber) {
         $.each(requirementGroup, function(requirementName, satisfiedBy) {
             var classRequirementName = requirementName + 'marker';
             var classSatisfierNames = [];
+
+            var classSatisfactionDropdown = document.createElement('select');
+            classSatisfactionDropdown.className = 'satisfiedByDropdown'; // 'pull-right space-right quarterDropdown';
+            classSatisfactionDropdown.id = requirementName + 'satisfaction';
+            classSatisfactionDropdown.add(new Option('<no class>', 'notselected'));
+
             satisfiedBy.forEach(function(satisfier) {
                 // check if this is a range of classe
                 if (satisfier.indexOf('-') > -1) {
@@ -30,11 +36,14 @@ function fillColumn(colNumber) {
                     var endRange = satisfier.substr(8, 3);
                     for (var i = startRange; i <= endRange; i++) {
                         var paddedNumber = ('00' + i).substr(-3);
-                        classSatisfierNames.push('satisfiedBy' + satisfier.substr(0, 4) + paddedNumber);
+                        var classname = 'satisfiedBy' + satisfier.substr(0, 4) + paddedNumber;
+                        classSatisfierNames.push(classname);
+                        classSatisfactionDropdown.add(new Option(classname, classname));
                     }
                 } else {
                     // it's a singular class
                     classSatisfierNames.push('satisfiedBy' + satisfier);
+                    classSatisfactionDropdown.add(new Option(satisfier, satisfier));
                 }
             });
 
@@ -46,13 +55,13 @@ function fillColumn(colNumber) {
             requirementEntry.className = 'list-group-item';
             requirementEntry.id = requirementName + 'listEntry';
             requirementEntry.onclick = function(e) {
-				var nodename;
-				if(e.path){
-					nodename = e.path[0].nodeName;
-				} else {
-					nodename = e.target.nodeName;
-				}
-				
+                var nodename;
+                if (e.path) {
+                    nodename = e.path[0].nodeName;
+                } else {
+                    nodename = e.target.nodeName;
+                }
+
                 if (nodename === 'LI') {
                     this.getElementsByTagName("input")[0].click();
                 }
@@ -64,13 +73,16 @@ function fillColumn(colNumber) {
             requirementCheckbox.setAttribute('type', 'checkbox');
             requirementCheckbox.id = requirementName;
             requirementCheckbox.className = classes + ' pull-right requirementMarker';
+            requirementCheckbox.style.display = 'none';
 
             var requirementDropdown = generateQuarterDropdown();
             requirementDropdown.id = requirementName + 'dropdown';
 
             requirementEntry.appendChild(requirementLabel);
+            requirementEntry.appendChild(document.createElement('br'));
             requirementEntry.appendChild(requirementCheckbox);
             requirementEntry.appendChild(requirementDropdown);
+            requirementEntry.appendChild(classSatisfactionDropdown);
 
             listGroup.appendChild(requirementEntry);
         });
@@ -80,6 +92,8 @@ function fillColumn(colNumber) {
     });
 }
 
+var requirements = {};
+
 function loadRequirements() {
     $.ajax({
         dataType: 'json',
@@ -88,15 +102,16 @@ function loadRequirements() {
             requirements = requirementsData;
             buildList();
 
-            if (localStorage.getItem("requirements") !== null) {
+            if (localStorage.getItem('requirements') !== null) {
                 restoreStatus();
             }
             drawCalendar();
             colorCode();
             updateCompletionPercentage();
 
-            $(".requirementMarker").change(refreshPage);
-            $(".quarterDropdown").change(refreshPage);
+            $('.requirementMarker').change(refreshPage);
+            $('.quarterDropdown').change(refreshPage);
+            $('.satisfiedByDropdown').change(refreshPage);
         }
     });
 }
