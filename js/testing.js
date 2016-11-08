@@ -135,11 +135,18 @@ var tests = {
         return [tbody.indexOf('ENGR001'), -1];
     },
 
-    scheduled_uncompleted_class_is_not_in_unscheduled_list: function() {
+    completed_unscheduled_class_is_not_in_unscheduled_list: function() {
         $('#classInput').val('engr1');
         $('#classInputForm').submit();
 
         return [$('#uncompletedUnscheduledList').children().first().prop('outerHTML'), '<li>COEN010</li>'];
+    },
+
+    scheduled_uncompleted_class_is_the_right_color: function() {
+        $('#ENGR001dropdown').val('Fa1');
+        refreshPage();
+
+        return [$('#ENGR001listEntry').css('background-color'), 'rgb(255, 255, 102)'];
     },
 
     scheduled_uncompleted_class_shows_intended_class: function() {
@@ -272,7 +279,7 @@ function runTests() {
 
     // summarize
     if (failcount === 0) {
-        console.log('%c ALL TESTS PASSED!!! :D ', 'background: #222; color: #bada55');
+        console.log('%c' + passcount + ' tests passed (100% success)', 'background: #222; color: #bada55');
     } else {
         console.log('%c' + passcount + ' tests passed', 'background: #222; color: #bada55');
         console.log('%c' + failcount + ' tests failed', 'background: red; color: white');
