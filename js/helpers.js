@@ -19,12 +19,12 @@ function generateQuarterDropdown() {
     quarterDropdown.className = 'pull-right space-right quarterDropdown';
 
     // create blank entry
-    var quarterOption = new Option('<no date>', 'notselected');
+    var quarterOption = new Option('Quarter', 'notselected');
     quarterDropdown.add(quarterOption);
 
     for (var year = 1; year <= 4; year++) {
         quarters.forEach(function(quarter) {
-            var label = quarter + ' ' + year + genOrdinal(year) + ' Year';
+            var label = quarter + ' ' + year;
             var value = quarter.slice(0, 2) + year;
             var quarterOption = new Option(label, value);
             quarterDropdown.add(quarterOption);
