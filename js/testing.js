@@ -142,14 +142,33 @@ var tests = {
         return [$('#uncompletedUnscheduledList').children().first().prop('outerHTML'), '<li>COEN010</li>'];
     },
 
+    scheduled_uncompleted_class_shows_intended_class: function() {
+        $('#ENGR001satisfaction').val('ENGR001');
+        saveStatus();
+        drawCalendar();
+
+        return [$('#uncompletedUnscheduledList').children().first().prop('outerHTML'), '<li>ENGR001 (ENGR001)</li>'];
+    },
+
     scheduled_uncompleted_class_is_in_calendar: function() {
         $('#ENGR001dropdown').val('Fa1');
         saveStatus();
         drawCalendar();
-        colorCode();
 
         var li = $('#Fa1').children().first().children().first().prop('outerHTML');
         var inBox = li.indexOf('ENGR001') > -1;
+
+        return [inBox, true];
+    },
+
+    scheduled_uncompleted_class_shows_correct_intention_in_calendar: function() {
+        $('#ENGR001dropdown').val('Fa1');
+        $('#ENGR001satisfaction').val('ENGR001');
+        saveStatus();
+        drawCalendar();
+
+        var li = $('#Fa1').children().first().children().first().prop('outerHTML');
+        var inBox = li.indexOf('ENGR001 (ENGR001)') > -1;
 
         return [inBox, true];
     },

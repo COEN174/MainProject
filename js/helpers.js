@@ -53,56 +53,53 @@ function drawCalendar() {
 
     var reqs = JSON.parse(window.localStorage.requirements);
     $.each(reqs, function(reqName, classData) {
-      // set which class satisfied it
-      var classSatisfier = '';
-      if(classData.satisfaction != 'notselected'){
-        classSatisfier = ' (' + classData.satisfaction + ')';
-      }
-
-      if(classData.date === 'notselected'){
-        if(classData.completed){
-          // completed; not scheduled
-          $('#completedUnscheduledList').append('<li>' + reqName.replace(/_/g, ' ') + classSatisfier + '</ul>');
-        } else {
-          // uncompleted; not scheduled
-          $('#uncompletedUnscheduledList').append('<li>' + reqName.replace(/_/g, ' ') + classSatisfier + '</ul>');
-        }
-      } else {
-        // put in calendar
-        var container = document.createElement('li');
-        var entry = document.createElement('div');
-
-        // repopulate spaces
-        entry.innerHTML = reqName.replace(/_/g, ' ') + classSatisfier;
-        entry.className = 'class-entry';
-
-        // handle background coloring
-        if (classData.completed) {
-            entry.className += ' bg-success';
-        } else {
-            entry.className += ' bg-warning';
+        // set which class satisfied it
+        var classSatisfier = '';
+        if (classData.satisfaction != 'notselected') {
+            classSatisfier = ' (' + classData.satisfaction + ')';
         }
 
-        // get the quarter of completion and load the entry into the calendar
-        container.appendChild(entry);
-        $('#' + classData.date).append(container);
-      }
+        if (classData.date === 'notselected') {
+            if (classData.completed) {
+                // completed; not scheduled
+                $('#completedUnscheduledList').append('<li>' + reqName.replace(/_/g, ' ') + classSatisfier + '</ul>');
+            } else {
+                // uncompleted; not scheduled
+                $('#uncompletedUnscheduledList').append('<li>' + reqName.replace(/_/g, ' ') + classSatisfier + '</ul>');
+            }
+        } else {
+            // put in calendar
+            var container = document.createElement('li');
+            var entry = document.createElement('div');
+
+            // repopulate spaces
+            entry.innerHTML = reqName.replace(/_/g, ' ') + classSatisfier;
+            entry.className = 'class-entry';
+
+            // handle background coloring
+            if (classData.completed) {
+                entry.className += ' bg-success';
+            } else {
+                entry.className += ' bg-warning';
+            }
+
+            // get the quarter of completion and load the entry into the calendar
+            container.appendChild(entry);
+            $('#' + classData.date).append(container);
+        }
     });
 }
 
 function colorCode() {
-    var ids = $('.requirementMarker').map(function() {
-        return this.id;
-    }).get();
-
-    ids.forEach(function(id) {
-        if ($('#' + id).is(':checked')) {
-            $('#' + id + 'listEntry').attr('status', 'done');
+    var reqs = JSON.parse(window.localStorage.requirements);
+    $.each(reqs, function(reqName, classData) {
+        if (classData.completed) {
+            $('#' + reqName + 'listEntry').attr('status', 'done');
         } else {
-            if ($('#' + id + 'dropdown').val() != 'notselected') {
-                $('#' + id + 'listEntry').attr('status', 'scheduled');
+            if (classData.satisfaction != 'notselected') {
+                $('#' + reqName + 'listEntry').attr('status', 'scheduled');
             } else {
-                $('#' + id + 'listEntry').attr('status', 'notscheduled');
+                $('#' + reqName + 'listEntry').attr('status', 'notscheduled');
             }
         }
     });
