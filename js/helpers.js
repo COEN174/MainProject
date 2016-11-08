@@ -111,6 +111,7 @@ function colorCode() {
 function clearForm() {
     $('.requirementMarker').removeAttr('checked');
     $('.quarterDropdown').val('notselected');
+    $('.satisfiedByDropdown').val('notselected');
     drawCalendar();
     colorCode();
     saveStatus();
