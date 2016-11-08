@@ -41,92 +41,65 @@ function intersect(a, b) {
     });
 }
 
-// draw side list of unscheduled requirements
-function drawUnscheduledList() {
-    // gather data
-    var completed = $('.requirementMarker:checked').map(function() {
-        return this.id;
-    }).get();
-
-    var uncompleted = $('.requirementMarker:not(:checked)').map(function() {
-        return this.id;
-    }).get();
-
-    var unscheduled = $('.quarterDropdown option[value="notselected"]:selected').map(function() {
-        return $(this).parent().get(0).id.replace('dropdown', '');
-    }).get();
-
-    // intersect to form lists of complete and incompleted unscheduled
-    var completedUnscheduled = intersect(completed, unscheduled);
-    var uncompletedUnscheduled = intersect(uncompleted, unscheduled);
-
-    // populate un[complete|scheduled]
-    $('#uncompletedUnscheduledList').empty();
-    if (uncompletedUnscheduled.length > 0) {
-        uncompletedUnscheduled.forEach(function(requirement) {
-            $('#uncompletedUnscheduledList').append('<li>' + requirement.replace(/_/g, ' ') + '</ul>');
-        });
-    }
-
-    // populate complete unscheduled
-    $('#completedUnscheduledList').empty();
-    if (completedUnscheduled.length > 0) {
-        completedUnscheduled.forEach(function(requirement) {
-            $('#completedUnscheduledList').append('<li>' + requirement.replace(/_/g, ' ') + '</ul>');
-        });
-    }
-}
-
 // erase all entries from calendar. yeah, I know...
 function emptyCalendar() {
     $('#Fa1, #Wi1, #Sp1, #Su1, #Fa2, #Wi2, #Sp2, #Su2, #Fa3, #Wi3, #Sp3, #Su3, #Fa4, #Wi4, #Sp4, #Su4').empty();
+    $('#uncompletedUnscheduledList').empty();
+    $('#completedUnscheduledList').empty();
 }
 
 function drawCalendar() {
     emptyCalendar();
-    drawUnscheduledList();
 
-    // list of all scheduled class
-    var scheduled = $('.quarterDropdown option[value!="notselected"]:selected').map(function() {
-        return $(this).parent().get(0).id.replace('dropdown', '');
-    }).get();
-
-    scheduled.forEach(function(requirement) {
-        // build an li entry as a container for the div
-        var container = document.createElement('li');
-        var entry = document.createElement('div');
-
-        // repopulate spaces
-        entry.innerHTML = requirement.replace(/_/g, ' ');
-        entry.className = 'class-entry';
-
-        // handle background coloring
-        if ($('#' + requirement).is(':checked')) {
-            entry.className += ' bg-success';
-        } else {
-            entry.className += ' bg-warning';
+    var reqs = JSON.parse(window.localStorage.requirements);
+    $.each(reqs, function(reqName, classData) {
+        // set which class satisfied it
+        var classSatisfier = '';
+        if (classData.satisfaction != 'notselected') {
+            classSatisfier = ' (' + classData.satisfaction + ')';
         }
 
-        // get the quarter of completion and load the entry into the calendar
-        var quarter = $('#' + requirement + 'dropdown').val();
-        container.appendChild(entry);
-        $('#' + quarter).append(container);
+        if (classData.date === 'notselected') {
+            if (classData.completed) {
+                // completed; not scheduled
+                $('#completedUnscheduledList').append('<li>' + reqName.replace(/_/g, ' ') + classSatisfier + '</ul>');
+            } else {
+                // uncompleted; not scheduled
+                $('#uncompletedUnscheduledList').append('<li>' + reqName.replace(/_/g, ' ') + classSatisfier + '</ul>');
+            }
+        } else {
+            // put in calendar
+            var container = document.createElement('li');
+            var entry = document.createElement('div');
+
+            // repopulate spaces
+            entry.innerHTML = reqName.replace(/_/g, ' ') + classSatisfier;
+            entry.className = 'class-entry';
+
+            // handle background coloring
+            if (classData.completed) {
+                entry.className += ' bg-success';
+            } else {
+                entry.className += ' bg-warning';
+            }
+
+            // get the quarter of completion and load the entry into the calendar
+            container.appendChild(entry);
+            $('#' + classData.date).append(container);
+        }
     });
 }
 
 function colorCode() {
-    var ids = $('.requirementMarker').map(function() {
-        return this.id;
-    }).get();
-
-    ids.forEach(function(id) {
-        if ($('#' + id).is(':checked')) {
-            $('#' + id + 'listEntry').attr('status', 'done');
+    var reqs = JSON.parse(window.localStorage.requirements);
+    $.each(reqs, function(reqName, classData) {
+        if (classData.completed) {
+            $('#' + reqName + 'listEntry').attr('status', 'done');
         } else {
-            if ($('#' + id + 'dropdown').val() != 'notselected') {
-                $('#' + id + 'listEntry').attr('status', 'scheduled');
+            if (classData.satisfaction != 'notselected') {
+                $('#' + reqName + 'listEntry').attr('status', 'scheduled');
             } else {
-                $('#' + id + 'listEntry').attr('status', 'notscheduled');
+                $('#' + reqName + 'listEntry').attr('status', 'notscheduled');
             }
         }
     });
@@ -135,6 +108,7 @@ function colorCode() {
 function clearForm() {
     $('.requirementMarker').removeAttr('checked');
     $('.quarterDropdown').val('notselected');
+    $('.satisfiedByDropdown').val('notselected');
     drawCalendar();
     colorCode();
     saveStatus();
@@ -142,9 +116,9 @@ function clearForm() {
 }
 
 function refreshPage() {
+    saveStatus();
     drawCalendar();
     colorCode();
-    saveStatus();
     updateCompletionPercentage();
 }
 
@@ -158,7 +132,8 @@ function saveStatus() {
     ids.forEach(function(id) {
         data[id] = {
             completed: $('#' + id).is(':checked'),
-            date: $('#' + id + 'dropdown').val()
+            date: $('#' + id + 'dropdown').val(),
+            satisfaction: $('#' + id + 'satisfaction').val()
         };
     });
 
@@ -175,6 +150,7 @@ function restoreStatus() {
         }
 
         $('#' + className + 'dropdown').val(classData.date);
+        $('#' + className + 'satisfaction').val(classData.satisfaction);
     });
 }
 
