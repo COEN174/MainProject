@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/print.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -23,15 +24,16 @@
             <div class="navbar-header" style="float: left;">
                 <a class="navbar-brand" href="#">Computer Engineering Degree Audit</a>
             </div>
-            <a href="#" class="btn btn-info" role="button" onclick="window.print();">Print Audit</a>
+            <a href="#" class="btn btn-info" id="print-btn" role="button" onclick="window.print();">Print Audit</a>
             <a href="#" class="btn btn-danger" role="button" onclick="clearForm();">Clear Form</a>
             <!--/.navbar-collapse -->
         </div>
     </nav>
 
-    <div class="container">
-        <div class="page-header">
-            Total degree progress: <strong><span id="completionPercentage"></span></strong> (<span id="completionDone"></span> out of <span id="completionTotal"></span> requirements completed)
+    <div class="container" id="progress-tracker-container">
+        <div class="container">
+            <br>
+            <h2>Total Degree Progress</h2> <strong><span id="completionPercentage"></span></strong> (<span id="completionDone"></span> out of <span id="completionTotal"></span> requirements completed)
             <div class="progress active">
                 <div id="completionProgress" class="progress-bar progress-bar-custom" style="width: 0%; background-color: lightgreen;">
                 </div>
@@ -39,8 +41,9 @@
                 </div>
             </div>
             <hr>
-            <h2>Class Entry</h2>
-            <div class="container">
+            
+            <div class="container" id="class-entry-container">
+                <h2>Class Entry</h2>
                 <p>Input the classes you have taken below seperated with commas, and hit enter or click Update to see your progress automatically updated. Or, continue below and check off the boxes and select what quarter you have taken or plan to take a course.</p>
                 <br>
                 <form id="classInputForm">
@@ -49,7 +52,8 @@
                 </form>
             </div>
             <hr>
-            <div class="container">
+            <div class="container" id="check-off-container">
+                <h2>Class Check-Off</h2>
                 <div class="row">
                     <div class="col-md-4" id="classCol1">
 
@@ -63,8 +67,9 @@
                     <hr>
                 </div>
                 <hr>
-                <div class="row">
+                <div class="container" id="calendar-container">
                     <div class="col-md-9">
+                        <h5 class="print-titles">Requirements Calendar</h5>
                         <h3>Completion Calendar</h3>
                         <p>Use this calendar to schedule your courses. Remember to balance your workload!</p>
                         <br>
@@ -184,14 +189,20 @@
                         <br>
                     </div>
                     
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="unscheduled-container">
+                        <h5 class="print-titles">The Classes You Have Left...</h5>
                         <h3>Unscheduled Classes</h3>
                         <br>
 
                         <h4 class="bg-danger text-center">Incomplete</h4>
-                        <ul class="cal-entry unscheduledList" id="uncompletedUnscheduledList"></ul>
+                        <div class="indent-div">
+                            <ul class="cal-entry unscheduledList" id="uncompletedUnscheduledList"></ul>
+                        </div>
                         <h4 class="bg-success text-center">Complete</h4>
-                        <ul class="cal-entry unscheduledList" id="completedUnscheduledList"></ul>
+                        <h5 class="print-titles">The Classes You Have Completed But Are Not Scheduled...</h5>
+                        <div class="indent-div">
+                            <ul class="cal-entry unscheduledList" id="completedUnscheduledList"></ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -202,6 +213,7 @@
         <script src="js/helpers.js"></script>
         <script src="js/classloader.js"></script>
         <script src="js/testing.js"></script>
+        <script src="js/print.js"></script>
 </body>
 
 </html>
