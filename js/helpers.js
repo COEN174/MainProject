@@ -96,10 +96,10 @@ function colorCode() {
         if (classData.completed) {
             $('#' + reqName + 'listEntry').attr('status', 'done');
         } else {
-            if (classData.satisfaction != 'notselected') {
-                $('#' + reqName + 'listEntry').attr('status', 'scheduled');
-            } else {
+            if (classData.date === 'notselected') {
                 $('#' + reqName + 'listEntry').attr('status', 'notscheduled');
+            } else {
+                $('#' + reqName + 'listEntry').attr('status', 'scheduled');
             }
         }
     });
