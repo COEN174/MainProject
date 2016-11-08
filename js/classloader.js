@@ -7,6 +7,7 @@ function buildList() {
 function fillColumn(colNumber) {
     // get the data for the colum we're working on
     colRequirements = requirements['col' + colNumber];
+    $('#classCol' + colNumber).empty();
 
     // loop through each requirement group and assemble a div with all the boxes and such in it
     $.each(colRequirements, function(requirementgroupName, requirementGroup) {
@@ -36,8 +37,8 @@ function fillColumn(colNumber) {
                     var endRange = satisfier.substr(8, 3);
                     for (var i = startRange; i <= endRange; i++) {
                         var paddedNumber = ('00' + i).substr(-3);
-                        var classname = 'satisfiedBy' + satisfier.substr(0, 4) + paddedNumber;
-                        classSatisfierNames.push(classname);
+                        var classname = satisfier.substr(0, 4) + paddedNumber;
+                        classSatisfierNames.push('satisfiedBy' + classname);
                         classSatisfactionDropdown.add(new Option(classname, classname));
                     }
                 } else {
