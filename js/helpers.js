@@ -6,8 +6,8 @@ function generateQuarterDropdown() {
     quarterDropdown.className = 'pull-right space-right quarterDropdown';
 
     // create blank entry
-	var quarterOption = new Option('Quarter', 'notselected');    quarterDropdown.add(quarterOption);
-
+    var quarterOption = new Option('Quarter', 'notselected');
+    quarterDropdown.add(quarterOption);
     for (var year = 1; year <= 4; year++) {
         quarters.forEach(function(quarter) {
             var label = quarter + ' ' + year;
@@ -30,8 +30,6 @@ function intersect(a, b) {
 // erase all entries from calendar. yeah, I know...
 function emptyCalendar() {
     $('#Fa1, #Wi1, #Sp1, #Su1, #Fa2, #Wi2, #Sp2, #Su2, #Fa3, #Wi3, #Sp3, #Su3, #Fa4, #Wi4, #Sp4, #Su4').empty();
-    $('#uncompletedUnscheduledList').empty(); 
-    $('#completedUnscheduledList').empty(); 
 }
 
 function drawCalendar() {
@@ -116,8 +114,7 @@ function saveStatus() {
     ids.forEach(function(id) {
         data[id] = {
             completed: $('#' + id).is(':checked'),
-            satisfaction: $('#' + id + 'satisfaction').val(),
-            date: $('#' + id + "date").val()
+            satisfaction: $('#' + id + 'satisfaction').val()
         };
     });
 
