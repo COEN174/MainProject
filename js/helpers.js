@@ -225,6 +225,7 @@ function updateColumnsWithTextArea() {
 // c should be all capitals. 4 letters and then 3 numbers
 // it will return the requiement, or NoReq 
 function findReqFromJson(c) {
+	var reqNames = [];
     for(colNumber = 1; colNumber < 3; colNumber++) {
 
         // get the data for the colum we're working on
@@ -244,13 +245,13 @@ function findReqFromJson(c) {
                                 for (var i = startRange; i <= endRange; i++) {
                                     var paddedNumber = ('00' + i).substr(-3);
                                     if(satisfier.substr(0, 4)+paddedNumber == c) {
-                                        return reqName;   
+                                        reqNames.push(reqName);  
                                     }
                                 }
                             } else {
                                 // it's a singular class
                                 if(satisfier == c) {
-                                    return reqName;   
+                                    reqNames.push(reqName);  
                                 }
                             }
                         }
@@ -259,7 +260,7 @@ function findReqFromJson(c) {
             }
         }
     }
-    return "NoReq";
+    return reqNames;
 }
 
 // returns true if localStorage.requirements.json either doesn't have req
@@ -286,15 +287,25 @@ function satisfyReqInLocalStorage(req, c) {
     window.localStorage.setItem("requirements", JSON.stringify(lsjson));
 }
 
-// returns the requirement that the class c satisfied
+// sets the requirements that the class c satisfied to satisfied
+// HIST107 is a double dip so you can use that to test if double dips work.
 function setRequirementFromClass(c) {
-    var req = findReqFromJson(c)
-    if(req == "NoReq") {
+    var reqs = findReqFromJson(c)
+    if(reqs.length == 0) {
+    // requirements.json did not have c listed as satisfying a requirement
         putInEducationalEnrichment(c);
     }
-    if(hasSatisfaction(req)) {
-        putInEducationalEnrichment(c);
-    } else {
-        satisfyReqInLocalStorage(req, c);
-    }
+    var unsatisfied = [];
+    for(var i = 0; i < reqs.length; i++) {
+	    if(!hasSatisfaction(reqs[i])) {
+	    	unsatisfied.push(reqs[i])
+	    }
+	}
+	if(unsatisfied.length == 0) {
+		putInEducationalEnrichment(c);
+	} else {
+		for(var i = 0; i < unsatisfied.length; i++) {
+	        satisfyReqInLocalStorage(unsatisfied[i], c);
+		}
+	}
 }
