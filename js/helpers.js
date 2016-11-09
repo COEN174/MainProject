@@ -82,10 +82,10 @@ function colorCode() {
         if (classData.completed) {
             $('#' + reqName + 'listEntry').attr('status', 'done');
         } else {
-            if (classData.date === 'notselected') {
-                $('#' + reqName + 'listEntry').attr('status', 'notscheduled');
-            } else {
+            if (classData.date === 'selected') {
                 $('#' + reqName + 'listEntry').attr('status', 'scheduled');
+            } else {
+                $('#' + reqName + 'listEntry').attr('status', 'notscheduled');
             }
         }
     });
@@ -116,7 +116,8 @@ function saveStatus() {
     ids.forEach(function(id) {
         data[id] = {
             completed: $('#' + id).is(':checked'),
-            satisfaction: $('#' + id + 'satisfaction').val()
+            satisfaction: $('#' + id + 'satisfaction').val(),
+            date: $('#' + id + "date").val()
         };
     });
 
@@ -229,7 +230,7 @@ function findReqFromJson(c) {
         // get the data for the colum we're working on
         var colRequirements = requirements['col' + colNumber];
 
-        // loop through each requirement group and assemble a div with all the boxes and such in it
+        // loop through the classes for the requirment to determine if c satisfies a requirement 
         for(var reqGroupName in colRequirements) {
             if(colRequirements.hasOwnProperty(reqGroupName)) {
                 for(var reqName in colRequirements[reqGroupName]) {
