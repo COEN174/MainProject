@@ -129,7 +129,7 @@ function saveStatus() {
     });
 
     localStorage.setItem('requirements', JSON.stringify(data));
-    localStorage.setItem('educational_enrichemnt', JSON.stringify([]));
+    localStorage.setItem('educational_enrichment', JSON.stringify([]));
 }
 
 function restoreStatus() {
@@ -221,7 +221,7 @@ function updateColumnsWithTextArea() {
         setRequirementFromClass(className);
     });
     buildList();
-    refreshPage(); 
+    refreshPage();
 
     // clear textbox and refocus
     $('#classInput').val('');
@@ -230,7 +230,7 @@ function updateColumnsWithTextArea() {
 
 // this function will return the requirement the class c satisifies from the json requirements
 // c should be all capitals. 4 letters and then 3 numbers
-// it will return the requiement, or NoReq 
+// it will return the requiement, or NoReq
 function findReqFromJson(c) {
 	var reqNames = [];
     for(colNumber = 1; colNumber < 3; colNumber++) {
@@ -238,7 +238,7 @@ function findReqFromJson(c) {
         // get the data for the colum we're working on
         var colRequirements = requirements['col' + colNumber];
 
-        // loop through the classes for the requirment to determine if c satisfies a requirement 
+        // loop through the classes for the requirment to determine if c satisfies a requirement
         for(var reqGroupName in colRequirements) {
             if(colRequirements.hasOwnProperty(reqGroupName)) {
                 for(var reqName in colRequirements[reqGroupName]) {
@@ -252,13 +252,13 @@ function findReqFromJson(c) {
                                 for (var i = startRange; i <= endRange; i++) {
                                     var paddedNumber = ('00' + i).substr(-3);
                                     if(satisfier.substr(0, 4)+paddedNumber == c) {
-                                        reqNames.push(reqName);  
+                                        reqNames.push(reqName);
                                     }
                                 }
                             } else {
                                 // it's a singular class
                                 if(satisfier == c) {
-                                    reqNames.push(reqName);  
+                                    reqNames.push(reqName);
                                 }
                             }
                         }
@@ -282,9 +282,9 @@ function hasSatisfaction(req) {
 }
 
 function putInEducationalEnrichment(c) {
-    var eduEnr = JSON.parse(window.localStorage.educational_enrichemnt)
+    var eduEnr = JSON.parse(window.localStorage.educational_enrichment)
     eduEnr.push(c)
-    window.localStorage.setItem("educational_enrichemnt", JSON.stringify(eduEnr));
+    window.localStorage.setItem("educational_enrichment", JSON.stringify(eduEnr));
 }
 
 function satisfyReqInLocalStorage(req, c) {
