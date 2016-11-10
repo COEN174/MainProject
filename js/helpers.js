@@ -97,6 +97,16 @@ function clearForm() {
     refreshPage();
 }
 
+function drawFromData(){
+  buildList(); // empty out the current list
+  restoreStatus(); // load data
+
+  // make all the warm UI fuzzies be up to date
+  drawCalendar();
+  colorCode();
+  updateCompletionPercentage();
+}
+
 function refreshPage() {
     saveStatus();
     drawCalendar();
