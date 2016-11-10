@@ -282,8 +282,8 @@ function hasSatisfaction(req) {
 }
 
 function putInEducationalEnrichment(c) {
-    var eduEnr = JSON.parse(window.localStorage.educational_enrichment)
-    eduEnr.push(c)
+    var eduEnr = JSON.parse(window.localStorage.educational_enrichment);
+    eduEnr.push(c);
     window.localStorage.setItem("educational_enrichment", JSON.stringify(eduEnr));
 }
 
@@ -297,18 +297,18 @@ function satisfyReqInLocalStorage(req, c) {
 // sets the requirements that the class c satisfied to satisfied
 // HIST107 is a double dip so you can use that to test if double dips work.
 function setRequirementFromClass(c) {
-    var reqs = findReqFromJson(c)
-    if(reqs.length == 0) {
+    var reqs = findReqFromJson(c);
+    if(reqs.length === 0) {
     // requirements.json did not have c listed as satisfying a requirement
         putInEducationalEnrichment(c);
     }
     var unsatisfied = [];
     for(var i = 0; i < reqs.length; i++) {
 	    if(!hasSatisfaction(reqs[i])) {
-	    	unsatisfied.push(reqs[i])
+	    	unsatisfied.push(reqs[i]);
 	    }
 	}
-	if(unsatisfied.length == 0) {
+	if(unsatisfied.length === 0) {
 		putInEducationalEnrichment(c);
 	} else {
 		for(var i = 0; i < unsatisfied.length; i++) {
