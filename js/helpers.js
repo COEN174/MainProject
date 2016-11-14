@@ -120,8 +120,9 @@ function clearForm() {
     $('.quarterDropdown').val('notselected');
     $('.satisfiedByDropdown').val('notselected');
 
+    localStorage.requirements = {};
     localStorage.educational_enrichment = [];
-
+    
     refreshPage();
 }
 
@@ -304,7 +305,6 @@ function updateColumnsWithTextArea() {
     classes.forEach(function(className) {
         setRequirementFromClass(className);
     });
-    buildList();
     drawFromData();
 
     // clear textbox and refocus
@@ -356,9 +356,9 @@ function findReqFromJson(c) {
 
 // returns true if localStorage.requirements.json either doesn't have req
 // or the req is already satisfied by a class
-function hasSatisfaction(req) {
+function hasSatisfaction(req, c) {
     var jsonReq = JSON.parse(window.localStorage.requirements)[req];
-    if (jsonReq.satisfaction == "notselected") {
+    if (jsonReq.satisfaction == "notselected" || jsonReq.satisfaction == c) {
         return false;
     } else {
         return true;
@@ -400,7 +400,7 @@ function setRequirementFromClass(c) {
     }
     var unsatisfied = [];
     for (var i = 0; i < reqs.length; i++) {
-        if (!hasSatisfaction(reqs[i])) {
+        if (!hasSatisfaction(reqs[i], c)) {
             unsatisfied.push(reqs[i]);
         }
     }
