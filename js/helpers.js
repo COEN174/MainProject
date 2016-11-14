@@ -76,21 +76,21 @@ function drawCalendar() {
     });
 
     var eeReqs = JSON.parse(window.localStorage.educational_enrichment);
-    eeReqs.forEach(function(elective){
-      if(elective.date === 'notselected'){
-        $('#completedUnscheduledList').append('<li>' + elective.name + '</ul>');
-      } else {
-        // put in calendar
-        var container = document.createElement('li');
-        var entry = document.createElement('div');
+    eeReqs.forEach(function(elective) {
+        if (elective.date === 'notselected') {
+            $('#completedUnscheduledList').append('<li>' + elective.name + '</ul>');
+        } else {
+            // put in calendar
+            var container = document.createElement('li');
+            var entry = document.createElement('div');
 
-        entry.innerHTML = elective.name;
-        entry.className = 'class-entry bg-success';
+            entry.innerHTML = elective.name;
+            entry.className = 'class-entry bg-success';
 
-        // get the quarter of completion and load the entry into the calendar
-        container.appendChild(entry);
-        $('#' + elective.date).append(container);
-      }
+            // get the quarter of completion and load the entry into the calendar
+            container.appendChild(entry);
+            $('#' + elective.date).append(container);
+        }
     });
 }
 
@@ -104,14 +104,14 @@ function colorCode() {
                 $('#' + reqName + 'listEntry').attr('status', 'notscheduled');
             } else {
                 $('#' + reqName + 'listEntry').attr('status', 'scheduled');
-			}
+            }
         }
     });
 
     // color code the EE reqs
     var eeRestored = JSON.parse(localStorage.educational_enrichment);
-    eeRestored.forEach(function(elective){
-      $('#' + elective.name + 'listEntry').attr('status', 'done');
+    eeRestored.forEach(function(elective) {
+        $('#' + elective.name + 'listEntry').attr('status', 'done');
     });
 }
 
@@ -125,14 +125,14 @@ function clearForm() {
     refreshPage();
 }
 
-function drawFromData(){
-  buildList(); // empty out the current list
-  restoreStatus(); // load data
+function drawFromData() {
+    buildList(); // empty out the current list
+    restoreStatus(); // load data
 
-  // make all the warm UI fuzzies be up to date
-  drawCalendar();
-  colorCode();
-  updateCompletionPercentage();
+    // make all the warm UI fuzzies be up to date
+    drawCalendar();
+    colorCode();
+    updateCompletionPercentage();
 }
 
 function refreshPage() {
@@ -189,43 +189,43 @@ function restoreStatus() {
 
     // now do EE
     var eeRestored = JSON.parse(localStorage.educational_enrichment);
-    eeRestored.forEach(function(elective){
-      var requirementEntry = document.createElement('li');
+    eeRestored.forEach(function(elective) {
+        var requirementEntry = document.createElement('li');
 
-      requirementEntry.className = 'list-group-item';
-      requirementEntry.id = elective.name + 'listEntry';
-      requirementEntry.onclick = function(e) {
-          var nodename;
-          if (e.path) {
-              nodename = e.path[0].nodeName;
-          } else {
-              nodename = e.target.nodeName;
-          }
+        requirementEntry.className = 'list-group-item';
+        requirementEntry.id = elective.name + 'listEntry';
+        requirementEntry.onclick = function(e) {
+            var nodename;
+            if (e.path) {
+                nodename = e.path[0].nodeName;
+            } else {
+                nodename = e.target.nodeName;
+            }
 
-          if (nodename === 'LI') {
-              this.getElementsByTagName("input")[0].click();
-          }
-      };
+            if (nodename === 'LI') {
+                this.getElementsByTagName("input")[0].click();
+            }
+        };
 
-      var requirementLabel = document.createTextNode(elective.name);
+        var requirementLabel = document.createTextNode(elective.name);
 
-      var requirementCheckbox = document.createElement('input');
-      requirementCheckbox.setAttribute('type', 'checkbox');
-      requirementCheckbox.id = elective.name;
-      requirementCheckbox.className = 'pull-right eeRequirementMarker';
-      requirementCheckbox.style.display = 'none';
-      requirementCheckbox.setAttribute('checked', true);
+        var requirementCheckbox = document.createElement('input');
+        requirementCheckbox.setAttribute('type', 'checkbox');
+        requirementCheckbox.id = elective.name;
+        requirementCheckbox.className = 'pull-right eeRequirementMarker';
+        requirementCheckbox.style.display = 'none';
+        requirementCheckbox.setAttribute('checked', true);
 
-      var requirementDropdown = generateQuarterDropdown();
-      requirementDropdown.id = elective.name + 'dropdown';
-      requirementDropdown.value = elective.date;
+        var requirementDropdown = generateQuarterDropdown();
+        requirementDropdown.id = elective.name + 'dropdown';
+        requirementDropdown.value = elective.date;
 
-      requirementEntry.appendChild(requirementLabel);
-      requirementEntry.appendChild(document.createElement('br'));
-      requirementEntry.appendChild(requirementCheckbox);
-      requirementEntry.appendChild(requirementDropdown);
+        requirementEntry.appendChild(requirementLabel);
+        requirementEntry.appendChild(document.createElement('br'));
+        requirementEntry.appendChild(requirementCheckbox);
+        requirementEntry.appendChild(requirementDropdown);
 
-      document.getElementById('eeRequirements').appendChild(requirementEntry);
+        document.getElementById('eeRequirements').appendChild(requirementEntry);
     });
 }
 
@@ -316,18 +316,18 @@ function updateColumnsWithTextArea() {
 // c should be all capitals. 4 letters and then 3 numbers
 // it will return the requiement, or NoReq
 function findReqFromJson(c) {
-	var reqNames = [];
-    for(colNumber = 1; colNumber < 3; colNumber++) {
+    var reqNames = [];
+    for (colNumber = 1; colNumber < 3; colNumber++) {
 
         // get the data for the colum we're working on
         var colRequirements = requirements['col' + colNumber];
 
         // loop through the classes for the requirment to determine if c satisfies a requirement
-        for(var reqGroupName in colRequirements) {
-            if(colRequirements.hasOwnProperty(reqGroupName)) {
-                for(var reqName in colRequirements[reqGroupName]) {
-                    if(colRequirements[reqGroupName].hasOwnProperty(reqName)) {
-                        for(var reqClasses in colRequirements[reqGroupName][reqName]) {
+        for (var reqGroupName in colRequirements) {
+            if (colRequirements.hasOwnProperty(reqGroupName)) {
+                for (var reqName in colRequirements[reqGroupName]) {
+                    if (colRequirements[reqGroupName].hasOwnProperty(reqName)) {
+                        for (var reqClasses in colRequirements[reqGroupName][reqName]) {
                             var satisfier = colRequirements[reqGroupName][reqName][reqClasses];
                             // check if this is a range of classes
                             if (satisfier.indexOf('-') > -1) {
@@ -335,13 +335,13 @@ function findReqFromJson(c) {
                                 var endRange = satisfier.substr(8, 3);
                                 for (var i = startRange; i <= endRange; i++) {
                                     var paddedNumber = ('00' + i).substr(-3);
-                                    if(satisfier.substr(0, 4)+paddedNumber == c) {
+                                    if (satisfier.substr(0, 4) + paddedNumber == c) {
                                         reqNames.push(reqName);
                                     }
                                 }
                             } else {
                                 // it's a singular class
-                                if(satisfier == c) {
+                                if (satisfier == c) {
                                     reqNames.push(reqName);
                                 }
                             }
@@ -358,7 +358,7 @@ function findReqFromJson(c) {
 // or the req is already satisfied by a class
 function hasSatisfaction(req) {
     var jsonReq = JSON.parse(window.localStorage.requirements)[req];
-    if(jsonReq.satisfaction == "notselected") {
+    if (jsonReq.satisfaction == "notselected") {
         return false;
     } else {
         return true;
@@ -372,10 +372,10 @@ function putInEducationalEnrichment(c) {
 
     var eduEnr = [];
     try {
-      eduEnr = JSON.parse(window.localStorage.educational_enrichment);
-    } catch (e){
-      // if we catch a failure, it's invalid JSON AKA we don't have EE in place yet
-      // we've already defined the eduEnr as an empty array which is fine
+        eduEnr = JSON.parse(window.localStorage.educational_enrichment);
+    } catch (e) {
+        // if we catch a failure, it's invalid JSON AKA we don't have EE in place yet
+        // we've already defined the eduEnr as an empty array which is fine
     }
 
     eduEnr.push(eeEntry);
@@ -393,22 +393,22 @@ function satisfyReqInLocalStorage(req, c) {
 // HIST107 is a double dip so you can use that to test if double dips work.
 function setRequirementFromClass(c) {
     var reqs = findReqFromJson(c);
-    if(reqs.length === 0) {
-    // requirements.json did not have c listed as satisfying a requirement
+    if (reqs.length === 0) {
+        // requirements.json did not have c listed as satisfying a requirement
         putInEducationalEnrichment(c);
         return;
     }
     var unsatisfied = [];
-    for(var i = 0; i < reqs.length; i++) {
-	    if(!hasSatisfaction(reqs[i])) {
-	    	unsatisfied.push(reqs[i]);
-	    }
-	}
-	if(unsatisfied.length === 0) {
-		putInEducationalEnrichment(c);
-	} else {
-		for(var i = 0; i < unsatisfied.length; i++) {
-	        satisfyReqInLocalStorage(unsatisfied[i], c);
-		}
-	}
+    for (var i = 0; i < reqs.length; i++) {
+        if (!hasSatisfaction(reqs[i])) {
+            unsatisfied.push(reqs[i]);
+        }
+    }
+    if (unsatisfied.length === 0) {
+        putInEducationalEnrichment(c);
+    } else {
+        for (var i = 0; i < unsatisfied.length; i++) {
+            satisfyReqInLocalStorage(unsatisfied[i], c);
+        }
+    }
 }
