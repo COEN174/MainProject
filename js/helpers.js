@@ -30,6 +30,8 @@ function intersect(a, b) {
 // erase all entries from calendar. yeah, I know...
 function emptyCalendar() {
     $('#Fa1, #Wi1, #Sp1, #Su1, #Fa2, #Wi2, #Sp2, #Su2, #Fa3, #Wi3, #Sp3, #Su3, #Fa4, #Wi4, #Sp4, #Su4').empty();
+    $('#uncompletedUnscheduledList').empty();
+    $('#completedUnscheduledList').empty();
 }
 
 function drawCalendar() {
@@ -72,6 +74,24 @@ function drawCalendar() {
             $('#' + classData.date).append(container);
         }
     });
+
+    var eeReqs = JSON.parse(window.localStorage.educational_enrichment);
+    eeReqs.forEach(function(elective){
+      if(elective.date === 'notselected'){
+        $('#completedUnscheduledList').append('<li>' + elective.name + '</ul>');
+      } else {
+        // put in calendar
+        var container = document.createElement('li');
+        var entry = document.createElement('div');
+
+        entry.innerHTML = elective.name;
+        entry.className = 'class-entry bg-success';
+
+        // get the quarter of completion and load the entry into the calendar
+        container.appendChild(entry);
+        $('#' + elective.date).append(container);
+      }
+    });
 }
 
 function colorCode() {
@@ -87,12 +107,20 @@ function colorCode() {
 			}
         }
     });
+
+    // color code the EE reqs
+    var eeRestored = JSON.parse(localStorage.educational_enrichment);
+    eeRestored.forEach(function(elective){
+      $('#' + elective.name + 'listEntry').attr('status', 'done');
+    });
 }
 
 function clearForm() {
     $('.requirementMarker').removeAttr('checked');
     $('.quarterDropdown').val('notselected');
     $('.satisfiedByDropdown').val('notselected');
+
+    localStorage.educational_enrichment = [];
 
     refreshPage();
 }
@@ -124,12 +152,27 @@ function saveStatus() {
     ids.forEach(function(id) {
         data[id] = {
             completed: $('#' + id).is(':checked'),
+            date: $('#' + id + 'dropdown').val(),
             satisfaction: $('#' + id + 'satisfaction').val()
         };
     });
 
     localStorage.setItem('requirements', JSON.stringify(data));
-    localStorage.setItem('educational_enrichment', JSON.stringify([]));
+
+    var eeData = [];
+    var eeIds = $('.eeRequirementMarker').map(function() {
+        return this.id;
+    }).get();
+
+    eeIds.forEach(function(id) {
+        eeData.push({
+            name: id,
+            date: $('#' + id + 'dropdown').val()
+        });
+    });
+
+
+    localStorage.setItem('educational_enrichment', JSON.stringify(eeData));
 }
 
 function restoreStatus() {
@@ -142,6 +185,47 @@ function restoreStatus() {
         }
 
         $('#' + className + 'dropdown').val(classData.date);
+    });
+
+    // now do EE
+    var eeRestored = JSON.parse(localStorage.educational_enrichment);
+    eeRestored.forEach(function(elective){
+      var requirementEntry = document.createElement('li');
+
+      requirementEntry.className = 'list-group-item';
+      requirementEntry.id = elective.name + 'listEntry';
+      requirementEntry.onclick = function(e) {
+          var nodename;
+          if (e.path) {
+              nodename = e.path[0].nodeName;
+          } else {
+              nodename = e.target.nodeName;
+          }
+
+          if (nodename === 'LI') {
+              this.getElementsByTagName("input")[0].click();
+          }
+      };
+
+      var requirementLabel = document.createTextNode(elective.name);
+
+      var requirementCheckbox = document.createElement('input');
+      requirementCheckbox.setAttribute('type', 'checkbox');
+      requirementCheckbox.id = elective.name;
+      requirementCheckbox.className = 'pull-right eeRequirementMarker';
+      requirementCheckbox.style.display = 'none';
+      requirementCheckbox.setAttribute('checked', true);
+
+      var requirementDropdown = generateQuarterDropdown();
+      requirementDropdown.id = elective.name + 'dropdown';
+      requirementDropdown.value = elective.date;
+
+      requirementEntry.appendChild(requirementLabel);
+      requirementEntry.appendChild(document.createElement('br'));
+      requirementEntry.appendChild(requirementCheckbox);
+      requirementEntry.appendChild(requirementDropdown);
+
+      document.getElementById('eeRequirements').appendChild(requirementEntry);
     });
 }
 
@@ -221,7 +305,7 @@ function updateColumnsWithTextArea() {
         setRequirementFromClass(className);
     });
     buildList();
-    refreshPage();
+    drawFromData();
 
     // clear textbox and refocus
     $('#classInput').val('');
@@ -282,8 +366,19 @@ function hasSatisfaction(req) {
 }
 
 function putInEducationalEnrichment(c) {
-    var eduEnr = JSON.parse(window.localStorage.educational_enrichment);
-    eduEnr.push(c);
+    var eeEntry = {};
+    eeEntry.name = c;
+    eeEntry.date = 'notselected';
+
+    var eduEnr = [];
+    try {
+      eduEnr = JSON.parse(window.localStorage.educational_enrichment);
+    } catch (e){
+      // if we catch a failure, it's invalid JSON AKA we don't have EE in place yet
+      // we've already defined the eduEnr as an empty array which is fine
+    }
+
+    eduEnr.push(eeEntry);
     window.localStorage.setItem("educational_enrichment", JSON.stringify(eduEnr));
 }
 
@@ -301,6 +396,7 @@ function setRequirementFromClass(c) {
     if(reqs.length === 0) {
     // requirements.json did not have c listed as satisfying a requirement
         putInEducationalEnrichment(c);
+        return;
     }
     var unsatisfied = [];
     for(var i = 0; i < reqs.length; i++) {

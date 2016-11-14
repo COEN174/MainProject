@@ -2,7 +2,8 @@ function buildList() {
     for (var i = 1; i <= 3; i++) {
         fillColumn(i);
     }
-    // TODO educational enrichment needs to be taken care of
+
+    drawEEContainer();
 }
 
 function fillColumn(colNumber) {
@@ -94,6 +95,21 @@ function fillColumn(colNumber) {
     });
 }
 
+function drawEEContainer(){
+  var container = document.createElement('div');
+
+  var title = document.createElement('h4');
+  title.innerHTML = 'Educational Enrichment';
+  container.appendChild(title);
+
+  var listGroup = document.createElement('ul');
+  listGroup.className = 'list-group';
+  listGroup.id = 'eeRequirements';
+
+  container.appendChild(listGroup);
+  document.getElementById('classCol3').appendChild(container);
+}
+
 function loadRequirements() {
     $.ajax({
         dataType: 'json',
@@ -105,6 +121,7 @@ function loadRequirements() {
             if (localStorage.getItem('requirements') !== null) {
                 restoreStatus();
             }
+
             drawCalendar();
             colorCode();
             updateCompletionPercentage();
