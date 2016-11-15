@@ -317,7 +317,7 @@ var tests = {
         drawCalendar();
         colorCode();
 
-        return [$('#completedUnscheduledList').children().first().text(), 'PHIL107'];
+        return [$('#completedUnscheduledList').children().first().text(), 'Educational Enrichment (PHIL107)'];
     },
 
     educational_enrichment_is_in_calendar_once_scheduled: function() {
@@ -329,7 +329,7 @@ var tests = {
         drawCalendar();
         colorCode();
 
-        return [$('#Fa1').children().first().children().first().text(), 'PHIL107'];
+        return [$('#Fa1').children().first().children().first().text(), 'Educational Enrichment (PHIL107)'];
     },
 
     scheduled_completed_EE_class_is_green: function() {
