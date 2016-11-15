@@ -370,7 +370,7 @@ function hasSatisfaction(req, c) {
 function isInEducationalEnrichment(c, eduEnr) {
     for (i = 0; i < eduEnr.length; i++) {
         if (eduEnr[i].name == c) {
-            return true
+            return true;
         }
     }
     return false;
