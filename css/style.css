@@ -104,3 +104,7 @@ input[type="checkbox"]{
 .hasCheckbox select.satisfiedByDropdown{
     display:none;
 }
+
+option{
+    padding:0;
+}
