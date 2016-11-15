@@ -82,8 +82,6 @@ function fillColumn(colNumber) {
             requirementCheckbox.setAttribute('type', 'checkbox');
             requirementCheckbox.id = requirementName;
             requirementCheckbox.className = classes + ' pull-right requirementMarker';
-            requirementCheckbox.style.marginRight = '5px';
-            classSatisfactionDropdown.style.marginRight='5px';
 
             var requirementDropdown = generateQuarterDropdown();
             requirementDropdown.id = requirementName + 'dropdown';
@@ -94,8 +92,8 @@ function fillColumn(colNumber) {
             reqEntryDiv.appendChild(requirementCheckbox);
 
             if(classSatisfactionDropdown.length > 2){
+                reqEntryDiv.classList.add('hasClassDropdown');
                 reqEntryDiv.appendChild(classSatisfactionDropdown);
-                requirementCheckbox.style.display = 'none';
             }
 
             listGroup.appendChild(requirementEntry);
