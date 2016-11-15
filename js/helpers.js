@@ -222,7 +222,7 @@ function restoreStatus() {
         requirementDropdown.value = elective.date;
 
         requirementEntry.appendChild(requirementLabel);
-        requirementEntry.appendChild(document.createElement('br'));
+       // requirementEntry.appendChild(document.createElement('br'));
         requirementEntry.appendChild(requirementCheckbox);
         requirementEntry.appendChild(requirementDropdown);
 

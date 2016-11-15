@@ -71,25 +71,32 @@ function fillColumn(colNumber) {
             };
 
             var requirementLabel = document.createTextNode(requirementName.replace(/_/g, ' '));
+           
+            //div for containing dropdowns
+            var reqEntryDiv = document.createElement('div');
+            reqEntryDiv.className = 'reqEntryDiv pull-right';
 
+            //checkbox creation
+            //dropdown and checkbox styling
             var requirementCheckbox = document.createElement('input');
             requirementCheckbox.setAttribute('type', 'checkbox');
             requirementCheckbox.id = requirementName;
             requirementCheckbox.className = classes + ' pull-right requirementMarker';
-            requirementCheckbox.style.display = 'none';
+            requirementCheckbox.style.marginRight = '5px';
+            classSatisfactionDropdown.style.marginRight='5px';
 
             var requirementDropdown = generateQuarterDropdown();
             requirementDropdown.id = requirementName + 'dropdown';
 
             requirementEntry.appendChild(requirementLabel);
-            requirementEntry.appendChild(document.createElement('br'));
-            requirementEntry.appendChild(requirementCheckbox);
-            requirementEntry.appendChild(requirementDropdown);
+            requirementEntry.appendChild(reqEntryDiv);
+            reqEntryDiv.appendChild(requirementDropdown);
+            reqEntryDiv.appendChild(requirementCheckbox);
 
-            if(classSatisfactionDropdown.length < 3){
-              classSatisfactionDropdown.className += ' singletonClass';
+            if(classSatisfactionDropdown.length > 2){
+                reqEntryDiv.appendChild(classSatisfactionDropdown);
+                requirementCheckbox.style.display = 'none';
             }
-            requirementEntry.appendChild(classSatisfactionDropdown);
 
             listGroup.appendChild(requirementEntry);
         });
