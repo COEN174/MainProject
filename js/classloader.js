@@ -85,6 +85,10 @@ function fillColumn(colNumber) {
             requirementEntry.appendChild(document.createElement('br'));
             requirementEntry.appendChild(requirementCheckbox);
             requirementEntry.appendChild(requirementDropdown);
+
+            if(classSatisfactionDropdown.length < 3){
+              classSatisfactionDropdown.className += ' singletonClass';
+            }
             requirementEntry.appendChild(classSatisfactionDropdown);
 
             listGroup.appendChild(requirementEntry);
