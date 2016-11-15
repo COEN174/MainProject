@@ -128,21 +128,28 @@ var tests = {
     },
 
     class_starts_in_uncompleted_list: function() {
-        return [$('#uncompletedUnscheduledList').children().first().prop('outerHTML'), '<li>ENGR001</li>'];
+        return [$('#uncompletedUnscheduledList').children().first().text(), 'ENGR001'];
     },
 
     class_is_not_in_uncompleted_list_on_entry: function() {
         $('#classInput').val('engr1');
         $('#classInputForm').submit();
 
-        return [$('#uncompletedUnscheduledList').children().first().prop('outerHTML'), '<li>COEN010</li>'];
+        return [$('#uncompletedUnscheduledList').children().first().text(), 'COEN010'];
     },
 
     class_moves_to_completed_list_on_entry: function() {
         $('#classInput').val('engr1');
         $('#classInputForm').submit();
 
-        return [$('#completedUnscheduledList').children().first().prop('outerHTML'), '<li>ENGR001 (ENGR001)</li>'];
+        return [$('#completedUnscheduledList').children().first().text(), 'ENGR001'];
+    },
+
+    class_shows_specifier_when_moved_to_completed_list_on_entry: function() {
+        $('#classInput').val('engl007');
+        $('#classInputForm').submit();
+
+        return [$('#completedUnscheduledList').children().first().text(), 'English 1 (ENGL007)'];
     },
 
     completed_class_checks_box: function() {
@@ -173,7 +180,7 @@ var tests = {
         $('#classInput').val('engr1');
         $('#classInputForm').submit();
 
-        return [$('#uncompletedUnscheduledList').children().first().prop('outerHTML'), '<li>COEN010</li>'];
+        return [$('#uncompletedUnscheduledList').children().first().text(), 'COEN010'];
     },
 
     scheduled_uncompleted_class_is_the_right_color: function() {
@@ -188,7 +195,7 @@ var tests = {
         saveStatus();
         drawCalendar();
 
-        return [$('#uncompletedUnscheduledList').children().first().prop('outerHTML'), '<li>ENGR001 (ENGR001)</li>'];
+        return [$('#uncompletedUnscheduledList').children().first().text(), 'ENGR001'];
     },
 
     scheduled_uncompleted_class_is_in_calendar: function() {
@@ -196,22 +203,32 @@ var tests = {
         saveStatus();
         drawCalendar();
 
-        var li = $('#Fa1').children().first().children().first().prop('outerHTML');
-        var inBox = li.indexOf('ENGR001') > -1;
-
-        return [inBox, true];
+        return [$('#Fa1').children().first().children().first().text(), 'ENGR001'];
     },
 
-    scheduled_uncompleted_class_shows_correct_intention_in_calendar: function() {
+    scheduled_uncompleted_1to1_shows_no_satisfier_in_calendar: function() {
         $('#ENGR001dropdown').val('Fa1');
         $('#ENGR001satisfaction').val('ENGR001');
         saveStatus();
         drawCalendar();
 
-        var li = $('#Fa1').children().first().children().first().prop('outerHTML');
-        var inBox = li.indexOf('ENGR001 (ENGR001)') > -1;
+        return [$('#Fa1').children().first().children().first().text(), 'ENGR001'];
+    },
 
-        return [inBox, true];
+    scheduled_uncompleted_class_shows_correct_manual_satisfier_in_calendar: function() {
+      $('#English_1dropdown').val('Fa1');
+      $('#English_1satisfaction').val('ENGL007');
+      saveStatus();
+      drawCalendar();
+
+      return [$('#Fa1').children().first().children().first().text(), 'English 1 (ENGL007)'];
+    },
+
+    scheduled_uncompleted_class_shows_correct_automatic_satisfier_in_calendar: function() {
+      $('#classInput').val('ENGL007');
+      $('#classInputForm').submit();
+
+      return [$('#completedUnscheduledList').children().first().text(), 'English 1 (ENGL007)'];
     },
 
     scheduled_completed_class_is_in_calendar: function() {
@@ -300,7 +317,7 @@ var tests = {
         drawCalendar();
         colorCode();
 
-        return [$('#completedUnscheduledList').children().first().prop('outerHTML'), '<li>PHIL107</li>'];
+        return [$('#completedUnscheduledList').children().first().text(), 'PHIL107'];
     },
 
     educational_enrichment_is_in_calendar_once_scheduled: function() {
@@ -312,10 +329,7 @@ var tests = {
         drawCalendar();
         colorCode();
 
-        var li = $('#Fa1').children().first().children().first().prop('outerHTML');
-        var inBox = li.indexOf('PHIL107') > -1;
-
-        return [inBox, true];
+        return [$('#Fa1').children().first().children().first().text(), 'PHIL107'];
     },
 
     scheduled_completed_EE_class_is_green: function() {
@@ -376,4 +390,4 @@ function runTests() {
 
 console.log('Test harness loaded...');
 // give the ajax time to load
-// setTimeout(runTests, 1000);
+ setTimeout(runTests, 1000);
