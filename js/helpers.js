@@ -267,6 +267,11 @@ function getClasses(inputString) {
     var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
     var matches = inputString.match(regex);
 
+    if (!matches) {
+        // not a valid class
+        return [];
+    }
+
     var classes = matches.map(function(classEntry) {
         // regex to break out the classes
         var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
@@ -306,6 +311,11 @@ function onTextAreaChange(event) {
 function updateColumnsWithTextArea() {
     var rawClass = $('#classInput').val();
     var classes = getClasses(rawClass);
+
+    if(classes.length === 0){
+      return;
+    }
+
     classes.forEach(function(className) {
         setRequirementFromClass(className);
     });
