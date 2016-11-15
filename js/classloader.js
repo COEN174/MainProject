@@ -67,6 +67,7 @@ function fillColumn(colNumber) {
 
                 if (nodename === 'LI') {
                     this.getElementsByTagName("input")[0].click();
+                    refreshPage();
                 }
             };
 
@@ -128,7 +129,7 @@ function loadRequirements() {
             colorCode();
             updateCompletionPercentage();
 
-            $('.requirementMarker').change(refreshPage);
+            //$('.requirementMarker').change(refreshPage);
             $('.quarterDropdown').change(refreshPage);
             $('.satisfiedByDropdown').change(refreshPage);
         }

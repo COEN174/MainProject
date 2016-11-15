@@ -205,6 +205,7 @@ function restoreStatus() {
 
             if (nodename === 'LI') {
                 this.getElementsByTagName("input")[0].click();
+                refreshPage();
             }
         };
 
