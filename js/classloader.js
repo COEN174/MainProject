@@ -93,6 +93,10 @@ function fillColumn(colNumber) {
         groupDiv.appendChild(listGroup);
         document.getElementById('classCol' + colNumber).appendChild(groupDiv);
     });
+
+    $('.requirementMarker').change(refreshPage);
+    $('.quarterDropdown').change(refreshPage);
+    $('.satisfiedByDropdown').change(refreshPage);
 }
 
 function drawEEContainer(){
@@ -127,10 +131,6 @@ function loadRequirements() {
             drawCalendar();
             colorCode();
             updateCompletionPercentage();
-
-            $('.requirementMarker').change(refreshPage);
-            $('.quarterDropdown').change(refreshPage);
-            $('.satisfiedByDropdown').change(refreshPage);
         }
     });
 }
