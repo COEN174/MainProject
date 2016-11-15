@@ -186,6 +186,7 @@ function restoreStatus() {
         }
 
         $('#' + className + 'dropdown').val(classData.date);
+        $('#' + className + 'satisfaction').val(classData.satisfaction);
     });
 
     // now do EE
