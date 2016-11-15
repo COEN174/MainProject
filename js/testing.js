@@ -62,7 +62,9 @@ var tests = {
         saveStatus();
 
         expectedRequirements.ENGR001.completed = true;
+        expectedRequirements.ENGR001.satisfaction = 'ENGR001';
         expectedRequirements.COEN010.completed = true;
+        expectedRequirements.COEN010.satisfaction = 'COEN010';
         return [localStorage.requirements, JSON.stringify(expectedRequirements)];
 
     },
@@ -73,6 +75,7 @@ var tests = {
         saveStatus();
 
         expectedRequirements.ENGR001.completed = true;
+        expectedRequirements.ENGR001.satisfaction = 'ENGR001';
         return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
@@ -82,6 +85,7 @@ var tests = {
         saveStatus();
 
         expectedRequirements.ENGR001.completed = true;
+        expectedRequirements.ENGR001.satisfaction = 'ENGR001';
         return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
@@ -91,6 +95,7 @@ var tests = {
         saveStatus();
 
         expectedRequirements.ENGR001.completed = true;
+        expectedRequirements.ENGR001.satisfaction = 'ENGR001';
         return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
@@ -100,8 +105,11 @@ var tests = {
         saveStatus();
 
         expectedRequirements.ENGR001.completed = true;
+        expectedRequirements.ENGR001.satisfaction = 'ENGR001';
         expectedRequirements.COEN010.completed = true;
+        expectedRequirements.COEN010.satisfaction = 'COEN010';
         expectedRequirements.COEN011.completed = true;
+        expectedRequirements.COEN011.satisfaction = 'COEN011';
         return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
@@ -111,8 +119,11 @@ var tests = {
         saveStatus();
 
         expectedRequirements.ENGR001.completed = true;
+        expectedRequirements.ENGR001.satisfaction = 'ENGR001';
         expectedRequirements.COEN010.completed = true;
+        expectedRequirements.COEN010.satisfaction = 'COEN010';
         expectedRequirements.COEN011.completed = true;
+        expectedRequirements.COEN011.satisfaction = 'COEN011';
         return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
