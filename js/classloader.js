@@ -90,10 +90,13 @@ function fillColumn(colNumber) {
             requirementEntry.appendChild(reqEntryDiv);
             reqEntryDiv.appendChild(requirementDropdown);
             reqEntryDiv.appendChild(requirementCheckbox);
+            reqEntryDiv.appendChild(classSatisfactionDropdown);
 
             if(classSatisfactionDropdown.length > 2){
                 reqEntryDiv.classList.add('hasClassDropdown');
-                reqEntryDiv.appendChild(classSatisfactionDropdown);
+            }
+            else{
+                reqEntryDiv.classList.add('hasCheckbox');
             }
 
             listGroup.appendChild(requirementEntry);
