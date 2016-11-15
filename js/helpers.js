@@ -29,7 +29,7 @@ function intersect(a, b) {
 
 // erase all entries from calendar. yeah, I know...
 function emptyCalendar() {
-    $('#Fa1, #Wi1, #Sp1, #Su1, #Fa2, #Wi2, #Sp2, #Su2, #Fa3, #Wi3, #Sp3, #Su3, #Fa4, #Wi4, #Sp4, #Su4').empty();
+    $('#Fa1, #Wi1, #Sp1, #Su1, #Fa2, #Wi2, #Sp2, #Su2, #Fa3, #Wi3, #Sp3, #Su3, #Fa4, #Wi4, #Sp4, #Su4');
     $('#uncompletedUnscheduledList').empty();
     $('#completedUnscheduledList').empty();
 }
@@ -127,7 +127,7 @@ function clearForm() {
 }
 
 function drawFromData() {
-    //buildList(); // empty out the current list
+    buildList(); // empty out the current list
     restoreStatus(); // load data
 
     // make all the warm UI fuzzies be up to date
