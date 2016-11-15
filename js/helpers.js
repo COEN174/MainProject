@@ -228,6 +228,9 @@ function restoreStatus() {
 
         document.getElementById('eeRequirements').appendChild(requirementEntry);
     });
+
+    // readd new listeners
+    $('.quarterDropdown').change(refreshPage);
 }
 
 function updateCompletionPercentage() {
