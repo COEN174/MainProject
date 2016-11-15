@@ -71,7 +71,7 @@ function fillColumn(colNumber) {
             };
 
             var requirementLabel = document.createTextNode(requirementName.replace(/_/g, ' '));
-           
+
             //div for containing dropdowns
             var reqEntryDiv = document.createElement('div');
             reqEntryDiv.className = 'reqEntryDiv pull-right';
@@ -92,10 +92,9 @@ function fillColumn(colNumber) {
             reqEntryDiv.appendChild(requirementCheckbox);
             reqEntryDiv.appendChild(classSatisfactionDropdown);
 
-            if(classSatisfactionDropdown.length > 2){
+            if (classSatisfactionDropdown.length > 2) {
                 reqEntryDiv.classList.add('hasClassDropdown');
-            }
-            else{
+            } else {
                 reqEntryDiv.classList.add('hasCheckbox');
             }
 
@@ -111,19 +110,19 @@ function fillColumn(colNumber) {
     $('.satisfiedByDropdown').change(refreshPage);
 }
 
-function drawEEContainer(){
-  var container = document.createElement('div');
+function drawEEContainer() {
+    var container = document.createElement('div');
 
-  var title = document.createElement('h4');
-  title.innerHTML = 'Educational Enrichment';
-  container.appendChild(title);
+    var title = document.createElement('h4');
+    title.innerHTML = 'Educational Enrichment';
+    container.appendChild(title);
 
-  var listGroup = document.createElement('ul');
-  listGroup.className = 'list-group';
-  listGroup.id = 'eeRequirements';
+    var listGroup = document.createElement('ul');
+    listGroup.className = 'list-group';
+    listGroup.id = 'eeRequirements';
 
-  container.appendChild(listGroup);
-  document.getElementById('classCol3').appendChild(container);
+    container.appendChild(listGroup);
+    document.getElementById('classCol3').appendChild(container);
 }
 
 function loadRequirements() {
@@ -137,7 +136,7 @@ function loadRequirements() {
             if (localStorage.getItem('requirements') !== null && localStorage.getItem('educational_enrichment') !== null) {
                 restoreStatus();
             } else {
-              saveStatus();
+                saveStatus();
             }
 
             drawCalendar();
