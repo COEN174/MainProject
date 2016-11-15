@@ -77,14 +77,15 @@ function drawCalendar() {
 
     var eeReqs = JSON.parse(window.localStorage.educational_enrichment);
     eeReqs.forEach(function(elective) {
+        var eeName = 'Educational Enrichment (' + elective.name + ')';
         if (elective.date === 'notselected') {
-            $('#completedUnscheduledList').append('<li>' + elective.name + '</ul>');
+            $('#completedUnscheduledList').append('<li>' + eeName + '</ul>');
         } else {
             // put in calendar
             var container = document.createElement('li');
             var entry = document.createElement('div');
 
-            entry.innerHTML = elective.name;
+            entry.innerHTML = eeName;
             entry.className = 'class-entry bg-success';
 
             // get the quarter of completion and load the entry into the calendar
