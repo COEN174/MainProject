@@ -41,7 +41,7 @@ function drawCalendar() {
     $.each(reqs, function(reqName, classData) {
         // set which class satisfied it
         var classSatisfier = '';
-        if (classData.satisfaction != 'notselected') {
+        if ($('#' + reqName + 'satisfaction')[0].length > 2 && classData.satisfaction !== 'notselected') {
             classSatisfier = ' (' + classData.satisfaction + ')';
         }
 
