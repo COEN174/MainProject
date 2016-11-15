@@ -71,21 +71,33 @@ function fillColumn(colNumber) {
             };
 
             var requirementLabel = document.createTextNode(requirementName.replace(/_/g, ' '));
+           
+            //div for containing dropdowns
+            var reqEntryDiv = document.createElement('div');
+            reqEntryDiv.className = 'reqEntryDiv pull-right';
 
+            //checkbox creation
+            //dropdown and checkbox styling
             var requirementCheckbox = document.createElement('input');
             requirementCheckbox.setAttribute('type', 'checkbox');
             requirementCheckbox.id = requirementName;
             requirementCheckbox.className = classes + ' pull-right requirementMarker';
-            requirementCheckbox.style.display = 'none';
 
             var requirementDropdown = generateQuarterDropdown();
             requirementDropdown.id = requirementName + 'dropdown';
 
             requirementEntry.appendChild(requirementLabel);
-            requirementEntry.appendChild(document.createElement('br'));
-            requirementEntry.appendChild(requirementCheckbox);
-            requirementEntry.appendChild(requirementDropdown);
-            requirementEntry.appendChild(classSatisfactionDropdown);
+            requirementEntry.appendChild(reqEntryDiv);
+            reqEntryDiv.appendChild(requirementDropdown);
+            reqEntryDiv.appendChild(requirementCheckbox);
+            reqEntryDiv.appendChild(classSatisfactionDropdown);
+
+            if(classSatisfactionDropdown.length > 2){
+                reqEntryDiv.classList.add('hasClassDropdown');
+            }
+            else{
+                reqEntryDiv.classList.add('hasCheckbox');
+            }
 
             listGroup.appendChild(requirementEntry);
         });

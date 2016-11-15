@@ -12,10 +12,6 @@ body {
     margin: 10px;
 }
 
-.space-right {
-    margin-right: 10px;
-}
-
 .list-group-item[status="scheduled"] {
     background-color: #FF6;
 }
@@ -91,4 +87,20 @@ h5.print-titles{
 }
 .indent-div{
     margin:0;
+}
+
+input[type="checkbox"]{
+    margin-right:5px;
+}
+
+.satisfiedByDropdown{
+    margin-right:5px;
+}
+
+.hasClassDropdown input[type="checkbox"]{
+    display:none;
+}
+
+.hasCheckbox select.satisfiedByDropdown{
+    display:none;
 }

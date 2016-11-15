@@ -3,7 +3,7 @@ function generateQuarterDropdown() {
     quarters = ['Fall', 'Winter', 'Spring', 'Summer'];
 
     var quarterDropdown = document.createElement('select');
-    quarterDropdown.className = 'pull-right space-right quarterDropdown';
+    quarterDropdown.className = 'pull-right quarterDropdown';
 
     // create blank entry
     var quarterOption = new Option('Quarter', 'notselected');
@@ -222,7 +222,6 @@ function restoreStatus() {
         requirementDropdown.value = elective.date;
 
         requirementEntry.appendChild(requirementLabel);
-        requirementEntry.appendChild(document.createElement('br'));
         requirementEntry.appendChild(requirementCheckbox);
         requirementEntry.appendChild(requirementDropdown);
 
