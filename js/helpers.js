@@ -127,7 +127,7 @@ function clearForm() {
 }
 
 function drawFromData() {
-    buildList(); // empty out the current list
+    //buildList(); // empty out the current list
     restoreStatus(); // load data
 
     // make all the warm UI fuzzies be up to date
@@ -205,6 +205,7 @@ function restoreStatus() {
 
             if (nodename === 'LI') {
                 this.getElementsByTagName("input")[0].click();
+                refreshPage();
             }
         };
 
