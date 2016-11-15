@@ -119,11 +119,11 @@ function clearForm() {
     $('.requirementMarker').removeAttr('checked');
     $('.quarterDropdown').val('notselected');
     $('.satisfiedByDropdown').val('notselected');
+    saveStatus();
 
-    localStorage.requirements = {};
-    localStorage.educational_enrichment = [];
-    
-    refreshPage();
+    localStorage.setItem('educational_enrichment', JSON.stringify([]));
+
+    drawFromData();
 }
 
 function drawFromData() {
