@@ -368,13 +368,13 @@ function hasSatisfaction(req, c) {
 }
 
 function isInEducationalEnrichment(c, eduEnr) {
-	for(i = 0; i < eduEnr.length; i++) {
-		if(eduEnr[i].name == c) {
-			return true
-		}
-	}
-	return false;
-} 
+    for (i = 0; i < eduEnr.length; i++) {
+        if (eduEnr[i].name == c) {
+            return true
+        }
+    }
+    return false;
+}
 
 function putInEducationalEnrichment(c) {
     var eeEntry = {};
@@ -389,10 +389,10 @@ function putInEducationalEnrichment(c) {
         // we've already defined the eduEnr as an empty array which is fine
     }
 
-	if(!isInEducationalEnrichment(c, eduEnr)) {
-	    eduEnr.push(eeEntry);
-	    window.localStorage.setItem("educational_enrichment", JSON.stringify(eduEnr));
-	}
+    if (!isInEducationalEnrichment(c, eduEnr)) {
+        eduEnr.push(eeEntry);
+        window.localStorage.setItem("educational_enrichment", JSON.stringify(eduEnr));
+    }
 }
 
 function satisfyReqInLocalStorage(req, c) {
