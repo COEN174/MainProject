@@ -2,6 +2,8 @@ function buildList() {
     for (var i = 1; i <= 3; i++) {
         fillColumn(i);
     }
+
+    drawEEContainer();
 }
 
 function fillColumn(colNumber) {
@@ -93,7 +95,20 @@ function fillColumn(colNumber) {
     });
 }
 
-var requirements = {};
+function drawEEContainer(){
+  var container = document.createElement('div');
+
+  var title = document.createElement('h4');
+  title.innerHTML = 'Educational Enrichment';
+  container.appendChild(title);
+
+  var listGroup = document.createElement('ul');
+  listGroup.className = 'list-group';
+  listGroup.id = 'eeRequirements';
+
+  container.appendChild(listGroup);
+  document.getElementById('classCol3').appendChild(container);
+}
 
 function loadRequirements() {
     $.ajax({
