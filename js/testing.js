@@ -278,17 +278,28 @@ var tests = {
     educational_enrichment_is_in_calendar_once_scheduled: function() {
         $('#classInput').val('PHIL107');
         $('#classInputForm').submit();
-        $('PHIL107dropdown').val('Fa1');
+        $('#PHIL107dropdown').val('Fa1');
 
         saveStatus();
         drawCalendar();
         colorCode();
 
         var li = $('#Fa1').children().first().children().first().prop('outerHTML');
-        //var inBox = li.indexOf('PHIL107') > -1;
+        var inBox = li.indexOf('PHIL107') > -1;
 
-        //return [inBox, true];
-        return [true,true]
+        return [inBox, true];
+    },
+
+    scheduled_completed_class_is_green: function() {
+        $('#classInput').val('PHIL107');
+        $('#classInputForm').submit();
+        $('#PHIL107dropdown').val('Fa1');
+
+        saveStatus();
+        drawCalendar();
+        colorCode();
+
+        return [$('#Fa1').children().first().children().first().css('background-color'), 'rgb(144, 238, 144)'];
     },
 };
 
@@ -336,4 +347,4 @@ function runTests() {
 
 console.log('Test harness loaded...');
 // give the ajax time to load
-// setTimeout(runTests, 1000);
+setTimeout(runTests, 1000);
