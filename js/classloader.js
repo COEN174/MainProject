@@ -118,7 +118,7 @@ function loadRequirements() {
             requirements = requirementsData;
             buildList();
 
-            if (localStorage.getItem('requirements') !== null) {
+            if (localStorage.getItem('requirements') !== null && localStorage.getItem('educational_enrichment') !== null) {
                 restoreStatus();
             } else {
               saveStatus();
