@@ -19,16 +19,17 @@ body {
 .list-group-item[status="done"] {
     background-color: lightgreen;
 }
-.list-group-item{
-    overflow:hidden;
+
+.list-group-item {
+    overflow: hidden;
 }
 
-.list-group-item:hover{
-    cursor:pointer;
+.list-group-item:hover {
+    cursor: pointer;
 }
 
-#eeRequirements .list-group-item:hover{
-    cursor:default;
+#eeRequirements .list-group-item:hover {
+    cursor: default;
 }
 
 h4 {
@@ -81,26 +82,27 @@ th {
     margin-bottom: 10px;
 }
 
-h5.print-titles{
-    display:none;
-    visibility:hidden;
-}
-.indent-div{
-    margin:0;
+h5.print-titles {
+    display: none;
+    visibility: hidden;
 }
 
-input[type="checkbox"]{
-    margin-right:5px;
+.indent-div {
+    margin: 0;
 }
 
-.satisfiedByDropdown{
-    margin-right:5px;
+input[type="checkbox"] {
+    margin-right: 5px;
 }
 
-.hasClassDropdown input[type="checkbox"]{
-    display:none;
+.satisfiedByDropdown {
+    margin-right: 5px;
 }
 
-.hasCheckbox select.satisfiedByDropdown{
-    display:none;
+.hasClassDropdown input[type="checkbox"] {
+    display: none;
+}
+
+.hasCheckbox select.satisfiedByDropdown {
+    display: none;
 }
