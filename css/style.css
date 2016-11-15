@@ -31,6 +31,10 @@ body {
     cursor:pointer;
 }
 
+#eeRequirements .list-group-item:hover{
+    cursor:default;
+}
+
 h4 {
     padding: 10px;
 }
