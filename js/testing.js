@@ -85,10 +85,10 @@ var tests = {
         saveStatus();
 
         expectedRequirements.Cultures_and_Ideas_3.completed = true;
-        expectedRequirements.Cultures_and_Ideas_3.satisfaction = 'POLI2';
+        expectedRequirements.Cultures_and_Ideas_3.satisfaction = 'POLI002';
         
         expectedRequirements.Social_Science.completed = true;
-        expectedRequirements.Social_Science.satisfaction = 'POLI2';
+        expectedRequirements.Social_Science.satisfaction = 'POLI002';
         
         return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
