@@ -267,11 +267,6 @@ function getClasses(inputString) {
     var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
     var matches = inputString.match(regex);
 
-    if (!matches) {
-        // not a valid class
-        return [];
-    }
-
     var classes = matches.map(function(classEntry) {
         // regex to break out the classes
         var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
@@ -311,11 +306,6 @@ function onTextAreaChange(event) {
 function updateColumnsWithTextArea() {
     var rawClass = $('#classInput').val();
     var classes = getClasses(rawClass);
-
-    if(classes.length === 0){
-      return;
-    }
-
     classes.forEach(function(className) {
         setRequirementFromClass(className);
     });
@@ -442,6 +432,16 @@ function satisfyReqInLocalStorage(req, c) {
     window.localStorage.setItem("requirements", JSON.stringify(lsjson));
 }
 
+function getValidReqs(unsatisfied) {
+    valid = []
+    for(var i = 0; i < unsatisfied.length; i++) {
+        if(unsatisfied[i] != "Elective") {
+            valid.push(unsatisfied[i]);
+        }
+    }
+    return valid;
+}
+
 // sets the requirements that the class c satisfied to satisfied
 // HIST107 is a double dip so you can use that to test if double dips work.
 function setRequirementFromClass(c) {
@@ -463,6 +463,7 @@ function setRequirementFromClass(c) {
         	unsatisfied.push(reqs[i]+"_"+sat);
         }
     }
+    unsatisfied = getValidReqs(unsatisfied);
     if (unsatisfied.length === 0) {
         putInEducationalEnrichment(c);
     } else {
