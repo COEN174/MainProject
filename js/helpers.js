@@ -267,11 +267,6 @@ function getClasses(inputString) {
     var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
     var matches = inputString.match(regex);
 
-    if (!matches) {
-        // not a valid class
-        return [];
-    }
-
     var classes = matches.map(function(classEntry) {
         // regex to break out the classes
         var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
@@ -311,11 +306,6 @@ function onTextAreaChange(event) {
 function updateColumnsWithTextArea() {
     var rawClass = $('#classInput').val();
     var classes = getClasses(rawClass);
-
-    if(classes.length === 0){
-      return;
-    }
-
     classes.forEach(function(className) {
         setRequirementFromClass(className);
     });
@@ -331,6 +321,7 @@ function updateColumnsWithTextArea() {
 // it will return the requiement, or NoReq
 function findReqFromJson(c) {
     var reqNames = [];
+    var electiveSat = false;
     for (colNumber = 1; colNumber < 3; colNumber++) {
 
         // get the data for the colum we're working on
@@ -342,21 +333,37 @@ function findReqFromJson(c) {
                 for (var reqName in colRequirements[reqGroupName]) {
                     if (colRequirements[reqGroupName].hasOwnProperty(reqName)) {
                         for (var reqClasses in colRequirements[reqGroupName][reqName]) {
-                            var satisfier = colRequirements[reqGroupName][reqName][reqClasses];
-                            // check if this is a range of classes
-                            if (satisfier.indexOf('-') > -1) {
-                                var startRange = satisfier.substr(4, 3);
-                                var endRange = satisfier.substr(8, 3);
-                                for (var i = startRange; i <= endRange; i++) {
-                                    var paddedNumber = ('00' + i).substr(-3);
-                                    if (satisfier.substr(0, 4) + paddedNumber == c) {
-                                        reqNames.push(reqName);
+                            if (colRequirements[reqGroupName][reqName].hasOwnProperty(reqClasses)) {
+                                var satisfier = colRequirements[reqGroupName][reqName][reqClasses];
+                                // check if this is a range of classes
+                                if (satisfier.indexOf('-') > -1) {
+                                    var startRange = satisfier.substr(4, 3);
+                                    var endRange = satisfier.substr(8, 3);
+                                    for (var i = startRange; i <= endRange; i++) {
+                                        var paddedNumber = ('00' + i).substr(-3);
+                                        if (satisfier.substr(0, 4) + paddedNumber == c) {
+                                            if (reqName.split("_")[0] == "Elective") {
+                                                if (!electiveSat) {
+                                                    reqNames.push("Elective");
+                                                    electiveSat = true;
+                                                }
+                                            } else {
+                                                reqNames.push(reqName);
+                                            }
+                                        }
                                     }
-                                }
-                            } else {
-                                // it's a singular class
-                                if (satisfier == c) {
-                                    reqNames.push(reqName);
+                                } else {
+                                    // it's a singular class
+                                    if (satisfier == c) {
+                                        if (reqName.split("_")[0] == "Elective") {
+                                            if (!electiveSat) {
+                                                reqNames.push("Elective");
+                                                electiveSat = true;
+                                            }
+                                        } else {
+                                            reqNames.push(reqName);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -371,11 +378,23 @@ function findReqFromJson(c) {
 // returns true if localStorage.requirements.json either doesn't have req
 // or the req is already satisfied by a class
 function hasSatisfaction(req, c) {
-    var jsonReq = JSON.parse(window.localStorage.requirements)[req];
-    if (jsonReq.satisfaction == "notselected" || jsonReq.satisfaction == c) {
-        return false;
+    var jsonReq;
+    if (req == "Elective") {
+        for (i = 1; i <= 3; i++) {
+            req = "Elective_" + i;
+            jsonReq = JSON.parse(window.localStorage.requirements)[req];
+            if (jsonReq.satisfaction == "notselected" || jsonReq.satisfaction == c) {
+                return i;
+            }
+        }
+        return -1;
     } else {
-        return true;
+        jsonReq = JSON.parse(window.localStorage.requirements)[req];
+        if (jsonReq.satisfaction == "notselected" || jsonReq.satisfaction == c) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }
 
@@ -414,6 +433,16 @@ function satisfyReqInLocalStorage(req, c) {
     window.localStorage.setItem("requirements", JSON.stringify(lsjson));
 }
 
+function getValidReqs(unsatisfied) {
+    valid = [];
+    for (var i = 0; i < unsatisfied.length; i++) {
+        if (unsatisfied[i] != "Elective") {
+            valid.push(unsatisfied[i]);
+        }
+    }
+    return valid;
+}
+
 // sets the requirements that the class c satisfied to satisfied
 // HIST107 is a double dip so you can use that to test if double dips work.
 function setRequirementFromClass(c) {
@@ -424,15 +453,23 @@ function setRequirementFromClass(c) {
         return;
     }
     var unsatisfied = [];
-    for (var i = 0; i < reqs.length; i++) {
-        if (!hasSatisfaction(reqs[i], c)) {
+    var i;
+    for (i = 0; i < reqs.length; i++) {
+        var sat = hasSatisfaction(reqs[i], c);
+        if (sat == -1) {
+            // hasn't been satisified
             unsatisfied.push(reqs[i]);
+        } else if (sat > 0) {
+            // also hasn't been satisfied, but
+            // this is here to handle coen electives without doing all 3 at once
+            unsatisfied.push(reqs[i] + "_" + sat);
         }
     }
+    unsatisfied = getValidReqs(unsatisfied);
     if (unsatisfied.length === 0) {
         putInEducationalEnrichment(c);
     } else {
-        for (var i = 0; i < unsatisfied.length; i++) {
+        for (i = 0; i < unsatisfied.length; i++) {
             satisfyReqInLocalStorage(unsatisfied[i], c);
         }
     }
