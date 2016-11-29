@@ -78,7 +78,7 @@ var tests = {
         expectedRequirements.ENGR001.satisfaction = 'ENGR001';
         return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
-    
+
     add_a_single_correct_double_dipper: function() {
         $('#classInput').val('POLI2');
         $('#classInputForm').submit();
@@ -86,11 +86,30 @@ var tests = {
 
         expectedRequirements.Cultures_and_Ideas_3.completed = true;
         expectedRequirements.Cultures_and_Ideas_3.satisfaction = 'POLI002';
-        
+
         expectedRequirements.Social_Science.completed = true;
         expectedRequirements.Social_Science.satisfaction = 'POLI002';
-        
+
         return [localStorage.requirements, JSON.stringify(expectedRequirements)];
+    },
+
+    add_a_single_coen_elective: function() {
+        $('#classInput').val('COEN100');
+        $('#classInputForm').submit();
+        saveStatus();
+
+        expectedRequirements.Elective_1.completed = true;
+        expectedRequirements.Elective_1.satisfaction = 'COEN100';
+
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
+    },
+
+    coen_elective_overflow_to_educational_enrichment: function() {
+        $('#classInput').val('COEN100 COEN110 COEN111 COEN112');
+        $('#classInputForm').submit();
+        saveStatus();
+
+        return [localStorage.educational_enrichment, '[{"name":"COEN112","date":"notselected"}]'];
     },
 
     add_a_single_unpadded_class: function() {
