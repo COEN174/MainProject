@@ -321,6 +321,7 @@ function updateColumnsWithTextArea() {
 // it will return the requiement, or NoReq
 function findReqFromJson(c) {
     var reqNames = [];
+    var electiveSat = false;
     for (colNumber = 1; colNumber < 3; colNumber++) {
 
         // get the data for the colum we're working on
@@ -332,23 +333,39 @@ function findReqFromJson(c) {
                 for (var reqName in colRequirements[reqGroupName]) {
                     if (colRequirements[reqGroupName].hasOwnProperty(reqName)) {
                         for (var reqClasses in colRequirements[reqGroupName][reqName]) {
-                            var satisfier = colRequirements[reqGroupName][reqName][reqClasses];
-                            // check if this is a range of classes
-                            if (satisfier.indexOf('-') > -1) {
-                                var startRange = satisfier.substr(4, 3);
-                                var endRange = satisfier.substr(8, 3);
-                                for (var i = startRange; i <= endRange; i++) {
-                                    var paddedNumber = ('00' + i).substr(-3);
-                                    if (satisfier.substr(0, 4) + paddedNumber == c) {
-                                        reqNames.push(reqName);
-                                    }
-                                }
-                            } else {
-                                // it's a singular class
-                                if (satisfier == c) {
-                                    reqNames.push(reqName);
-                                }
-                            }
+                        	if(colRequirements[reqGroupName][reqName].hasOwnProperty(reqClasses)) {
+	                            var satisfier = colRequirements[reqGroupName][reqName][reqClasses];
+	                            // check if this is a range of classes
+	                            if (satisfier.indexOf('-') > -1) {
+	                                var startRange = satisfier.substr(4, 3);
+	                                var endRange = satisfier.substr(8, 3);
+	                                for (var i = startRange; i <= endRange; i++) {
+	                                    var paddedNumber = ('00' + i).substr(-3);
+	                                    if (satisfier.substr(0, 4) + paddedNumber == c) {
+	                                    	if(reqName.split("_")[0] == "Elective") {
+	                                    		if(!electiveSat) {
+		                                        	reqNames.push("Elective");
+		                                        	electiveSat = true;
+		                                        }
+	                                        } else {
+	                                        	reqNames.push(reqName);
+	                                        }
+	                                    }
+	                                }
+	                            } else {
+	                                // it's a singular class
+	                                if (satisfier == c) {
+	                                    if(reqName.split("_")[0] == "Elective") {
+	                                    		if(!electiveSat) {
+		                                        	reqNames.push("Elective");
+		                                        	electiveSat = true;
+		                                        }
+	                                        } else {
+	                                        	reqNames.push(reqName);
+	                                        }
+	                                }
+	                            }
+	                        }
                         }
                     }
                 }
@@ -361,12 +378,23 @@ function findReqFromJson(c) {
 // returns true if localStorage.requirements.json either doesn't have req
 // or the req is already satisfied by a class
 function hasSatisfaction(req, c) {
-    var jsonReq = JSON.parse(window.localStorage.requirements)[req];
-    if (jsonReq.satisfaction == "notselected" || jsonReq.satisfaction == c) {
-        return false;
-    } else {
-        return true;
-    }
+	if(req == "Elective") {
+		for(i = 1; i <= 3; i++) {
+			req = "Elective_" + i;
+			var jsonReq = JSON.parse(window.localStorage.requirements)[req];
+		    if (jsonReq.satisfaction == "notselected" || jsonReq.satisfaction == c) {
+		        return i;
+		    }	       
+		}
+		return -1;
+	} else {
+	    var jsonReq = JSON.parse(window.localStorage.requirements)[req];
+	    if (jsonReq.satisfaction == "notselected" || jsonReq.satisfaction == c) {
+	        return -1;
+	    } else {
+	        return 0;
+	    }
+	}
 }
 
 function isInEducationalEnrichment(c, eduEnr) {
@@ -415,8 +443,14 @@ function setRequirementFromClass(c) {
     }
     var unsatisfied = [];
     for (var i = 0; i < reqs.length; i++) {
-        if (!hasSatisfaction(reqs[i], c)) {
+    	var sat = hasSatisfaction(reqs[i], c);
+        if (sat == -1) {
+        	// hasn't been satisified
             unsatisfied.push(reqs[i]);
+        } else if(sat > 0) {
+        	// also hasn't been satisfied, but
+        	// this is here to handle coen electives without doing all 3 at once
+        	unsatisfied.push(reqs[i]+"_"+sat);
         }
     }
     if (unsatisfied.length === 0) {
