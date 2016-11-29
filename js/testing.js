@@ -78,6 +78,20 @@ var tests = {
         expectedRequirements.ENGR001.satisfaction = 'ENGR001';
         return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
+    
+    add_a_single_correct_double_dipper: function() {
+        $('#classInput').val('POLI2');
+        $('#classInputForm').submit();
+        saveStatus();
+
+        expectedRequirements.Cultures_and_Ideas_3.completed = true;
+        expectedRequirements.Cultures_and_Ideas_3.satisfaction = 'POLI2';
+        
+        expectedRequirements.Social_Science.completed = true;
+        expectedRequirements.Social_Science.satisfaction = 'POLI2';
+        
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
+    },
 
     add_a_single_unpadded_class: function() {
         $('#classInput').val('ENGR1');
