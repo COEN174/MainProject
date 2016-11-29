@@ -41,7 +41,7 @@ function drawCalendar() {
     $.each(reqs, function(reqName, classData) {
         // set which class satisfied it
         var classSatisfier = '';
-        if (classData.satisfaction != 'notselected') {
+        if ($('#' + reqName + 'satisfaction')[0].length > 2 && classData.satisfaction !== 'notselected') {
             classSatisfier = ' (' + classData.satisfaction + ')';
         }
 
@@ -77,14 +77,15 @@ function drawCalendar() {
 
     var eeReqs = JSON.parse(window.localStorage.educational_enrichment);
     eeReqs.forEach(function(elective) {
+        var eeName = 'Educational Enrichment (' + elective.name + ')';
         if (elective.date === 'notselected') {
-            $('#completedUnscheduledList').append('<li>' + elective.name + '</ul>');
+            $('#completedUnscheduledList').append('<li>' + eeName + '</ul>');
         } else {
             // put in calendar
             var container = document.createElement('li');
             var entry = document.createElement('div');
 
-            entry.innerHTML = elective.name;
+            entry.innerHTML = eeName;
             entry.className = 'class-entry bg-success';
 
             // get the quarter of completion and load the entry into the calendar
@@ -186,6 +187,7 @@ function restoreStatus() {
         }
 
         $('#' + className + 'dropdown').val(classData.date);
+        $('#' + className + 'satisfaction').val(classData.satisfaction);
     });
 
     // now do EE
@@ -265,6 +267,11 @@ function getClasses(inputString) {
     var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
     var matches = inputString.match(regex);
 
+    if (!matches) {
+        // not a valid class
+        return [];
+    }
+
     var classes = matches.map(function(classEntry) {
         // regex to break out the classes
         var regex = /([a-z][a-z][a-z][a-z])\s*(\d{1,3})/gi;
@@ -304,6 +311,11 @@ function onTextAreaChange(event) {
 function updateColumnsWithTextArea() {
     var rawClass = $('#classInput').val();
     var classes = getClasses(rawClass);
+
+    if(classes.length === 0){
+      return;
+    }
+
     classes.forEach(function(className) {
         setRequirementFromClass(className);
     });
@@ -396,13 +408,13 @@ function hasSatisfaction(req, c) {
 }
 
 function isInEducationalEnrichment(c, eduEnr) {
-	for(i = 0; i < eduEnr.length; i++) {
-		if(eduEnr[i].name == c) {
-			return true
-		}
-	}
-	return false;
-} 
+    for (i = 0; i < eduEnr.length; i++) {
+        if (eduEnr[i].name == c) {
+            return true;
+        }
+    }
+    return false;
+}
 
 function putInEducationalEnrichment(c) {
     var eeEntry = {};
@@ -417,10 +429,10 @@ function putInEducationalEnrichment(c) {
         // we've already defined the eduEnr as an empty array which is fine
     }
 
-	if(!isInEducationalEnrichment(c, eduEnr)) {
-	    eduEnr.push(eeEntry);
-	    window.localStorage.setItem("educational_enrichment", JSON.stringify(eduEnr));
-	}
+    if (!isInEducationalEnrichment(c, eduEnr)) {
+        eduEnr.push(eeEntry);
+        window.localStorage.setItem("educational_enrichment", JSON.stringify(eduEnr));
+    }
 }
 
 function satisfyReqInLocalStorage(req, c) {

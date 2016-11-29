@@ -103,6 +103,10 @@ input[type="checkbox"] {
     display: none;
 }
 
-.hasCheckbox select.satisfiedByDropdown {
-    display: none;
+.hasCheckbox select.satisfiedByDropdown{
+    display:none;
+}
+
+option{
+    padding:0;
 }

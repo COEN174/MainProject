@@ -1,3 +1,5 @@
+var expectedRequirements;
+
 var tests = {
     clear_button_clears_educational_enrichment: function() {
         $('#classInput').val('PHIL107');
@@ -6,8 +8,7 @@ var tests = {
         saveStatus();
         clearForm();
 
-        var expected = '[]';
-        return [localStorage.educational_enrichment, expected];
+        return [localStorage.educational_enrichment, '[]'];
     },
 
     clear_button_clears_requirements: function() {
@@ -18,32 +19,32 @@ var tests = {
         saveStatus();
         clearForm();
 
-        var expected = '{"ENGR001":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN010":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN019":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN020":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN021":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN070":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN122":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN146":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN171":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN174":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN175":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN177":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN179":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Civic_Engagement":{"completed":false,"date":"notselected","satisfaction":"notselected"},"STS":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELSJ":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ENGL181":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Diversity":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Arts":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Ethics":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Social_Science":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH013":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH014":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH106":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH108":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH053":{"completed":false,"date":"notselected","satisfaction":"notselected"},"CHEM011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS031":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS032":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS033":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN050":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN153":{"completed":false,"date":"notselected","satisfaction":"notselected"}}';
-        return [localStorage.requirements, expected];
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
     save_completion_to_local_storage: function() {
         $('#ENGR001').click();
         saveStatus();
 
-        var expected = '{"ENGR001":{"completed":true,"date":"notselected","satisfaction":"notselected"},"COEN010":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN019":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN020":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN021":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN070":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN122":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN146":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN171":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN174":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN175":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN177":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN179":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Civic_Engagement":{"completed":false,"date":"notselected","satisfaction":"notselected"},"STS":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELSJ":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ENGL181":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Diversity":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Arts":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Ethics":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Social_Science":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH013":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH014":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH106":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH108":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH053":{"completed":false,"date":"notselected","satisfaction":"notselected"},"CHEM011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS031":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS032":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS033":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN050":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN153":{"completed":false,"date":"notselected","satisfaction":"notselected"}}';
-        return [localStorage.requirements, expected];
+        expectedRequirements.ENGR001.completed = true;
+
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
     save_intended_dates_to_local_storage: function() {
         $('#ENGR001dropdown').val('Fa1');
         saveStatus();
 
-        var expected = '{"ENGR001":{"completed":false,"date":"Fa1","satisfaction":"notselected"},"COEN010":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN019":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN020":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN021":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN070":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN122":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN146":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN171":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN174":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN175":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN177":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN179":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Civic_Engagement":{"completed":false,"date":"notselected","satisfaction":"notselected"},"STS":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELSJ":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ENGL181":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Diversity":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Arts":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Ethics":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Social_Science":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH013":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH014":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH106":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH108":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH053":{"completed":false,"date":"notselected","satisfaction":"notselected"},"CHEM011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS031":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS032":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS033":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN050":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN153":{"completed":false,"date":"notselected","satisfaction":"notselected"}}';
-        return [localStorage.requirements, expected];
+        expectedRequirements.ENGR001.date = 'Fa1';
+
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
     empty_input_on_submit: function() {
         $('#classInput').val('poooooop9');
         $('#classInputForm').submit();
 
-        var expected = '';
-        return [$('#classInput').val(), expected];
+        return [$('#classInput').val(), ''];
     },
 
     make_no_change_on_invalid: function() {
@@ -51,8 +52,7 @@ var tests = {
         $('#classInputForm').submit();
         saveStatus();
 
-        var expected = '{"ENGR001":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN010":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN019":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN020":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN021":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN070":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN122":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN146":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN171":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN174":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN175":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN177":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN179":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Civic_Engagement":{"completed":false,"date":"notselected","satisfaction":"notselected"},"STS":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELSJ":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ENGL181":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Diversity":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Arts":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Ethics":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Social_Science":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH013":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH014":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH106":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH108":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH053":{"completed":false,"date":"notselected","satisfaction":"notselected"},"CHEM011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS031":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS032":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS033":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN050":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN153":{"completed":false,"date":"notselected","satisfaction":"notselected"}}';
-        return [localStorage.requirements, expected];
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
 
     },
 
@@ -61,8 +61,11 @@ var tests = {
         $('#classInputForm').submit();
         saveStatus();
 
-        var expected = '{"ENGR001":{"completed":true,"date":"notselected","satisfaction":"notselected"},"COEN010":{"completed":true,"date":"notselected","satisfaction":"notselected"},"COEN011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN019":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN020":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN021":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN070":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN122":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN146":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN171":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN174":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN175":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN177":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN179":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Civic_Engagement":{"completed":false,"date":"notselected","satisfaction":"notselected"},"STS":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELSJ":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ENGL181":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Diversity":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Arts":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Ethics":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Social_Science":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH013":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH014":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH106":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH108":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH053":{"completed":false,"date":"notselected","satisfaction":"notselected"},"CHEM011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS031":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS032":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS033":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN050":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN153":{"completed":false,"date":"notselected","satisfaction":"notselected"}}';
-        return [localStorage.requirements, expected];
+        expectedRequirements.ENGR001.completed = true;
+        expectedRequirements.ENGR001.satisfaction = 'ENGR001';
+        expectedRequirements.COEN010.completed = true;
+        expectedRequirements.COEN010.satisfaction = 'COEN010';
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
 
     },
 
@@ -71,8 +74,23 @@ var tests = {
         $('#classInputForm').submit();
         saveStatus();
 
-        var expected = '{"ENGR001":{"completed":true,"date":"notselected","satisfaction":"notselected"},"COEN010":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN019":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN020":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN021":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN070":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN122":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN146":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN171":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN174":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN175":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN177":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN179":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Civic_Engagement":{"completed":false,"date":"notselected","satisfaction":"notselected"},"STS":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELSJ":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ENGL181":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Diversity":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Arts":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Ethics":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Social_Science":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH013":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH014":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH106":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH108":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH053":{"completed":false,"date":"notselected","satisfaction":"notselected"},"CHEM011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS031":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS032":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS033":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN050":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN153":{"completed":false,"date":"notselected","satisfaction":"notselected"}}';
-        return [localStorage.requirements, expected];
+        expectedRequirements.ENGR001.completed = true;
+        expectedRequirements.ENGR001.satisfaction = 'ENGR001';
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
+    },
+    
+    add_a_single_correct_double_dipper: function() {
+        $('#classInput').val('POLI2');
+        $('#classInputForm').submit();
+        saveStatus();
+
+        expectedRequirements.Cultures_and_Ideas_3.completed = true;
+        expectedRequirements.Cultures_and_Ideas_3.satisfaction = 'POLI002';
+        
+        expectedRequirements.Social_Science.completed = true;
+        expectedRequirements.Social_Science.satisfaction = 'POLI002';
+        
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
     add_a_single_unpadded_class: function() {
@@ -80,8 +98,9 @@ var tests = {
         $('#classInputForm').submit();
         saveStatus();
 
-        var expected = '{"ENGR001":{"completed":true,"date":"notselected","satisfaction":"notselected"},"COEN010":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN019":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN020":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN021":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN070":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN122":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN146":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN171":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN174":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN175":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN177":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN179":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Civic_Engagement":{"completed":false,"date":"notselected","satisfaction":"notselected"},"STS":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELSJ":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ENGL181":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Diversity":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Arts":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Ethics":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Social_Science":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH013":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH014":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH106":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH108":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH053":{"completed":false,"date":"notselected","satisfaction":"notselected"},"CHEM011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS031":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS032":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS033":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN050":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN153":{"completed":false,"date":"notselected","satisfaction":"notselected"}}';
-        return [localStorage.requirements, expected];
+        expectedRequirements.ENGR001.completed = true;
+        expectedRequirements.ENGR001.satisfaction = 'ENGR001';
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
     add_a_single_lowercase_class: function() {
@@ -89,8 +108,9 @@ var tests = {
         $('#classInputForm').submit();
         saveStatus();
 
-        var expected = '{"ENGR001":{"completed":true,"date":"notselected","satisfaction":"notselected"},"COEN010":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN019":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN020":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN021":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN070":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN122":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN146":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN171":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN174":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN175":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN177":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN179":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Civic_Engagement":{"completed":false,"date":"notselected","satisfaction":"notselected"},"STS":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELSJ":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ENGL181":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Diversity":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Arts":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Ethics":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Social_Science":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH013":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH014":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH106":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH108":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH053":{"completed":false,"date":"notselected","satisfaction":"notselected"},"CHEM011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS031":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS032":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS033":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN050":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN153":{"completed":false,"date":"notselected","satisfaction":"notselected"}}';
-        return [localStorage.requirements, expected];
+        expectedRequirements.ENGR001.completed = true;
+        expectedRequirements.ENGR001.satisfaction = 'ENGR001';
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
     add_multiple_classes: function() {
@@ -98,8 +118,13 @@ var tests = {
         $('#classInputForm').submit();
         saveStatus();
 
-        var expected = '{"ENGR001":{"completed":true,"date":"notselected","satisfaction":"notselected"},"COEN010":{"completed":true,"date":"notselected","satisfaction":"notselected"},"COEN011":{"completed":true,"date":"notselected","satisfaction":"notselected"},"COEN012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN019":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN020":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN021":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN070":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN122":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN146":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN171":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN174":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN175":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN177":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN179":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Civic_Engagement":{"completed":false,"date":"notselected","satisfaction":"notselected"},"STS":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELSJ":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ENGL181":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Diversity":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Arts":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Ethics":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Social_Science":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH013":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH014":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH106":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH108":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH053":{"completed":false,"date":"notselected","satisfaction":"notselected"},"CHEM011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS031":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS032":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS033":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN050":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN153":{"completed":false,"date":"notselected","satisfaction":"notselected"}}';
-        return [localStorage.requirements, expected];
+        expectedRequirements.ENGR001.completed = true;
+        expectedRequirements.ENGR001.satisfaction = 'ENGR001';
+        expectedRequirements.COEN010.completed = true;
+        expectedRequirements.COEN010.satisfaction = 'COEN010';
+        expectedRequirements.COEN011.completed = true;
+        expectedRequirements.COEN011.satisfaction = 'COEN011';
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
     add_multiple_classes_on_multiple_lines: function() {
@@ -107,26 +132,38 @@ var tests = {
         $('#classInputForm').submit();
         saveStatus();
 
-        var expected = '{"ENGR001":{"completed":true,"date":"notselected","satisfaction":"notselected"},"COEN010":{"completed":true,"date":"notselected","satisfaction":"notselected"},"COEN011":{"completed":true,"date":"notselected","satisfaction":"notselected"},"COEN012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN019":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN020":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN021":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN070":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN122":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN146":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN171":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN174":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN175":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN177":{"completed":false,"date":"notselected","satisfaction":"notselected"},"COEN179":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Elective_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"English_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Cultures_and_Ideas_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Civic_Engagement":{"completed":false,"date":"notselected","satisfaction":"notselected"},"STS":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELSJ":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ENGL181":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Diversity":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Arts":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Ethics":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Social_Science":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Religious_Studies_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_1":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_2":{"completed":false,"date":"notselected","satisfaction":"notselected"},"Senior_Design_3":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH012":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH013":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH014":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH106":{"completed":false,"date":"notselected","satisfaction":"notselected"},"AMTH108":{"completed":false,"date":"notselected","satisfaction":"notselected"},"MATH053":{"completed":false,"date":"notselected","satisfaction":"notselected"},"CHEM011":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS031":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS032":{"completed":false,"date":"notselected","satisfaction":"notselected"},"PHYS033":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN050":{"completed":false,"date":"notselected","satisfaction":"notselected"},"ELEN153":{"completed":false,"date":"notselected","satisfaction":"notselected"}}';
-        return [localStorage.requirements, expected];
+        expectedRequirements.ENGR001.completed = true;
+        expectedRequirements.ENGR001.satisfaction = 'ENGR001';
+        expectedRequirements.COEN010.completed = true;
+        expectedRequirements.COEN010.satisfaction = 'COEN010';
+        expectedRequirements.COEN011.completed = true;
+        expectedRequirements.COEN011.satisfaction = 'COEN011';
+        return [localStorage.requirements, JSON.stringify(expectedRequirements)];
     },
 
     class_starts_in_uncompleted_list: function() {
-        return [$('#uncompletedUnscheduledList').children().first().prop('outerHTML'), '<li>ENGR001</li>'];
+        return [$('#uncompletedUnscheduledList').children().first().text(), 'ENGR001'];
     },
 
     class_is_not_in_uncompleted_list_on_entry: function() {
         $('#classInput').val('engr1');
         $('#classInputForm').submit();
 
-        return [$('#uncompletedUnscheduledList').children().first().prop('outerHTML'), '<li>COEN010</li>'];
+        return [$('#uncompletedUnscheduledList').children().first().text(), 'COEN010'];
     },
 
     class_moves_to_completed_list_on_entry: function() {
         $('#classInput').val('engr1');
         $('#classInputForm').submit();
 
-        return [$('#completedUnscheduledList').children().first().prop('outerHTML'), '<li>ENGR001 (ENGR001)</li>'];
+        return [$('#completedUnscheduledList').children().first().text(), 'ENGR001'];
+    },
+
+    class_shows_specifier_when_moved_to_completed_list_on_entry: function() {
+        $('#classInput').val('engl007');
+        $('#classInputForm').submit();
+
+        return [$('#completedUnscheduledList').children().first().text(), 'English 1 (ENGL007)'];
     },
 
     completed_class_checks_box: function() {
@@ -157,7 +194,7 @@ var tests = {
         $('#classInput').val('engr1');
         $('#classInputForm').submit();
 
-        return [$('#uncompletedUnscheduledList').children().first().prop('outerHTML'), '<li>COEN010</li>'];
+        return [$('#uncompletedUnscheduledList').children().first().text(), 'COEN010'];
     },
 
     scheduled_uncompleted_class_is_the_right_color: function() {
@@ -172,7 +209,7 @@ var tests = {
         saveStatus();
         drawCalendar();
 
-        return [$('#uncompletedUnscheduledList').children().first().prop('outerHTML'), '<li>ENGR001 (ENGR001)</li>'];
+        return [$('#uncompletedUnscheduledList').children().first().text(), 'ENGR001'];
     },
 
     scheduled_uncompleted_class_is_in_calendar: function() {
@@ -180,22 +217,32 @@ var tests = {
         saveStatus();
         drawCalendar();
 
-        var li = $('#Fa1').children().first().children().first().prop('outerHTML');
-        var inBox = li.indexOf('ENGR001') > -1;
-
-        return [inBox, true];
+        return [$('#Fa1').children().first().children().first().text(), 'ENGR001'];
     },
 
-    scheduled_uncompleted_class_shows_correct_intention_in_calendar: function() {
+    scheduled_uncompleted_1to1_shows_no_satisfier_in_calendar: function() {
         $('#ENGR001dropdown').val('Fa1');
         $('#ENGR001satisfaction').val('ENGR001');
         saveStatus();
         drawCalendar();
 
-        var li = $('#Fa1').children().first().children().first().prop('outerHTML');
-        var inBox = li.indexOf('ENGR001 (ENGR001)') > -1;
+        return [$('#Fa1').children().first().children().first().text(), 'ENGR001'];
+    },
 
-        return [inBox, true];
+    scheduled_uncompleted_class_shows_correct_manual_satisfier_in_calendar: function() {
+      $('#English_1dropdown').val('Fa1');
+      $('#English_1satisfaction').val('ENGL007');
+      saveStatus();
+      drawCalendar();
+
+      return [$('#Fa1').children().first().children().first().text(), 'English 1 (ENGL007)'];
+    },
+
+    scheduled_uncompleted_class_shows_correct_automatic_satisfier_in_calendar: function() {
+      $('#classInput').val('ENGL007');
+      $('#classInputForm').submit();
+
+      return [$('#completedUnscheduledList').children().first().text(), 'English 1 (ENGL007)'];
     },
 
     scheduled_completed_class_is_in_calendar: function() {
@@ -273,8 +320,7 @@ var tests = {
         drawCalendar();
         colorCode();
 
-        var expected = '[{"name":"PHIL107","date":"notselected"}]';
-        return [localStorage.educational_enrichment, expected];
+        return [localStorage.educational_enrichment, '[{"name":"PHIL107","date":"notselected"}]'];
     },
 
     educational_enrichment_goes_into_completed: function() {
@@ -285,7 +331,7 @@ var tests = {
         drawCalendar();
         colorCode();
 
-        return [$('#completedUnscheduledList').children().first().prop('outerHTML'), '<li>PHIL107</li>'];
+        return [$('#completedUnscheduledList').children().first().text(), 'Educational Enrichment (PHIL107)'];
     },
 
     educational_enrichment_is_in_calendar_once_scheduled: function() {
@@ -297,10 +343,7 @@ var tests = {
         drawCalendar();
         colorCode();
 
-        var li = $('#Fa1').children().first().children().first().prop('outerHTML');
-        var inBox = li.indexOf('PHIL107') > -1;
-
-        return [inBox, true];
+        return [$('#Fa1').children().first().children().first().text(), 'Educational Enrichment (PHIL107)'];
     },
 
     scheduled_completed_EE_class_is_green: function() {
@@ -332,6 +375,7 @@ function runTests() {
         // run test and ensure returned == expected
         clearForm();
         saveStatus();
+        expectedRequirements = JSON.parse(localStorage.requirements);
         results = tests[name]();
         if (results[0] === results[1]) {
             console.log(prettyName + ' %cPASS', 'background: #222; color: #bada55');
